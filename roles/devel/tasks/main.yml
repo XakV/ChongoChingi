@@ -1,0 +1,40 @@
+---
+- name: devel | Install devel packages
+  dnf:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - go-compilers-golang-compiler
+  - golang-bin
+  - love
+  - lua
+  - python3-virtualenvwrapper
+  - git
+
+- name: devel | Install devel fonts
+  dnf:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - google-droid-sans-mono-fonts
+  - levien-inconsolata-fonts
+  - mozilla-fira-mono-fonts
+  - mozilla-fira-sans-fonts
+  - overpass-mono-fonts
+  - overpass-fonts
+  
+- name: devel | user devel dir | user dev_dir set-up
+  file:
+      dest: "{{homedir}}/Code"
+      owner: "{{user}}"
+      group: "{{user}}"
+      state: directory
+
+- name: devel | IDE | set up IDE for devel
+  copy:
+    src: ZeroBraneStudioEduPack-1.60-linux.sh
+    dest: "{{homedir}}/Code"
+    owner: "{{user}}"
+    group: "{{user}}"
+    mode: 0755
+

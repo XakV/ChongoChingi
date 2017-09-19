@@ -1,0 +1,6 @@
+# A list of ports we want open
+udp_ports: "4445/udp"
+tcp_ports: ["25565-25569/tcp", "5222/tcp", "5432/tcp", "8953/udp"]
+lan_client_sources: "192.168.0.1/24" 
+lan_services: ["ssh", "cockpit", "http", "https", "dns"]
+

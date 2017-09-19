@@ -1,0 +1,6 @@
+- name: virt | Install virt packages
+  dnf:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - '@virtualization'

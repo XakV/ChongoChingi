@@ -1,0 +1,10 @@
+---
+
+- name: Host for Zach setup
+  hosts: amistad
+
+  roles:
+  - common
+  - devel
+  - gaming
+

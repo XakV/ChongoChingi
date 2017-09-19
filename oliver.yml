@@ -1,0 +1,9 @@
+---
+
+- name: Host for Oliver setup
+  hosts: tatooine
+
+  roles:
+  - common
+  - gaming
+

@@ -1,0 +1,7 @@
+user: ansible
+homedir: /home/ansible
+ssdisk: false
+nvidia: false
+amd: false
+qt: false
+

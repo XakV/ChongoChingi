@@ -1,0 +1,13 @@
+- name: syncthing | Install syncthing packages
+  dnf:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - syncthing
+  - syncthing-inotify
+  - syncthing-tools
+  notify: enable syncthing
+ 
+## TODO - Set up synch directories 
+
+- 

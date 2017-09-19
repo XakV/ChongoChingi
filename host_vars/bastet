@@ -1,0 +1,8 @@
+user: nolan
+homedir: /home/nolan
+ssdisk: false
+nvidia: true
+amd: false
+qt: true
+
+isdesktop: true

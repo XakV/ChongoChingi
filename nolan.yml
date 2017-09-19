@@ -1,0 +1,11 @@
+---
+
+- name: Host for nolan setup
+  hosts: "{{items}}"
+  with_items:
+  - bastet
+
+  roles:
+  - common
+  - gaming
+

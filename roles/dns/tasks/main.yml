@@ -1,0 +1,32 @@
+- name: Common | Install common packages
+  dnf:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - vim-enhanced
+  - tmux
+  - cups-ipptool
+  - inkscape
+  - java-1.8.0-openjdk
+  - youtube-dl
+  - smartmontools
+  
+- name: Common | users | user set-up
+  user:
+      name: "{{user}}"
+      homedir: "{{homedir}}"
+
+- name: Common | user home | user homedir set-up
+  file:
+      dest: "{{homedir}}"
+      owner: "{{user}}"
+      group: "{{user}}"
+      state: directory
+
+- name: Common | dotfiles | copy dotfiles needed everywhere
+  file:
+      dest: #TODO
+      owner: "{{user}}"
+      group: "{{user}}"
+      state: #TODO
+

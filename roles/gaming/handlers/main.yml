@@ -1,0 +1,8 @@
+- name: update cache
+  shell: /usr/bin/dnf --update -y --refresh
+  register: cache_result
+
+- name: block nouveau
+  kernel_blacklist:
+    name: nouveau
+    state: present
