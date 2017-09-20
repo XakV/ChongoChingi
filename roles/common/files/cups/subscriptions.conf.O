@@ -1,14 +1,14 @@
 # Subscription configuration file for CUPS v2.2.2
-# Written by cupsd on 2017-09-18 14:05
-NextSubscriptionId 187
+# Written by cupsd on 2017-09-19 11:25
+NextSubscriptionId 197
 <Subscription 153>
 Events printer-state-changed printer-restarted printer-shutdown printer-stopped printer-added printer-deleted printer-modified job-state-changed job-created job-completed job-stopped job-config-changed job-progress server-restarted server-started server-stopped server-audit
 Owner jebel_krong
 Recipient dbus://
 LeaseDuration 3600
 Interval 0
-ExpirationTime 1505761305
-NextEventId 5179
+ExpirationTime 1505838305
+NextEventId 8625
 </Subscription>
 <Subscription 172>
 Events printer-state-changed printer-restarted printer-shutdown printer-stopped printer-added printer-deleted printer-modified server-restarted server-started server-stopped server-audit
@@ -16,6 +16,6 @@ Owner jebel_krong
 Recipient dbus://
 LeaseDuration 3600
 Interval 0
-ExpirationTime 1505759119
-NextEventId 1497
+ExpirationTime 1505836119
+NextEventId 1712
 </Subscription>

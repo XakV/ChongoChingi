@@ -7,4 +7,10 @@
   - common
   - devel
   - gaming
+  - syncthing
 
+  post_tasks:
+  - name: update all
+    dnf: 
+      name: "*"
+      state: latest

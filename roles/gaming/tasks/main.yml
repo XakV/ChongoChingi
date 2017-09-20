@@ -6,7 +6,7 @@
       baseurl: https://negativo17.org/repos/multimedia/fedora-$releasever/$basearch/
       gpgcheck: no
       enabled: yes
-  notify: update cache
+  notify: update all
 
 - name: gaming | install negativo steam repos
   yum_repository:
@@ -15,7 +15,7 @@
       baseurl: https://negativo17.org/repos/steam/fedora-$releasever/$basearch/
       gpgcheck: no
       enabled: yes
-  notify: update cache
+  notify: update all
 
 - name: gaming | Install gaming packages
   dnf:
@@ -26,7 +26,16 @@
   - 0ad
   - wesnoth
   - steam
-  
+
+    ## - name: gaming | add copr lsi
+    ##   command: /usr/bin/dnf copr enable -y alunux/linux-steam-integration
+    ## 
+    ## - name: gaming | install lsi
+    ##   dnf:
+    ##       state: latest
+    ##       name: linux-steam-integration
+    ## TODO - Find out why this doesnt work
+
 - name: gaming | Install generic gaming drivers
   dnf:
       state: latest
@@ -76,6 +85,8 @@
   - libtxc_dxtn.i686
   - libtxc_dxtn.x86_64
   when: amd == true
+
+
 
   #- name: gaming | Install snaps
   # TODO

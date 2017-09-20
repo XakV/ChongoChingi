@@ -1,4 +1,5 @@
-- name: syncthing | Install syncthing packages
+---
+- name: Common | Install common packages
   dnf:
       state: latest
       name: "{{ item }}"
@@ -7,7 +8,3 @@
   - syncthing-inotify
   - syncthing-tools
   notify: enable syncthing
- 
-## TODO - Set up synch directories 
-
-- 

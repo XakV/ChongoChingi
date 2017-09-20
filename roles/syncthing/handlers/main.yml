@@ -1,0 +1,11 @@
+- name: enable syncthing
+  remote_user: "{{ host.user }}"
+  systemd:
+    name: "{{ items }}"
+    with_items:
+    - syncthing
+    - syncthing-inotify
+    enabled: yes
+    state: restarted
+    user: yes
+ 

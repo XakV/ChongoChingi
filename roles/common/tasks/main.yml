@@ -30,10 +30,11 @@
     name: "{{ item }}"
   with_items:
   - kate
+  - latte-dock
   when:
     qt == true
 
-- name: Cups for desktops
+- name: Common | install Cups
   dnf:
     state: latest
     name: "{{ item }}"
@@ -44,5 +45,12 @@
   - cups-pdf
   - cups-ipptool
   - gutenprint-cups
+
+- name: Common | configure Cups
+  synchronize:
+    src: roles/common/files/cups
+    dest: "rsync://{{ ansible_hostname }}.local:/etc/cups/"
+    set_remote_user: no
+  notify: restart cups
   when:
     isdesktop == true

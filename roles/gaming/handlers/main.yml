@@ -1,6 +1,7 @@
-- name: update cache
-  shell: /usr/bin/dnf --update -y --refresh
-  register: cache_result
+- name: update all
+  dnf:
+    name: "*"
+    state: "latest"
 
 - name: block nouveau
   kernel_blacklist:
