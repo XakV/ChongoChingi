@@ -49,6 +49,9 @@
   - mesa-vulkan-drivers
   - vlc
   - yarock
+  notify:
+    - add xpad module
+
 
 - name: gaming | Install NVidia if that variable is set
   dnf:

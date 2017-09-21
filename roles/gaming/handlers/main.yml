@@ -7,3 +7,8 @@
   kernel_blacklist:
     name: nouveau
     state: present
+
+- name: add xpad module
+  modprobe:
+    name: xpad
+    state: present

@@ -1,0 +1,19 @@
+- name: Firewall | configure firewalld
+  firewalld:
+      zone: home
+      source: 192.168.0.0/24
+      interface: {{ ansible_default_ipv4.interface }}
+      port: "4445/udp"
+      state: enabled
+      permanent: false
+      service: "{{ item }}"
+  with_items:
+    - ssh
+    - mdns
+    - dhcpv6-client
+    - ipp
+    - ipp-client
+    - pulseaudio
+    - snmp
+  notify:
+    - reload firewall
