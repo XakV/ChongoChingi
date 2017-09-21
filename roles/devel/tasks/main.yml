@@ -11,6 +11,15 @@
   - python3-virtualenvwrapper
   - git
 
+- name: devel | install pip v2 system packages
+  pip:
+      name: cryptography
+
+- name: devel | install pip v3 system packages
+  pip:
+      name: cryptography
+      executable: pip3
+
 - name: devel | Install devel fonts
   dnf:
       state: latest
