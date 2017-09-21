@@ -1,16 +1,7 @@
 ---
 
-- name: Host for Zach setup
-  hosts: amistad
+- name: test on riss
+  hosts: localhost
 
   roles:
-  - common
-  - devel
-  - gaming
-  - syncthing
-
-  post_tasks:
-  - name: update all
-    dnf: 
-      name: "*"
-      state: latest
+  - firewall

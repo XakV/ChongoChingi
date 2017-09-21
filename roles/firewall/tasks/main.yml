@@ -1,9 +1,26 @@
-- name: Firewall | configure firewalld
+- name: Firewall | configure zone interface
   firewalld:
       zone: home
       source: 192.168.0.0/24
-      interface: {{ ansible_default_ipv4.interface }}
+      interface: "{{ ansible_default_ipv4.interface }}"
+      state: enabled
+      permanent: false
+  notify:
+    - reload firewall
+
+- name: Firewall | configure zone port
+  firewalld:
+      zone: home
+      state: enabled
       port: "4445/udp"
+      permanent: false
+  notify:
+    - reload firewall
+
+
+- name: Firewall | configure zone services
+  firewalld:
+      zone: home
       state: enabled
       permanent: false
       service: "{{ item }}"

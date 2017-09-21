@@ -15,7 +15,8 @@
   - deja-dup
   - python3-dnf-plugins-extras-common
   - networkmanager-tui
-  
+  - python-firewall
+  - python3-firewall
 
 - name: Common | set up fstrim if ssdisk
   systemd:

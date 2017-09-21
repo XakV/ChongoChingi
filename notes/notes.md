@@ -1,20 +1,45 @@
 ### TODO
 
- - How do you run a script
- - check out RB's scripts
- - download itch.io games
- - can you configure printers? yes - see cups
+ - [ ] Scripting
+   - [ ] check out RB's scripts
+   - [ ] Determine if any scripts are needed
+ - [ ] Office/Cups
+   - [ ] set up office roles
+   - [ ] libreoffice
+   - [ ] sync to gdocs/gsheets?
+   - [ ] Calibre server
  - add additional multimedia software
- - set up office roles
-   - libreoffice
-   - sync to gdocs/gsheets?
- - create hosts file to share
- - set up dns via resolv.conf and search domain
-   - search domain "villers.lan"
-   - dns - some google alternative
-   - set hostname via nmtui?
- - set up vault
- - add calibre - server mode?
- - synchronize dotfiles
- - rebuild vim config
- - lsi steam copr
+ - [ ] Firewall
+   - [ ] create ipV6 firewall role
+   - [ ] create server firewall role
+   - [ ] create hosts file to share
+   - [ ] search domain "villers.lan"
+   - [ ] dns - some google alternative
+   - [ ] set hostname via nmtui?
+ - [ ] Gaming
+   - [ ] snaps
+   - [ ] flatpacks
+   - [ ] itch.io
+   - [ ] configure steam?
+ - [ ] Automation
+   - [ ] Set Up Ansible Vault
+   - [ ] cron job
+   - [ ] known_hosts module
+ - [ ] Devel/Environment
+   - [ ] synchronize dotfiles
+   - [ ] rebuild vim config
+
+### TO TEST
+
+ - [ ] Base firewall role on lan 
+ - [ ] Services
+   - [ ] cups, firewalld, ssh, fstrim.timer
+
+### TO FIX
+
+ - [ ] Why does steam/nvidia fail on first run?
+
+### DONE
+
+ - [x] Base roles for common, devel, gaming, firewall
+
