@@ -36,18 +36,6 @@
   when:
     qt == true
 
-- name: Common | install Cups
-  dnf:
-    state: latest
-    name: "{{ item }}"
-  with_items:
-  - cups
-  - cups-lpd
-  - cups-client
-  - cups-pdf
-  - cups-ipptool
-  - gutenprint-cups
-
 - name: Common | set etc/hosts
   copy:
     src: hosts

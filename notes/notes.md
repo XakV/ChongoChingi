@@ -4,16 +4,14 @@
    - [ ] check out RB's scripts
    - [ ] Determine if any scripts are needed
  - [ ] Office/Cups
-   - [ ] set up office roles
-   - [ ] libreoffice
-   - [ ] sync to gdocs/gsheets?
-   - [ ] Calibre server
+   - [x] set up office roles
+   - [x] libreoffice
+   - [x] Calibre server
  - add additional multimedia software
  - [ ] Firewall
    - [ ] create ipV6 firewall role
    - [ ] create server firewall role
-   - [ ] create hosts file to share
-   - [ ] search domain "villers.lan"
+   - [x] create hosts file to share
    - [ ] dns - some google alternative
    - [ ] set hostname via nmtui?
  - [ ] Gaming
@@ -25,7 +23,7 @@
    - [ ] Set Up Ansible Vault
    - [ ] cron job
    - [ ] known_hosts module
- - [ ] Devel/Environment
+ - [ ] Create terminal role
    - [ ] synchronize dotfiles
    - [ ] rebuild vim config
 
