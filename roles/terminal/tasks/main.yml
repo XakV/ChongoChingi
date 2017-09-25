@@ -1,0 +1,9 @@
+---
+- name: configuration | copy dotfiles
+  copy:
+    src: jebel
+    dest: "{{ homedir }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0644
+

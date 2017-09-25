@@ -1,0 +1,23 @@
+---
+- name: Office | install Cups
+  dnf:
+    state: latest
+    name: "{{ item }}"
+  with_items:
+  - cups
+  - cups-lpd
+  - cups-client
+  - cups-pdf
+  - cups-ipptool
+  - gutenprint-cups
+
+- name: Office | install LibreOffice
+  dnf:
+    state: latest
+    name: "{{ item }}"
+  with_items:
+  - libreoffice
+  - calibre
+  - qtpass
+  - kgpg
+  notify: restart cups
