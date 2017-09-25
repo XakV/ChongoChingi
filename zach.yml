@@ -8,6 +8,8 @@
   - devel
   - gaming
   - syncthing
+  - terminal
+  - office
 
   post_tasks:
   - name: update all

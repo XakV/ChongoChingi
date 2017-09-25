@@ -6,6 +6,7 @@
   with_items:
   - vim-enhanced
   - tmux
+  - weechat
   - inkscape
   - java-1.8.0-openjdk
   - youtube-dl
