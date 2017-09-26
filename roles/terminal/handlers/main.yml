@@ -1,6 +1,2 @@
-- name: restart cups
-  systemd:
-    name: cups 
-    enabled: yes
-    state: restarted
- 
+- name: install plugged
+  script: vimplugged.sh

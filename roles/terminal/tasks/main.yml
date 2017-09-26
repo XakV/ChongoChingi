@@ -1,9 +1,21 @@
 ---
-- name: configuration | copy dotfiles
+- name: terminal configuration | create vim backup dir
+  file:
+    path: "{{ homedir }}/.vim/tmp"
+    state: directory
+    mode: 0755
+
+- name: terminal configuration | create vim plugin dir
+  file:
+    path: "{{ homedir }}/.vim/plugged"
+    state: directory
+    mode: 0755
+  notify: install plugged
+
+- name: terminal configuration | copy dotfiles
   copy:
     src: jebel
     dest: "{{ homedir }}"
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: 0644
-

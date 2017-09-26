@@ -12,7 +12,6 @@
    - [ ] create ipV6 firewall role
    - [ ] create server firewall role
    - [x] create hosts file to share
-   - [ ] dns - some google alternative
    - [ ] set hostname via nmtui?
  - [ ] Gaming
    - [ ] snaps
@@ -22,10 +21,11 @@
  - [ ] Automation
    - [ ] Set Up Ansible Vault
    - [ ] cron job
-   - [ ] known_hosts module
  - [ ] Create terminal role
-   - [ ] synchronize dotfiles
-   - [ ] rebuild vim config
+   - [x] git
+   - [x] konsole
+   - [x] synchronize dotfiles
+   - [x] rebuild vim config
 
 ### TO TEST
 
