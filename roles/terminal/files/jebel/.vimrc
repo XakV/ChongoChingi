@@ -6,6 +6,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
+Plug 'plasticboy/vim-markdown'
 Plug 'https://github.com/vimwiki/vimwiki.git', { 'branch': 'dev' }
 Plug 'https://github.com/preocanin/greenwint.git'
 Plug 'https://github.com/vim-syntastic/syntastic.git'
@@ -16,10 +17,10 @@ call plug#end()
 
 " Vim Keys configuration
 " leader
-let mapleader = 'q'
+let mapleader = ';'
 
 " Reload config ',v will reload config'
-map <silent> <Leader>v :source ~/.vimrc<CR>:PlugInstall<CR>:bdelete<CR>
+map <Leader>9 :source ~/.vimrc<CR>:PlugInstall<CR>:bdelete<CR>
 
 " Autowrite - save when switching buffer
 set autowrite
@@ -125,10 +126,10 @@ nmap <leader>l :wincmd l<CR>
 nmap <leader>k :wincmd k<CR>
 
 " use leader to resize
-nmap <leader>hh :resize +20<CR>
-nmap <leader>ll :resize -20<CR>
-nmap <leader>kk :vertical resize +20<CR>
-nmap <leader>jj :vertical resize -20<CR>
+nmap <leader>+ :resize +20<CR>
+nmap <leader>_ :resize -20<CR>
+nmap <leader>= :vertical resize +20<CR>
+nmap <leader>- :vertical resize -20<CR>
 
 
 " Colorscheme config

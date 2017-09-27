@@ -13,11 +13,19 @@
 
 - name: devel | install pip v2 system packages
   pip:
-      name: cryptography
+      name: "{{ item }}"
+  with_items:
+    - cryptography
+    - requests
+    - xmltodict
 
 - name: devel | install pip v3 system packages
   pip:
-      name: cryptography
+      name: "{{ item }}"
+  with_items:
+    - cryptography
+    - requests
+    - xmltodict
       executable: pip3
 
 - name: devel | Install devel fonts
