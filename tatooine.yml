@@ -1,0 +1,17 @@
+---
+
+- name: Host for Oliver setup
+  hosts: tatooine
+
+  roles:
+  - common
+  - gaming
+  - syncthing
+  - office
+  - firewall
+
+  post_tasks:
+  - name: update all
+    dnf:
+      name: "*"
+      state: latest

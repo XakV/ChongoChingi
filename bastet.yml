@@ -1,0 +1,17 @@
+---
+
+- name: Host for nolan setup
+  hosts: bastet
+
+  roles:
+  - common
+  - gaming
+  - syncthing
+  - office
+  - firewall
+
+  post_tasks:
+  - name: update all
+    dnf: 
+      name: "*"
+      state: latest
