@@ -35,3 +35,26 @@
     - snmp
   notify:
     - reload firewall
+
+- name: Firewall | enable ipv6 privacy extensions
+  sysctl:
+    name: "net.ipv6.conf.{{ item }}.use_tempaddr"
+    value: 2
+    sysctl_set: yes
+    state: present
+    reload: yes
+  with_items:
+    - "{{ ansible_default_ipv6.interface }}"
+    - default
+    - all
+
+- name: Firewall | allow LAN access to Spigot Servers
+  firewalld:
+      zone: home
+      state: enabled
+      port: "25565-25568/tcp"
+      permanent: true
+  notify:
+    - reload firewall
+  when: mcserver == true
+

@@ -4,5 +4,5 @@ ssdisk: false
 nvidia: false
 amd: true
 qt: true
-
+mcserver: false
 isdesktop: true
