@@ -16,7 +16,7 @@
  - [ ] Automation
    - [ ] Set Up Ansible Vault
    - [ ] cron job
-   - [ ] dnf-automatic and config
+   - [x] dnf-automatic and config
    - [ ] sshd config file and keys
 
 ### TO TEST

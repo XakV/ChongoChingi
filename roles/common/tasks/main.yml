@@ -44,6 +44,32 @@
     state: started
     enabled: true
 
+- name: Common | copy pub ssh keys
+  authorized_key:
+    user: "{{ user }}"
+    state: present
+    key: "{{ item }}"
+  with_file:
+    - key_vault/ansible/id_ecdsa.pub
+    - key_vault/jebel_krong/id_ecdsa.pub
+    - key_vault/jkrong/id_ecdsa.pub
+
+- name: Common | copy private ssh key to owner
+  copy:
+    src: "key_vault/{{ user }}/id_ecdsa"
+    dest: "{{ homedir }}/.ssh/"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0600
+
+- name: Common | copy sshd_config
+  copy:
+    src: sshd_config
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0600
+
 - name: Common | install a few Qt apps if appropriate
   dnf:
     state: latest
