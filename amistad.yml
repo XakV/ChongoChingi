@@ -11,6 +11,7 @@
   - terminal
   - office
   - firefox
+  - firewall
 
   post_tasks:
   - name: update all

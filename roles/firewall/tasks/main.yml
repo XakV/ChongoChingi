@@ -1,3 +1,4 @@
+---
 - name: Firewall | configure zone interface
   firewalld:
       zone: home
