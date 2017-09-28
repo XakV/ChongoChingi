@@ -58,15 +58,15 @@
       state: latest
       name: "{{ item }}"
   with_items:
-  - dkms-nvidia-384.59-1
-  - nvidia-driver-384.59-6
-  - nvidia-driver-libs-384.59-6.i686
-  - nvidia-driver-libs-384.59-6.x86_64
-  - nvidia-settings-384.59-6
-  - nvidia-libXNVCtrl-384.59-6
-  - nvidia-settings-384.59-1
-  - nvidia-modprobe-384.59-1
-  - nvidia-xconfig--384.59-1
+  - dkms-nvidia
+  - nvidia-driver
+  - nvidia-driver-libs.i686
+  - nvidia-driver-libs.x86_64
+  - nvidia-settings
+  - nvidia-libXNVCtrl
+  - nvidia-settings
+  - nvidia-modprobe
+  - nvidia-xconfig
   - libglvnd
   - libglvnd-egl
   - libglvnd-gles

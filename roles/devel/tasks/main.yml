@@ -22,11 +22,11 @@
 - name: devel | install pip v3 system packages
   pip:
       name: "{{ item }}"
+      executable: pip-3
   with_items:
     - cryptography
     - requests
     - xmltodict
-      executable: pip3
 
 - name: devel | Install devel fonts
   dnf:

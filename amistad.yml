@@ -10,6 +10,7 @@
   - syncthing
   - terminal
   - office
+  - firefox
 
   post_tasks:
   - name: update all

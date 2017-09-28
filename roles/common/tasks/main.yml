@@ -18,6 +18,9 @@
   - NetworkManager-tui
   - python-firewall
   - python3-firewall
+  - python3-dnf-plugins-core
+  - python3-dnf-plugins-extras-common
+  - python3-dnf-plugin-system-upgrade
 
 - name: Common | set up fstrim if ssdisk
   systemd:
@@ -26,6 +29,20 @@
     enabled: true
   when:
     ssdisk == true
+
+- name: Common | copy dnf-automatic files
+  copy:
+     src: dnf
+     dest: /etc/dnf/
+     owner: root
+     group: root
+     mode: 0644 
+
+- name: Common | activate dnf-automatic
+  systemd:
+    name: dnf-automatic-install.timer
+    state: started
+    enabled: true
 
 - name: Common | install a few Qt apps if appropriate
   dnf:

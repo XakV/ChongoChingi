@@ -1,5 +1,7 @@
 user: jebel_krong
 homedir: /home/jebel_krong
 nvidia: true
+amd: false
 ssdisk: true
 isdesktop: true
+qt: true
