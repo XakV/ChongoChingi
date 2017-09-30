@@ -8,14 +8,14 @@
       enabled: yes
   notify: update all
 
-- name: gaming | install negativo steam repos
-  yum_repository:
-      name: fedora-steam
-      description: negativo17 - steam 
-      baseurl: https://negativo17.org/repos/steam/fedora-$releasever/$basearch/
-      gpgcheck: no
-      enabled: yes
-  notify: update all
+  #- name: gaming | install negativo steam repos
+  #  yum_repository:
+  #      name: fedora-steam
+  #      description: negativo17 - steam 
+  #      baseurl: https://negativo17.org/repos/steam/fedora-$releasever/$basearch/
+  #      gpgcheck: no
+  #      enabled: yes
+  #  notify: update all
 
 - name: gaming | Install gaming packages
   dnf:
@@ -25,7 +25,7 @@
   - supertuxkart
   - 0ad
   - wesnoth
-  - steam
+    #  - steam
 
     ## - name: gaming | add copr lsi
     ##   command: /usr/bin/dnf copr enable -y alunux/linux-steam-integration
@@ -41,13 +41,12 @@
       state: latest
       name: "{{ item }}"
   with_items:
-  - mesa-vdpau-drivers.x86_64
-  - mesa-vdpau-drivers.i686
+          #  - mesa-vdpau-drivers.x86_64
+          #  - mesa-vdpau-drivers.i686
   - vulkan.x86_64
   - vulkan.i686
-  - dkms-xpad.noarch
+  - xpad
   - mesa-vulkan-drivers
-  - vlc
   - yarock
   notify:
     - add xpad module

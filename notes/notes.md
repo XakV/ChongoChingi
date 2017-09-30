@@ -12,6 +12,8 @@
    - bcache
  - [ ] Services
    - backup (via DAV?)
+ - [ ] Communication
+   - RIOT
 
 
 ### TODO

@@ -21,6 +21,8 @@
   - python3-dnf-plugins-core
   - python3-dnf-plugins-extras-common
   - python3-dnf-plugin-system-upgrade
+  - dnf-automatic
+  - python-dnf
 
 - name: Common | set up fstrim if ssdisk
   systemd:

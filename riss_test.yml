@@ -1,7 +1,0 @@
----
-
-- name: test on riss
-  hosts: localhost
-
-  roles:
-  - devel
