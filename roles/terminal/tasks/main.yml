@@ -3,12 +3,16 @@
   file:
     path: "{{ homedir }}/.vim/tmp"
     state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
     mode: 0755
 
 - name: terminal configuration | create vim plugin dir
   file:
     path: "{{ homedir }}/.vim/plugged"
     state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
     mode: 0755
   notify: install plugged
 
@@ -20,7 +24,7 @@
     group: "{{ user }}"
     mode: 0644
   with_fileglob:
-    - jebel/*
+    - 'jebel/*'
 
 - name: terminal configuraiton | git setup
   git_config:
@@ -45,4 +49,8 @@
     owner: "{{ user }}"
     group: "{{ user }}"
     state: link
-  with_fileglob: "*"
+    force: yes
+  with_items:
+  - profile
+  - bash_profile
+  - vimrc

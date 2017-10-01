@@ -1,12 +1,2 @@
 - name: install plugged
   script: vimplugged.sh
-
-
-  #- name: linkup doots
-  # file:
-  #   src: "{{ homedir }}/Code/snooty_doots/{{ item }}"   
-  #   dest: "{{ homedir}}/.{{ item }}"
-  #   owner: "{{ user }}"
-  #   group: "{{ user }}"
-  #   state: link
-  # with_fileglob: "*"

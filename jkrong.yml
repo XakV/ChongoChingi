@@ -1,8 +1,6 @@
 
 - name: Host for jebel_krong setup
   hosts: earth-central
-  strategy: debug
- 
 
   roles:
   - common
@@ -12,5 +10,4 @@
   - syncthing
   - firefox
   - terminal 
-  - nvidia
 

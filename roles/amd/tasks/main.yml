@@ -1,0 +1,10 @@
+---
+- name: gaming | Install Radeon tools if that variable is set
+  dnf:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - radeontop
+  - radeontool
+  - libtxc_dxtn.i686
+  - libtxc_dxtn.x86_64

@@ -1,6 +1,6 @@
 
-- name: Host for nolan setup
-  hosts: bastet
+- name: Host for oliver setup
+  hosts: tatooine
 
   roles:
   - common
@@ -8,5 +8,6 @@
   - office
   - firewall
   - syncthing
+  - amd
    
 

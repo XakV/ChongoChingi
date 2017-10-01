@@ -43,4 +43,4 @@
 
 
 - name: nvidia | dracut
-  command: '/usr/bin/dracut /boot/initramfs-$(uname -r).img $(uname -r)'
+  command: '/usr/bin/dracut'
