@@ -1,0 +1,14 @@
+
+- name: Host for jebel_krong setup
+  hosts: earth-central
+
+  roles:
+  - common
+  - gaming
+  - office
+  - firewall
+  - syncthing
+  - firefox
+  - terminal 
+  - nvidia
+

@@ -1,0 +1,10 @@
+
+- name: Host for jebel_krong setup
+  hosts: samarkand
+
+  roles:
+  - common
+  - firewall
+  - syncthing
+  - terminal 
+

@@ -1,12 +1,5 @@
-- name: update all
-  dnf:
-    name: "*"
-    state: "latest"
-
-- name: block nouveau
-  kernel_blacklist:
-    name: nouveau
-    state: present
+- name: update-all
+  command: '/usr/bin/dnf update --refresh -y'
 
 - name: add xpad module
   modprobe:

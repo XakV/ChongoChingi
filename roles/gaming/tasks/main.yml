@@ -6,16 +6,16 @@
       baseurl: https://negativo17.org/repos/multimedia/fedora-$releasever/$basearch/
       gpgcheck: no
       enabled: yes
-  notify: update all
+  notify: update-all
 
-  #- name: gaming | install negativo steam repos
-  #  yum_repository:
-  #      name: fedora-steam
-  #      description: negativo17 - steam 
-  #      baseurl: https://negativo17.org/repos/steam/fedora-$releasever/$basearch/
-  #      gpgcheck: no
-  #      enabled: yes
-  #  notify: update all
+- name: gaming | install negativo steam repos
+  yum_repository:
+      name: fedora-steam
+      description: negativo17 - steam 
+      baseurl: https://negativo17.org/repos/steam/fedora-$releasever/$basearch/
+      gpgcheck: no
+      enabled: yes
+  notify: update-all
 
 - name: gaming | Install gaming packages
   dnf:
@@ -41,8 +41,13 @@
       state: latest
       name: "{{ item }}"
   with_items:
-          #  - mesa-vdpau-drivers.x86_64
-          #  - mesa-vdpau-drivers.i686
+  - kernel-devel
+  - kernel-headers
+  - gcc
+  - acpid
+  - pkgconfig
+  - mesa-vdpau-drivers.x86_64
+  - mesa-vdpau-drivers.i686
   - vulkan.x86_64
   - vulkan.i686
   - xpad
@@ -51,31 +56,6 @@
   notify:
     - add xpad module
 
-
-- name: gaming | Install NVidia if that variable is set
-  dnf:
-      state: latest
-      name: "{{ item }}"
-  with_items:
-  - dkms-nvidia
-  - nvidia-driver
-  - nvidia-driver-libs.i686
-  - nvidia-driver-libs.x86_64
-  - nvidia-settings
-  - nvidia-libXNVCtrl
-  - nvidia-settings
-  - nvidia-modprobe
-  - nvidia-xconfig
-  - libglvnd
-  - libglvnd-egl
-  - libglvnd-gles
-  - libglvnd-glx
-  - libglvnd-opengl
-  - libglvnd-core-devel
-  - libglvnd-devel
-  - libvdpau
-  when: nvidia == true
-  notify: block nouveau
 
 - name: gaming | Install Radeon tools if that variable is set
   dnf:
