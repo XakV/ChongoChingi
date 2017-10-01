@@ -25,7 +25,7 @@
   - supertuxkart
   - 0ad
   - wesnoth
-    #  - steam
+  - steam
 
     ## - name: gaming | add copr lsi
     ##   command: /usr/bin/dnf copr enable -y alunux/linux-steam-integration

@@ -1,4 +1,13 @@
 ---
+- name: gaming | install negativo repos
+  yum_repository:
+      name: fedora-nvidia
+      description: negativo17 - Multimedia 
+      baseurl: https://negativo17.org/repos/fedora-nvidia/fedora-$releasever/$basearch/
+      gpgcheck: no
+      enabled: yes
+  notify: update-all
+
 - name: nvidia | Install NVidia if that variable is set
   dnf:
       state: latest
@@ -9,9 +18,6 @@
   - nvidia-driver-libs.i686
   - nvidia-driver-libs.x86_64
   - nvidia-settings
-  - nvidia-libXNVCtrl
-  - nvidia-settings
-  - nvidia-modprobe
   - nvidia-xconfig
   - libglvnd
   - libglvnd-egl
@@ -21,26 +27,4 @@
   - libglvnd-core-devel
   - libglvnd-devel
   - libvdpau
-  
-- name: nvidia | block nouveau
-  kernel_blacklist: 
-    name: nouveau
-    state: present
 
-- name: nvidia | edit grub cmdline config
-  lineinfile:
-    path: /etc/sysconfig/grub
-    regexp: '^GRUB_CMDLINE_LINUX'
-    line: 'GRUB_CMDLINE_LINUX="rhgb quiet rd.blacklist.nouveau"'
-
-- name: nvidia | update grub
-  command: '/usr/sbin/grub2-mkconfig -o /boot/grub2/grub.cfg'
-  when: bios_mach == true
-
-- name: nvidia | update grub
-  command: '/usr/sbin/grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg'
-  when: bios_mach == false
-
-
-- name: nvidia | dracut
-  command: '/usr/bin/dracut'

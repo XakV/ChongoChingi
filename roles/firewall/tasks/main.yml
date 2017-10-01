@@ -5,7 +5,7 @@
       source: 192.168.0.0/24
       interface: "{{ ansible_default_ipv4.interface }}"
       state: enabled
-      permanent: false
+      permanent: true
   notify:
     - reload firewall
 
@@ -14,7 +14,7 @@
       zone: home
       state: enabled
       port: "4445/udp"
-      permanent: false
+      permanent: true
   notify:
     - reload firewall
 
@@ -23,7 +23,7 @@
   firewalld:
       zone: home
       state: enabled
-      permanent: false
+      permanent: true
       service: "{{ item }}"
   with_items:
     - ssh
