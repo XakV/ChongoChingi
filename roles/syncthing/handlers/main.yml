@@ -1,3 +1,0 @@
-- name: enable syncthing
-  shell: "/usr/bin/systemctl --user enable syncthing.service"
-  shell: "/usr/bin/systemctl --user enable syncthing-inotify.service"

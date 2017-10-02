@@ -55,6 +55,7 @@
     - key_vault/ansible/id_ecdsa.pub
     - key_vault/jebel_krong/id_ecdsa.pub
     - key_vault/jkrong/id_ecdsa.pub
+  when: isdesktop == true
 
 - name: Common | copy private ssh key to owner
   copy:
@@ -63,6 +64,7 @@
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: 0600
+  when: isdesktop == true
 
 - name: Common | copy sshd_config
   copy:

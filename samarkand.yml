@@ -1,10 +1,10 @@
 
-- name: Host for jebel_krong setup
+- name: Host for ansible setup
   hosts: samarkand
 
   roles:
   - common
   - firewall
-  - syncthing
+    #  - syncthing
   - terminal 
 

@@ -58,3 +58,14 @@
     - reload firewall
   when: mcserver == true
 
+- name: Firewall | allow LAN access to syncthing
+  firewalld:
+      zone: home
+      state: enabled
+      port: "8384/tcp"
+      permanent: true
+  notify:
+    - reload firewall
+  when: isdesktop == false
+
+

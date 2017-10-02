@@ -1,0 +1,8 @@
+
+- name: user jebel_krong setup on samarkand
+  hosts: samarkand
+
+  roles:
+  - firewall
+  - syncthing
+

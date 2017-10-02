@@ -5,23 +5,22 @@
    - [ ] Determine if any scripts are needed
  - [ ] Gaming
    - [ ] Minecraft
-   - [ ] snaps
    - [ ] flatpacks
    - [ ] itch.io
-   - [ ] configure steam?
+ - [ ] Communication
+   - RIOT - via flatpak or snap
+
+### DISCARD PILE
  - [ ] Filesystems
    - bcache
- - [ ] Services
-   - backup (via DAV?)
- - [ ] Communication
-   - RIOT
-
 
 ### TODO
-
+ - [ ] Services
+   - backup (via DAV?)
+   - syncthing - create template
 
 ### TO TEST
-
+ - [ ] syncthing role updates
  
 
 ### TO FIX

@@ -7,4 +7,16 @@
   - syncthing
   - syncthing-inotify
   - syncthing-tools
-  notify: enable syncthing
+
+    #- name: enable syncthing
+    #  systemd:
+    #      name: "{{ item }}"
+    #      state: started
+    #    enabled: yes
+    #    user: yes
+    # with_items:
+    # - syncthing
+    # - syncthing-inotify 
+    # become: true
+    # become_method: su
+    # become_user: "{{ user }}"
