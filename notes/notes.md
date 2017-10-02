@@ -26,7 +26,8 @@
 ### TO FIX
 
  - [x] Why does steam/nvidia fail on first run? A. Because Spelling counts, copy/pasting is an issue
-
+ - [ ] Why does ansible user on samarkand not have permission to user start/stop systemd services
+ 
 ### DONE
 
  - [x] Base roles for common, devel, gaming, firewall
