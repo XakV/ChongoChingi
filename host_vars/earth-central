@@ -6,4 +6,3 @@ ssdisk: true
 isdesktop: true
 qt: true
 mcserver: false
-bios_mach: true

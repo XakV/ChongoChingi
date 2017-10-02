@@ -4,6 +4,7 @@
    - [ ] check out RB's scripts
    - [ ] Determine if any scripts are needed
  - [ ] Gaming
+   - [ ] Minecraft
    - [ ] snaps
    - [ ] flatpacks
    - [ ] itch.io
@@ -21,16 +22,19 @@
 
 ### TO TEST
 
+ 
+
+### TO FIX
+
+ - [x] Why does steam/nvidia fail on first run? A. Because Spelling counts, copy/pasting is an issue
+
+### DONE
+
+ - [x] Base roles for common, devel, gaming, firewall
  - [x] Base firewall role on lan 
  - [x] Services
-   - [x] cups, firewalld, ssh, fstrim.timer
- - [x] Create terminal role
-   - [x] git
-   - [x] konsole
-   - [x] synchronize dotfiles
-   - [x] rebuild vim config
- - [x] create hosts file to share
- - [x] Office/Cups
+ - [x] cups, firewalld, ssh, fstrim.timer
+ - [x] Office/Cups                    
    - [x] set up office roles
    - [x] libreoffice
    - [x] Calibre server
@@ -41,12 +45,9 @@
  - [x] Firewall
    - [x] create ipV6 firewall role
    - [x] create server firewall role
-
-### TO FIX
-
- - [ ] Why does steam/nvidia fail on first run?
-
-### DONE
-
- - [x] Base roles for common, devel, gaming, firewall
-
+ - [x] Create terminal role
+   - [x] git
+   - [x] konsole
+   - [x] synchronize dotfiles
+   - [x] rebuild vim config
+ - [x] create hosts file to share

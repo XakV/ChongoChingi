@@ -1,13 +1,4 @@
 ---
-- name: gaming | install negativo repos
-  yum_repository:
-      name: fedora-nvidia
-      description: negativo17 - Multimedia 
-      baseurl: https://negativo17.org/repos/fedora-nvidia/fedora-$releasever/$basearch/
-      gpgcheck: no
-      enabled: yes
-  notify: update-all
-
 - name: nvidia | Install NVidia if that variable is set
   dnf:
       state: latest

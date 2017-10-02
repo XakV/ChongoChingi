@@ -1,6 +1,6 @@
 
 - name: Host for jebel_krong setup
-  hosts: earth-central
+  hosts: amistad
 
   roles:
   - common

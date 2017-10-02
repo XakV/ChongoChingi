@@ -26,16 +26,6 @@
   with_fileglob:
     - 'jebel/*'
 
-- name: terminal configuraiton | git setup
-  git_config:
-    name: user.email
-    value: 'zachvatwork@gmail.com'
-    scope: global
-  git_config:
-    name: user.name
-    value: 'affablezonkey'
-    scope: global
-
 - name: terminal configuration | clone dotfile repo
   git:
     repo: 'https://github.com/AffableZonkey/snooty_doots.git'
@@ -54,3 +44,4 @@
   - profile
   - bash_profile
   - vimrc
+  - gitconfig
