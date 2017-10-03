@@ -57,14 +57,14 @@
     - key_vault/jkrong/id_ecdsa.pub
   when: isdesktop == true
 
-- name: Common | copy private ssh key to owner
-  copy:
-    src: "key_vault/{{ user }}/id_ecdsa"
-    dest: "{{ homedir }}/.ssh/"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: 0600
-  when: isdesktop == true
+  #- name: Common | copy private ssh key to owner
+  #  copy:
+    #   src: "key_vault/{{ user }}/id_ecdsa"
+    #   dest: "{{ homedir }}/.ssh/"
+    #   owner: "{{ user }}"
+    #   group: "{{ user }}"
+    #    mode: 0600
+    #  when: isdesktop == true
 
 - name: Common | copy sshd_config
   copy:

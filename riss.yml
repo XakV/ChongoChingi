@@ -1,0 +1,12 @@
+
+- name: Host for jebel_krong setup
+  hosts: riss
+ 
+
+  roles:
+  - common
+  - firewall
+  - syncthing
+  - firefox
+  - terminal 
+
