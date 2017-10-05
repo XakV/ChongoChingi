@@ -23,6 +23,10 @@
   - python3-dnf-plugin-system-upgrade
   - dnf-automatic
   - python-dnf
+  - libXScrnSaver
+  - lsof
+  - cadaver
+  - chromium
 
 - name: Common | set up fstrim if ssdisk
   systemd:
@@ -38,7 +42,7 @@
      dest: /etc/dnf/
      owner: root
      group: root
-     mode: 0644 
+     mode: 0644
 
 - name: Common | activate dnf-automatic
   systemd:
