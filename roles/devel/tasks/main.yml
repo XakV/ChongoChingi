@@ -10,6 +10,7 @@
   - lua
   - python3-virtualenvwrapper
   - git
+  - rubygems
 
 - name: devel | install pip v2 system packages
   pip:

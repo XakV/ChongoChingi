@@ -1,0 +1,23 @@
+" ============================================================================
+" Netrw Directory Listing                                        (netrw v156)
+"   /home/ansible/ansiblaster
+"   Sorted by      name
+"   Sort sequence: [\/]$,*
+"   Quick Help: <F1>:help  -:go up dir  D:delete  R:rename  s:sort-by  x:special
+" ==============================================================================
+../
+ansiblaster/
+| .git/
+| files/
+| group_vars/
+| host_vars/
+| notes/
+| roles/
+| .gitignore
+| bastet.yml
+| jebel_krong.yml
+| jebel_sam.yml
+| jkrong.yml
+| riss.yml
+| samarkand.yml
+| tatooine.yml
