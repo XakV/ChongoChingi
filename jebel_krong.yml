@@ -10,7 +10,10 @@
   - office
   - firewall
   - syncthing
-  - firefox
+  - devel
+    #  - firefox
+    #  TODO - How to make firefox thing work without clubbing itself on the head at each run
+    #  Perhaps separate a new provision playbook from other playbooks
   - terminal 
   - nvidia
 

@@ -7,6 +7,6 @@
   - common
   - firewall
   - syncthing
-  - firefox
+    #  - firefox
   - terminal 
 
