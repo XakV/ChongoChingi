@@ -16,7 +16,7 @@
     state: latest
     name: "{{ item }}"
   with_items:
-  - libreoffice
+    #  - libreoffice
   - calibre
   - qtpass
   - kgpg

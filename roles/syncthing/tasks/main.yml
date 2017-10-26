@@ -8,15 +8,15 @@
   - syncthing-inotify
   - syncthing-tools
 
-    #- name: enable syncthing
-    #  systemd:
-    #      name: "{{ item }}"
-    #      state: started
-    #    enabled: yes
-    #    user: yes
-    # with_items:
-    # - syncthing
-    # - syncthing-inotify 
-    # become: true
-    # become_method: su
-    # become_user: "{{ user }}"
+- name: enable syncthing
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+    user: yes
+  with_items:
+  - syncthing
+  - syncthing-inotify
+  become: true
+  become_method: su
+  become_user: "{{ ansible_user_id }}"

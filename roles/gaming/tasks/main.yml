@@ -2,20 +2,20 @@
 - name: gaming | install negativo repos
   yum_repository:
       name: fedora-multimedia
-      description: negativo17 - Multimedia 
+      description: "negativo17 - Multimedia"
       baseurl: https://negativo17.org/repos/multimedia/fedora-$releasever/$basearch/
       gpgcheck: no
       enabled: yes
   notify: update-all
 
-- name: gaming | install negativo steam repos
-  yum_repository:
-      name: fedora-steam
-      description: negativo17 - steam 
-      baseurl: https://negativo17.org/repos/steam/fedora-$releasever/$basearch/
-      gpgcheck: no
-      enabled: yes
-  notify: update-all
+  #- name: gaming | install negativo steam repos
+  # dnf:
+    #      state: latest
+    #      name: "{{ item }}"
+    #  with_items:
+      #  - 'https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-27.noarch.rpm'
+      #  - 'https://download1.rpmfusion.org/free/fedora/rpmfusion-nonfree-release-27.noarch.rpm'
+      #  notify: update-all
 
 - name: gaming | Install gaming packages
   dnf:
@@ -23,14 +23,12 @@
       name: "{{ item }}"
   with_items:
   - supertuxkart
-  - 0ad
-  - wesnoth
+  #  - 0ad
+  #  - wesnoth
   - steam
 
     ## - name: gaming | add copr lsi
     ##   command: /usr/bin/dnf copr enable -y alunux/linux-steam-integration
-    ## 
-    ## - name: gaming | install lsi
     ##   dnf:
     ##       state: latest
     ##       name: linux-steam-integration

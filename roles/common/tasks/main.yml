@@ -4,7 +4,6 @@
       state: latest
       name: "{{ item }}"
   with_items:
-  - vim-enhanced
   - tmux
   - weechat
   - inkscape
@@ -13,8 +12,6 @@
   - smartmontools
   - kernel-devel
   - dkms
-  - deja-dup
-  - python3-dnf-plugins-extras-common
   - NetworkManager-tui
   - python-firewall
   - python3-firewall
@@ -25,8 +22,6 @@
   - python-dnf
   - libXScrnSaver
   - lsof
-  - cadaver
-  - chromium
 
 - name: Common | set up fstrim if ssdisk
   systemd:
@@ -50,16 +45,16 @@
     state: started
     enabled: true
 
-- name: Common | copy pub ssh keys
-  authorized_key:
-    user: "{{ user }}"
-    state: present
-    key: "{{ item }}"
-  with_file:
-    - key_vault/ansible/id_ecdsa.pub
-    - key_vault/jebel_krong/id_ecdsa.pub
-    - key_vault/jkrong/id_ecdsa.pub
-  when: isdesktop == true
+    #- name: Common | copy pub ssh keys
+    #  authorized_key:
+      #    user: "{{ user }}"
+      #    state: present
+      #    key: "{{ item }}"
+      #  with_file:
+        #    - key_vault/ansible/id_ecdsa.pub
+        #    - key_vault/jebel_krong/id_ecdsa.pub
+        #    - key_vault/jkrong/id_ecdsa.pub
+        #  when: isdesktop == true
 
   #- name: Common | copy private ssh key to owner
   #  copy:

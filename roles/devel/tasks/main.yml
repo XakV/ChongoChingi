@@ -11,6 +11,7 @@
   - python3-virtualenvwrapper
   - git
   - rubygems
+  - ruby-devel
 
 - name: devel | install pip v2 system packages
   pip:
@@ -40,19 +41,19 @@
   - mozilla-fira-sans-fonts
   - overpass-mono-fonts
   - overpass-fonts
-  
+
 - name: devel | user devel dir | user dev_dir set-up
   file:
-      dest: "{{homedir}}/Code"
-      owner: "{{user}}"
-      group: "{{user}}"
+      dest: "{{ansible_user_dir}}/Code"
+      owner: "{{ansible_user_id}}"
+      group: "{{ansible_user_id}}"
       state: directory
 
 - name: devel | IDE | set up IDE for devel
   copy:
     src: ZeroBraneStudioEduPack-1.60-linux.sh
-    dest: "{{homedir}}/Code"
-    owner: "{{user}}"
-    group: "{{user}}"
+    dest: "{{ansible_user_dir}}/Code"
+    owner: "{{ansible_user_id}}"
+    group: "{{ansible_user_id}}"
     mode: 0755
 

@@ -1,49 +1,45 @@
 ---
 - name: terminal configuration | create vim backup dir
   file:
-    path: "{{ homedir }}/.vim/tmp"
+    path: "{{ ansible_user_dir }}/.vim/tmp"
     state: directory
-    owner: "{{ user }}"
-    group: "{{ user }}"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
     mode: 0755
 
 - name: terminal configuration | create vim plugin dir
   file:
-    path: "{{ homedir }}/.vim/plugged"
+    path: "{{ ansible_user_dir }}/.vim/plugged"
     state: directory
-    owner: "{{ user }}"
-    group: "{{ user }}"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
     mode: 0755
   notify: install plugged
 
-- name: terminal configuration | copy kfiles
-  copy:
-    src: "{{ item }}"
-    dest: "{{ homedir }}/.config/"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: 0644
-  with_fileglob:
-    - 'jebel/*'
+- name: terminal config | create Code dir
+  file:
+    path: "{{ ansible_user_dir }}/Code"
+    state: directory
+    mode: 0755
 
-    #TODO - figure out how to keep all this stuff in synch    
-    #- name: terminal configuration | clone dotfile repo
-    ###  git:
-      ##### repo: 'git@github.com:AffableZonkey/snooty_doots.git'
-      ### dest: "{{ homedir }}/Code/snooty_doots"
-      #### accept_hostkey: yes
-      #### update: yes
+    #TODO - figure out how to keep all this stuff in synch
+- name: terminal configuration | clone dotfile repo
+  git:
+    repo: 'git@github.com:AffableZonkey/snooty_doots.git'
+    dest: "{{ ansible_user_dir }}/Code/snooty_doots"
+    accept_hostkey: yes
+    update: yes
 
-      ###- name: linkup doots
-      #### file:
-        #  src: "{{ homedir }}/Code/snooty_doots/{{ item }}"   
-        ### dest: "{{ homedir}}/.{{ item }}"
-        ## owner: "{{ user }}"
-        ## group: "{{ user }}"
-        # state: link
-        #  force: yes
-        # with_items:
-          # - profile
-          #  - bash_profile
-          #  - vimrc
-          #  - gitconfig
+- name: linkup doots
+  file:
+    src: "{{ ansible_user_dir }}/Code/snooty_doots/{{ item }}"
+    dest: "{{ ansible_user_dir}}/.{{ item }}"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    state: link
+    #  force: yes
+  with_items:
+    - profile
+    - bash_profile
+    - vimrc
+    - gitconfig

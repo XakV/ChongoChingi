@@ -1,2 +1,5 @@
 - name: install plugged
-  script: vimplugged.sh
+  script: files/vimplugged.sh
+  become: true
+  become-method: su
+  become-user: "{{ ansible_user_id }}"
