@@ -1,8 +1,6 @@
-user: jkrong
-homedir: /home/jkrong
 nvidia: false
 amd: false
 ssdisk: true
-qt: true
+qt: false
 isdesktop: true
 mcserver: false

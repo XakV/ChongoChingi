@@ -1,13 +1,19 @@
 
 - name: Host for jebel_krong setup
-  hosts: amistad
+  hosts: skaidon
 
   roles:
   - common
-  - gaming
+  # - gaming
   - office
   - firewall
-  - syncthing
+  - devel
     #  - firefox
-  - terminal 
+
+- name: Do the unpriv thing
+  hosts: skaidon
+  become: true
+  become_user: jkrong
+  roles:
+  - terminal
 

@@ -37,7 +37,7 @@
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_id }}"
     state: link
-    #  force: yes
+    force: yes
   with_items:
     - profile
     - bash_profile
