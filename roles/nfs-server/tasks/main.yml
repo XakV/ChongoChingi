@@ -1,0 +1,34 @@
+#file - nfs role tasks main.yml
+---
+- name: add nfs packages
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+  - nfs-utils
+  - rpcbind
+  - libsss_autofs
+  
+- name: set up exports
+  copy:
+    src: exports
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: 0644
+
+- name: open firewall
+  firewalld:
+    zone: FedoraServer
+    source: 192.168.0.1/24
+    interface: "{{ ansible_default_ipv4.interface }}"
+    state: enabled
+    permanent: true
+    service: "{{ item }}"
+  with_items:
+  - nfs
+  - mountd
+  - rpc-bind
+  notify:
+    - reload firewall
+

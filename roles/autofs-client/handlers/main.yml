@@ -1,0 +1,6 @@
+- name: reloadAutofs
+  systemd:
+    name: autofs
+    state: restarted
+    daemon_reload: yes
+    enabled: true

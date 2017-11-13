@@ -1,0 +1,22 @@
+#file - autofs role tasks main.yml
+---
+- name: set up autofs map
+  copy:
+    src: "{{ item }}"
+    dest: /etc/"{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - auto.master
+    - auto.nfsBackup
+  notify:
+    - restartAutofs
+
+- name: chown and chmod nsfBackup dir
+  file:
+    path: /home/"{{ ansible_user_dir }}"/nfsBackup
+    state: directory
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    mode: 0755
