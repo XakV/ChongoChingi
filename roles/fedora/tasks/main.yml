@@ -1,0 +1,58 @@
+---
+- name: Common | Install common packages
+  dnf:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - tmux
+  - weechat
+  - inkscape
+  - java-1.8.0-openjdk
+  - youtube-dl
+  - smartmontools
+  - kernel-devel
+  - dkms
+  - NetworkManager-tui
+  - python-firewall
+  - python3-firewall
+  - python3-dnf-plugins-core
+  - python3-dnf-plugins-extras-common
+  - python3-dnf-plugin-system-upgrade
+  - dnf-automatic
+  - python-dnf
+  - libXScrnSaver
+  - lsof
+
+- name: Common | copy dnf-automatic files
+  copy:
+     src: dnf
+     dest: /etc/dnf/
+     owner: root
+     group: root
+     mode: 0644
+
+- name: Common | activate dnf-automatic
+  systemd:
+    name: dnf-automatic-install.timer
+    state: started
+    enabled: true
+
+    #- name: Common | copy pub ssh keys
+    #  authorized_key:
+      #    user: "{{ user }}"
+      #    state: present
+      #    key: "{{ item }}"
+      #  with_file:
+        #    - key_vault/ansible/id_ecdsa.pub
+        #    - key_vault/jebel_krong/id_ecdsa.pub
+        #    - key_vault/jkrong/id_ecdsa.pub
+        #  when: isdesktop == true
+
+  #- name: Common | copy private ssh key to owner
+  #  copy:
+    #   src: "key_vault/{{ user }}/id_ecdsa"
+    #   dest: "{{ homedir }}/.ssh/"
+    #   owner: "{{ user }}"
+    #   group: "{{ user }}"
+    #    mode: 0600
+    #  when: isdesktop == true

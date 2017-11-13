@@ -1,0 +1,16 @@
+---
+- name: Common | Install common packages
+  apt:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - tmux
+  - weechat
+  - inkscape
+  - openjdk-8-jdk
+  - youtube-dl
+  - smartmontools
+  - python-firewall
+  - python3-firewall
+  - libXScrnSaver
+  - lsof

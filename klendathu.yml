@@ -1,6 +1,6 @@
 
-- name: Host for jebel_krong setup
-  hosts: skaidon
+- name: Host for jkrong setup
+  hosts: klendathu
 
   roles:
   - common
@@ -11,7 +11,7 @@
     #  - firefox
 
 - name: Do the unpriv thing
-  hosts: skaidon
+  hosts: klendathu
   become: true
   become_user: jkrong
   roles:

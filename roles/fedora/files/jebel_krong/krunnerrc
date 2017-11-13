@@ -1,0 +1,5 @@
+[General]
+history=zero,konsole,firefox nightly,zer,kwrite,ste,kons,sett,firef,latte,latt,kate,ark,kon
+
+[PlasmaRunnerManager]
+LaunchCounts=3 services_org.kde.kwrite.desktop,1 services_org.kde.konsole.desktop,1 services_firefox.desktop,2 services_latte-dock.desktop,1 services_systemsettings.desktop,1 services_zbstudio.desktop

@@ -4,3 +4,4 @@ ssdisk: true
 qt: false
 isdesktop: true
 mcserver: false
+islaptop: true

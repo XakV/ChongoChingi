@@ -1,6 +1,6 @@
 ---
 - name: devel | Install devel packages
-  dnf:
+  package:
       state: latest
       name: "{{ item }}"
   with_items:
@@ -31,7 +31,7 @@
     - xmltodict
 
 - name: devel | Install devel fonts
-  dnf:
+  package:
       state: latest
       name: "{{ item }}"
   with_items:
