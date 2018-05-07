@@ -1,6 +1,0 @@
-nvidia: true
-amd: false
-ssdisk: true
-isdesktop: true
-qt: true
-mcserver: false
