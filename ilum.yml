@@ -1,0 +1,8 @@
+
+- name: Host for oliver setup
+  hosts: ilum
+
+  roles:
+    - initiator
+   
+

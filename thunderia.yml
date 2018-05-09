@@ -1,0 +1,10 @@
+
+- name: Host for nolan setup
+  hosts: thunderia.local
+  become: yes
+  become_user: nolan
+
+  roles:
+    - initiator
+   
+

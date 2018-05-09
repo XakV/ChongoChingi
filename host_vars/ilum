@@ -1,0 +1,8 @@
+user: oliver
+homedir: /home/oliver
+ssdisk: true
+nvidia: true
+amd: false
+qt: true
+mcserver: false
+isdesktop: true

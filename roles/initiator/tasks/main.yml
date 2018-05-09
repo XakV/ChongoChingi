@@ -1,0 +1,29 @@
+---
+- name: initiator | Install initiator packages
+  apt:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - open-iscsi
+  - deja-dup
+  - deja-dup-caja
+  
+- name: Copy a new initiatorname.iscsi file | back up original
+  copy:
+    src: initiatorname.iscsi
+    dest: /etc/iscsi/initiatorname.iscsi
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes    
+  notify: restart_iscsi
+
+- name: Create the mountpoint 
+  file:
+    path: "{{ user_home }}/Backups"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0755
+ 
+
