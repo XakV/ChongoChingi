@@ -1,8 +1,8 @@
 user: oliver
-homedir: /home/oliver
+user_home: /home/oliver
 ssdisk: true
 nvidia: true
 amd: false
-qt: true
+qt: false
 mcserver: false
 isdesktop: true

@@ -1,6 +1,6 @@
 
 - name: Host for oliver setup
-  hosts: ilum
+  hosts: ilum.local
 
   roles:
     - initiator

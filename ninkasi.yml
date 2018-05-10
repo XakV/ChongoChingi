@@ -1,20 +1,8 @@
 
-- name: Host for jebel_krong setup
-  hosts: earth-central
-  strategy: debug
- 
+- name: Host for zach setup
+  hosts: ninkasi.local
 
   roles:
-  - common
-    #  - gaming
-  - office
-  - firewall
-    #  - syncthing
-  - devel
-    #  - firefox
-    #  TODO - How to make firefox thing work without clubbing itself on the head at each run
-    #  Perhaps separate a new provision playbook from other playbooks
-  - terminal 
-    #  - nvidia
-  - virt
+    - initiator
+   
 

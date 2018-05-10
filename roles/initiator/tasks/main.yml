@@ -1,13 +1,12 @@
 ---
 - name: initiator | Install initiator packages
-  apt:
+  dnf:
       state: latest
       name: "{{ item }}"
   with_items:
-  - open-iscsi
+  - iscsi-initiator-utils
   - deja-dup
-  - deja-dup-caja
-  
+
 - name: Copy a new initiatorname.iscsi file | back up original
   copy:
     src: initiatorname.iscsi
