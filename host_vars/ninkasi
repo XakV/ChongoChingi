@@ -1,3 +1,5 @@
+user: jebel
+user_home: /home/jebel
 nvidia: false
 amd: false
 ssdisk: true

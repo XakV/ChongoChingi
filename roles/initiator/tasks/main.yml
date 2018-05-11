@@ -6,6 +6,8 @@
   with_items:
   - iscsi-initiator-utils
   - deja-dup
+  become: yes
+  become_user: root
 
 - name: Copy a new initiatorname.iscsi file | back up original
   copy:
@@ -16,13 +18,16 @@
     mode: 0644
     backup: yes    
   notify: restart_iscsi
+  become: yes
+  become_user: root
 
 - name: Create the mountpoint 
   file:
-    path: "{{ user_home }}/Backups"
+    path: "{{ ansible_user_dir }}/Backups"
     state: directory
-    owner: "{{ user }}"
-    group: "{{ user }}"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
     mode: 0755
- 
+  become: yes
+  become_user: "{{ ansible_user_id }}"
 
