@@ -1,0 +1,14 @@
+---
+- name: backup | archive specific home dirs
+  archive:
+     path:
+    - "/home/{{ user }}"
+    dest: "/home/{{ user }}/Backups/backup.tar.bz2"
+    exclude_path:
+    - "home/{{ user }}/.swt"
+    - "home/{{ user }}/Templates"
+    - "home/{{ user }}/.thumbnails"
+    - "home/{{ user }}/.gnome*"
+    - "home/{{ user }}/Backups"
+    - "home/{{ user }}/.swt"
+    format: bz2
