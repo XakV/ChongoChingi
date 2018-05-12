@@ -1,0 +1,24 @@
+nvidia: false
+amd: false
+ssdisk: true
+qt: false
+isdesktop: true
+mcserver: false
+home_dir_user: jebel
+iscsi_client_name: laptopclient
+backup_objects:
+  - .bash_profile
+  - .bashrc
+  - .config
+  - Code
+  - .gitconfig
+  - .local
+  - .muttrc
+  - .profile
+  - .ssh
+  - .taskrc
+  - .vim
+  - .vimrc
+  - .weechat
+  - .zbstudio
+  - .ansible

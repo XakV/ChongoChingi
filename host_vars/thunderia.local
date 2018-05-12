@@ -1,8 +1,17 @@
-user: nolan
-user_home: /home/nolan
 ssdisk: true
 nvidia: true
 amd: false
 qt: false
 mcserver: false
 isdesktop: true
+home_dir_user: nolan
+iscsi_client_name: nolanclient
+backup_objects:
+  - .ssh
+  - .minecraft
+  - .local
+  - Documents
+  - Pictures
+  - .steam
+  - Steam
+  - Music

@@ -1,0 +1,28 @@
+nvidia: false
+amd: false
+ssdisk: true
+isdesktop: true
+qt: flase
+mcserver: false
+home_dir_user: jebel
+iscsi_client_name: wkstnclient
+backup_objects:
+  - .bash_profile
+  - .bashrc
+  - .config
+  - Code
+  - Documents
+  - .local
+  - .minecraft
+  - Music
+  - .muttrc
+  - Pictures
+  - .ssh
+  - .vim
+  - .vimrc
+  - .weechat
+  - .zbstudio
+  - .profile
+  - .taskrc
+  - .ansible
+  - .gitconfig

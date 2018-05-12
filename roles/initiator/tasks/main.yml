@@ -5,13 +5,12 @@
       name: "{{ item }}"
   with_items:
   - iscsi-initiator-utils
-  - deja-dup
   become: yes
   become_user: root
 
 - name: Copy a new initiatorname.iscsi file | back up original
-  copy:
-    src: initiatorname.iscsi
+  template:
+    src: initiatorname.j2
     dest: /etc/iscsi/initiatorname.iscsi
     owner: root
     group: root

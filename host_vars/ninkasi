@@ -1,8 +1,0 @@
-user: jebel
-user_home: /home/jebel
-nvidia: false
-amd: false
-ssdisk: true
-qt: false
-isdesktop: true
-mcserver: false
