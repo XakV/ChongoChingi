@@ -1,0 +1,15 @@
+
+#
+# /etc/fstab
+# Created by anaconda on Sun Mar 11 22:45:23 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/fedora_wolf--1061-root /                       xfs     defaults        0 0
+UUID=fe8cd05b-7fb2-429d-bfa5-c6b265816a27 /boot                   ext4    defaults        1 2
+/dev/mapper/fedora_wolf--1061-home /home                   xfs     defaults        0 0
+/dev/mapper/fedora_wolf--1061-swap swap                    swap    defaults        0 0
+#UUID=936dffce-f61d-4d1d-b6b3-dfda119157e7 /home/jebel/Public xfs	_netdev 0 2
+#UUID=5c41f6b6-baa8-494d-b652-fe35c2c4d383 /home/jebel/Backups xfs 	_netdev 0 2
+UUID=40079202-eed6-41f3-93f7-ebd0d2131caf /home/jebel/Backups xfs       _netdev 0 2
