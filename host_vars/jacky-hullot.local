@@ -5,7 +5,7 @@ isdesktop: true
 qt: flase
 mcserver: false
 home_dir_user: jebel
-iscsi_client_name: wkstnclient
+iscsi_client_name: jacky-hullot
 backup_objects:
   - .bash_profile
   - .bashrc

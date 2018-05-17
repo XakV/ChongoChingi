@@ -1,6 +1,8 @@
 
 - name: Host for jebel_krong setup
-  hosts: dumuzi.local
+  hosts: jacky-hullot.local
+  hostname:
+    name: "jacky-hullot"
 
   roles:
     - initiator
