@@ -26,3 +26,4 @@ backup_objects:
   - .taskrc
   - .ansible
   - .gitconfig
+iscsi_target_ip: "10.0.0.6"

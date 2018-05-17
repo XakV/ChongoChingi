@@ -35,4 +35,9 @@
     show_nodes: yes
     discover: yes
     portal: "{{ iscsi_target_ip }}"
-  register: nodes
+  register: iqn_list
+  become: yes
+  become_user: root
+  
+- debug:
+    msg: "targets {{ iqn_list.nodes }}"

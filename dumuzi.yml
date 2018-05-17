@@ -1,19 +1,20 @@
 
 - name: Host for jebel_krong setup
-  hosts: skaidon
+  hosts: dumuzi.local
 
   roles:
-  - common
+    - initiator
+#  - common
   # - gaming
-  - office
-  - firewall
-  - devel
+#  - office
+#  - firewall
+#  - devel
     #  - firefox
 
-- name: Do the unpriv thing
-  hosts: skaidon
-  become: true
-  become_user: jkrong
-  roles:
-  - terminal
+#- name: Do the unpriv thing
+#  hosts: skaidon
+#  become: true
+#  become_user: jkrong
+#  roles:
+#  - terminal
 

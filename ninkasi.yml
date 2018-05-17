@@ -1,9 +1,0 @@
-
-- name: Host for zach setup
-  hosts: ninkasi.local
-
-  roles:
-    - initiator
-#    - backup
-   
-
