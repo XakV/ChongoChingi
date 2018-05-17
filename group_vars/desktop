@@ -1,3 +1,4 @@
 # A list of ports we want open
 udp_ports: "4445/udp"
 lan_client_sources: "10.0.0.1/24" 
+iscsi_target_ip: "10.0.0.6"
