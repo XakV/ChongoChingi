@@ -44,9 +44,31 @@
     target: "iqn.2018-05.local.c7-server:{{ iscsi_client_name }}"
     portal: "{{ iscsi_target_ip }}"
   register: returned_device
-  debug: 
-    msg: "device is {{ returned_device.devicenode }}"
-  notify: partition_and_mount
+  notify: partition_device
 
-  
+- debug: 
+    msg: "device is {{ returned_device['devicenodes'] }}"
+
+- name: capture partition info of new device
+  parted:
+    device: "{{ returned_device.devicenodes[0] }}"
+    unit: MiB
+  register: iscsi_dev_info
+
+- debug:
+    msg: "part info {{ iscsi_dev_info.partitions }}"
+    
+- name: create filesystem
+  filesystem:
+    fstype: xfs
+    dev: "{{ returned_device.devicenodes[0] }}"
+
+- name: mount new FS
+  mount: 
+    path: /opt/Backups
+    src: "{{ returned_device.devicenodes[0] }}" 
+    fstype: xfs
+    opts: _netdev
+    state: present
+    
 
