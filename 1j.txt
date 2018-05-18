@@ -1,0 +1,198 @@
+jacky-hullot.local | SUCCESS => {
+    "ansible_facts": {
+        "ansible_device_links": {
+            "ids": {
+                "sda": [
+                    "ata-SATA_SSD_17101812003639"
+                ], 
+                "sda1": [
+                    "ata-SATA_SSD_17101812003639-part1"
+                ], 
+                "sda2": [
+                    "ata-SATA_SSD_17101812003639-part2"
+                ], 
+                "sda3": [
+                    "ata-SATA_SSD_17101812003639-part3"
+                ], 
+                "sda4": [
+                    "ata-SATA_SSD_17101812003639-part4"
+                ], 
+                "sdb": [
+                    "ata-WDC_WD3200AAJS-56M0A0_WD-WCAV2A742930", 
+                    "wwn-0x50014ee1578d5643"
+                ], 
+                "sdb1": [
+                    "ata-WDC_WD3200AAJS-56M0A0_WD-WCAV2A742930-part1", 
+                    "wwn-0x50014ee1578d5643-part1"
+                ]
+            }, 
+            "labels": {}, 
+            "masters": {}, 
+            "uuids": {
+                "sda1": [
+                    "6d386bc3-71f7-4a18-b8e2-b6e77ee87274"
+                ], 
+                "sda2": [
+                    "80cba291-dcb5-4aca-89c1-d26fe27eb1b3"
+                ], 
+                "sda3": [
+                    "7148000b-da07-457b-8b31-37e7931e3a68"
+                ], 
+                "sda4": [
+                    "a13a6999-4cb9-40e6-9148-46e02984fe70"
+                ], 
+                "sdb1": [
+                    "37d644d4-c779-4588-9384-8e7805a723f7"
+                ]
+            }
+        }, 
+        "ansible_devices": {
+            "sda": {
+                "holders": [], 
+                "host": "SATA controller: Intel Corporation 200 Series PCH SATA controller [AHCI mode]", 
+                "links": {
+                    "ids": [
+                        "ata-SATA_SSD_17101812003639"
+                    ], 
+                    "labels": [], 
+                    "masters": [], 
+                    "uuids": []
+                }, 
+                "model": "SATA SSD", 
+                "partitions": {
+                    "sda1": {
+                        "holders": [], 
+                        "links": {
+                            "ids": [
+                                "ata-SATA_SSD_17101812003639-part1"
+                            ], 
+                            "labels": [], 
+                            "masters": [], 
+                            "uuids": [
+                                "6d386bc3-71f7-4a18-b8e2-b6e77ee87274"
+                            ]
+                        }, 
+                        "sectors": "4194304", 
+                        "sectorsize": 512, 
+                        "size": "2.00 GB", 
+                        "start": "2048", 
+                        "uuid": "6d386bc3-71f7-4a18-b8e2-b6e77ee87274"
+                    }, 
+                    "sda2": {
+                        "holders": [], 
+                        "links": {
+                            "ids": [
+                                "ata-SATA_SSD_17101812003639-part2"
+                            ], 
+                            "labels": [], 
+                            "masters": [], 
+                            "uuids": [
+                                "80cba291-dcb5-4aca-89c1-d26fe27eb1b3"
+                            ]
+                        }, 
+                        "sectors": "104857600", 
+                        "sectorsize": 512, 
+                        "size": "50.00 GB", 
+                        "start": "4196352", 
+                        "uuid": "80cba291-dcb5-4aca-89c1-d26fe27eb1b3"
+                    }, 
+                    "sda3": {
+                        "holders": [], 
+                        "links": {
+                            "ids": [
+                                "ata-SATA_SSD_17101812003639-part3"
+                            ], 
+                            "labels": [], 
+                            "masters": [], 
+                            "uuids": [
+                                "7148000b-da07-457b-8b31-37e7931e3a68"
+                            ]
+                        }, 
+                        "sectors": "115355648", 
+                        "sectorsize": 512, 
+                        "size": "55.01 GB", 
+                        "start": "109053952", 
+                        "uuid": "7148000b-da07-457b-8b31-37e7931e3a68"
+                    }, 
+                    "sda4": {
+                        "holders": [], 
+                        "links": {
+                            "ids": [
+                                "ata-SATA_SSD_17101812003639-part4"
+                            ], 
+                            "labels": [], 
+                            "masters": [], 
+                            "uuids": [
+                                "a13a6999-4cb9-40e6-9148-46e02984fe70"
+                            ]
+                        }, 
+                        "sectors": "10031104", 
+                        "sectorsize": 512, 
+                        "size": "4.78 GB", 
+                        "start": "224409600", 
+                        "uuid": "a13a6999-4cb9-40e6-9148-46e02984fe70"
+                    }
+                }, 
+                "removable": "0", 
+                "rotational": "0", 
+                "sas_address": null, 
+                "sas_device_handle": null, 
+                "scheduler_mode": "deadline", 
+                "sectors": "234441648", 
+                "sectorsize": "512", 
+                "size": "111.79 GB", 
+                "support_discard": "512", 
+                "vendor": "ATA", 
+                "virtual": 1
+            }, 
+            "sdb": {
+                "holders": [], 
+                "host": "SATA controller: Intel Corporation 200 Series PCH SATA controller [AHCI mode]", 
+                "links": {
+                    "ids": [
+                        "ata-WDC_WD3200AAJS-56M0A0_WD-WCAV2A742930", 
+                        "wwn-0x50014ee1578d5643"
+                    ], 
+                    "labels": [], 
+                    "masters": [], 
+                    "uuids": []
+                }, 
+                "model": "WDC WD3200AAJS-5", 
+                "partitions": {
+                    "sdb1": {
+                        "holders": [], 
+                        "links": {
+                            "ids": [
+                                "ata-WDC_WD3200AAJS-56M0A0_WD-WCAV2A742930-part1", 
+                                "wwn-0x50014ee1578d5643-part1"
+                            ], 
+                            "labels": [], 
+                            "masters": [], 
+                            "uuids": [
+                                "37d644d4-c779-4588-9384-8e7805a723f7"
+                            ]
+                        }, 
+                        "sectors": "625139712", 
+                        "sectorsize": 512, 
+                        "size": "298.09 GB", 
+                        "start": "2048", 
+                        "uuid": "37d644d4-c779-4588-9384-8e7805a723f7"
+                    }
+                }, 
+                "removable": "0", 
+                "rotational": "1", 
+                "sas_address": null, 
+                "sas_device_handle": null, 
+                "scheduler_mode": "deadline", 
+                "sectors": "625142448", 
+                "sectorsize": "512", 
+                "size": "298.09 GB", 
+                "support_discard": "0", 
+                "vendor": "ATA", 
+                "virtual": 1, 
+                "wwn": "0x50014ee1578d5643"
+            }
+        }
+    }, 
+    "changed": false
+}

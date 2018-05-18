@@ -35,9 +35,18 @@
     show_nodes: yes
     discover: yes
     portal: "{{ iscsi_target_ip }}"
-  register: iqn_list
   become: yes
   become_user: root
   
-- debug:
-    msg: "targets {{ iqn_list.nodes }}"
+- name: login to target
+  open_iscsi:
+    login: yes
+    target: "iqn.2018-05.local.c7-server:{{ iscsi_client_name }}"
+    portal: "{{ iscsi_target_ip }}"
+  register: returned_device
+  debug: 
+    msg: "device is {{ returned_device.devicenode }}"
+  notify: partition_and_mount
+
+  
+

@@ -7,3 +7,7 @@
     name: iscsid
     enabled: yes
     state: restarted
+
+- name: partition_and_mount
+  parted: 
+    device: "{{ * }}"
