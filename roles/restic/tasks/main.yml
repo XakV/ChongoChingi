@@ -1,10 +1,20 @@
 ---
 - name: Common | Install common packages
   dnf:
-      state: latest
-      name: "{{ item }}"
+    state: latest
+    name: "{{ item }}"
   with_items:
   - python2-scp
   - python3-scp
   - python3-paramiko
+  - python3-dnf-plugins-extras-common
+  - python3-dnf-plugins-core
+
+- name: copr enable restic repo
+  shell: dnf copr enable -y copart/restic
+
+- name: copr install restic
+  dnf:
+    state: latest
+    name: restic
 
