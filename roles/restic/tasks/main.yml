@@ -18,3 +18,28 @@
     state: latest
     name: restic
 
+- name: copy exclude file
+  copy:
+    src: restic_excludes.txt
+    dest: /opt/Backups/restic_excludes.txt
+    owner: {{ home_dir_user }}
+    group: {{ home_dir_user }}
+    mode: 0644
+
+- name: create restic repository
+  shell: restic init --repo /opt/Backups --password-file "{{ /home/home_dir_user }}/.restic_info"
+
+- name: set up backups
+  cron:
+    name: homedirbackup
+    hour: {{ restic_backup_hr }}
+    minute: {{ restic_backup_min }}
+    job: restic -r /opt/Backups/ backup "/home/{{ home_dir_user }}" --exclude-file /opt/Backups/restic_excludes.txt --password-file "{{ /home/home_dir_user }}/.restic_info }}"
+
+- name: prune backups
+  cron:
+    name: prune snapshots with restic
+    
+    
+  
+    

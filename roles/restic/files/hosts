@@ -1,9 +1,0 @@
-127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 localhost.local 
-::1         localhost localhost.localdomain localhost6 localhost6.localdomain6 localhost.local
-192.168.0.12 samarkand samarkand.local
-192.168.0.7 earth-central earth-central.local
-192.168.0.19 tatooine tatooine.local
-192.168.0.5 mac-printer mac-printer.local
-192.168.0.18 bastet bastet.local
-192.168.0.4 amistad amistad.local
-
