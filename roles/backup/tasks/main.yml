@@ -1,0 +1,9 @@
+---
+  become: yes
+  become_user: root
+
+- name: install restic via copr
+  shell: dnf -y copr enable copart/restic
+  dnf:
+    name: restic
+    state: latest

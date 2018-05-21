@@ -8,6 +8,8 @@
   become: yes
   become_user: root
 
+# !!! Achtung !!! handler deletes any discoverydb entries when run
+
 - name: Copy a new initiatorname.iscsi file | back up original
   template:
     src: initiatorname.j2
@@ -16,7 +18,9 @@
     group: root
     mode: 0644
     backup: yes    
-  notify: restart_iscsi
+  notify:
+    - restart_iscsi
+    - flush_discovdb
   become: yes
   become_user: root
 
@@ -69,6 +73,7 @@
     src: "{{ returned_device.devicenodes[0] }}" 
     fstype: xfs
     opts: _netdev
+    passno: 2
     state: present
     
 
