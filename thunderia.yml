@@ -6,5 +6,6 @@
 
   roles:
     - initiator
+    - restic
    
 

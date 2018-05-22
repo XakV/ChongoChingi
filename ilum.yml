@@ -4,5 +4,6 @@
 
   roles:
     - initiator
+    - restic
    
 

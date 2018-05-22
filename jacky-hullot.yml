@@ -1,9 +1,10 @@
-
+#JACKY-HULLOT - a 17th century name for a young male owl
 - name: Host for jebel_krong setup
   hosts: jacky-hullot.local
 
   roles:
     - initiator
+    - restic
 #  - common
   # - gaming
 #  - office

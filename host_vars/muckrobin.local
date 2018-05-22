@@ -6,20 +6,8 @@ isdesktop: true
 mcserver: false
 home_dir_user: jebel
 iscsi_client_name: muckrobin
-backup_objects:
-  - .bash_profile
-  - .bashrc
-  - .config
-  - Code
-  - .gitconfig
-  - .local
-  - .muttrc
-  - .profile
-  - .ssh
-  - .taskrc
-  - .vim
-  - .vimrc
-  - .weechat
-  - .zbstudio
-  - .ansible
 iscsi_target_ip: "10.0.0.6"
+restic_backup_hr: 01
+restic_backup_min: 00
+restic_prune_hr: 06
+restic_prune_min: 00

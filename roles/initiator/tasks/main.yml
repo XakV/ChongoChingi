@@ -5,8 +5,16 @@
       name: "{{ item }}"
   with_items:
   - iscsi-initiator-utils
+  - python-firewall
   become: yes
   become_user: root
+
+- name: open firewall port for iscsi
+  firewalld:
+    port: 3260/tcp
+    permanent: true
+    immediate: true
+    state: enabled
 
 # !!! Achtung !!! handler deletes any discoverydb entries when run
 
@@ -28,8 +36,8 @@
   file:
     path: /opt/Backups
     state: directory
-    owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_id }}"
+    owner: "{{ home_dir_user }}"
+    group: "{{ home_dir_user }}"
     mode: 0755
   become: yes
   become_user: root
