@@ -5,7 +5,7 @@
       name: "{{ item }}"
   with_items:
   - iscsi-initiator-utils
-  - python-firewall
+  - python3-firewall
   become: yes
   become_user: root
 

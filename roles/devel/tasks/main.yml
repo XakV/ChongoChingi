@@ -8,6 +8,11 @@
   - golang-bin
   - love
   - lua
+  - lua-devel
+  - openssl-devel
+  - python3-pygments
+  - python3-pygments-markdown-lexer
+  - hugo
   - python3-virtualenvwrapper
   - git
   - rubygems
@@ -45,15 +50,6 @@
 - name: devel | user devel dir | user dev_dir set-up
   file:
       dest: "{{ansible_user_dir}}/Code"
-      owner: "{{ansible_user_id}}"
-      group: "{{ansible_user_id}}"
+      owner: "{{home_dir_user}}"
+      group: "{{home_dir_user}}"
       state: directory
-
-- name: devel | IDE | set up IDE for devel
-  copy:
-    src: ZeroBraneStudioEduPack-1.60-linux.sh
-    dest: "{{ansible_user_dir}}/Code"
-    owner: "{{ansible_user_id}}"
-    group: "{{ansible_user_id}}"
-    mode: 0755
-
