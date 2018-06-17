@@ -5,11 +5,11 @@
   roles:
     - initiator
     - restic
+    - devel
 #  - common
   # - gaming
 #  - office
 #  - firewall
-#  - devel
     #  - firefox
 
 #- name: Do the unpriv thing

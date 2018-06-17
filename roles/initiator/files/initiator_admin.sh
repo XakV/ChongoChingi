@@ -2,7 +2,7 @@
 
 ### Do the basic portal discovery and login
 
-TPORTAL=10.0.0.6
+TPORTAL=10.0.0.199
 TARGETNAME=$(iscsiadm --mode discovery --type sendtargets --portal $TPORTAL discover | grep $HOSTNAME | cut -d " " -f 2)
 iscsiadm --mode node --name $TARGETNAME --portal $TPORTAL --login
 
