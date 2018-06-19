@@ -1,0 +1,29 @@
+---
+- name: sysstat | Install needed packages
+  dnf:
+    state: latest
+    name: "{{ item }}"
+  with_items:
+  - mutt
+  - sysstat
+
+- name: copy report script
+  copy:
+    src: sysreport.sh
+    dest: /usr/local/bin/
+    owner: "{{ home_dir_user }}"
+    group: "{{ home_dir_user }}"
+    mode: 0755
+
+- name: add cron job
+  cron:
+    name: homedirbackup
+    hour: "08"
+    minute: "05"
+    job: /bin/bash /usr/local/bin/sysreport.sh
+
+- name: enable cron
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: crond  

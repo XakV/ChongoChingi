@@ -7,5 +7,6 @@
   roles:
     - initiator
     - restic
+    - sysstat
    
 

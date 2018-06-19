@@ -6,7 +6,7 @@
     - initiator
     - restic
     - devel
-#  - common
+    - sysstat
   # - gaming
 #  - office
 #  - firewall
