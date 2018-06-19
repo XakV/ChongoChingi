@@ -1,6 +1,6 @@
 
 - name: Host for oliver setup
-  hosts: ilum.local
+  hosts: ilum.grobble.lan
 
   roles:
     - initiator

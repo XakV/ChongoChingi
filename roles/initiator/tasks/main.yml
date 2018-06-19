@@ -56,7 +56,7 @@
     target: "iqn.2018-05.local.c7-server:{{ iscsi_client_name }}"
     portal: "{{ iscsi_target_ip }}"
   register: returned_device
-  notify: partition_device
+#  notify: partition_device
 
 - debug: 
     msg: "device is {{ returned_device['devicenodes'] }}"
