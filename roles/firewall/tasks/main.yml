@@ -2,7 +2,7 @@
 - name: Firewall | configure zone interface
   firewalld:
       zone: home
-      source: 192.168.0.0/24
+      source: 10.0.0.0/24
       interface: "{{ ansible_default_ipv4.interface }}"
       state: enabled
       permanent: true
@@ -35,37 +35,3 @@
     - snmp
   notify:
     - reload firewall
-
-- name: Firewall | enable ipv6 privacy extensions
-  sysctl:
-    name: "net.ipv6.conf.{{ item }}.use_tempaddr"
-    value: 2
-    sysctl_set: yes
-    state: present
-    reload: yes
-  with_items:
-    - "{{ ansible_default_ipv6.interface }}"
-    - default
-    - all
-
-- name: Firewall | allow LAN access to Spigot Servers
-  firewalld:
-      zone: home
-      state: enabled
-      port: "25565-25568/tcp"
-      permanent: true
-  notify:
-    - reload firewall
-  when: mcserver == true
-
-- name: Firewall | allow LAN access to syncthing
-  firewalld:
-      zone: home
-      state: enabled
-      port: "8384/tcp"
-      permanent: true
-  notify:
-    - reload firewall
-  when: isdesktop == false
-
-

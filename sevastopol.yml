@@ -1,16 +1,14 @@
-#JACKY-HULLOT - a 17th century name for a young male owl
+#Sevastopol - Russian City destroyed in WWII
 - name: Host for jebel_krong setup
-  hosts: jacky-hullot.grobble.lan
+  hosts: sevastopol.grobble.lan
 
   roles:
     - initiator
-    - restic
     - devel
     - sysstat
-  # - gaming
-#  - office
-#  - firewall
-    #  - firefox
+    - restic
+    - firewall
+    - common
 
 #- name: Do the unpriv thing
 #  hosts: skaidon
