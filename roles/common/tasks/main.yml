@@ -43,9 +43,9 @@
 
 - name: Common | Mount Mods from Oliver unless Oliver
   mount:
-    path: "{ ansible_user_dir }/.minecraft/mods"
+    path: "/home/{{ home_dir_user }}/.minecraft/mods"
     src: ilum://home/oliver/.minecraft/mods
     fstype: nfs
     opts: _netdev
     state: mounted
-  when: '"{ ansible_hostname }" != "ilum.grobble.lan"'
+  when: '"{{  ansible_hostname }}" != "ilum.grobble.lan"'
