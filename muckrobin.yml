@@ -6,5 +6,6 @@
     - initiator
     - sysstat
     - restic
+    - common
    
 

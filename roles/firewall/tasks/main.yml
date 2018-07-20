@@ -33,5 +33,8 @@
     - ipp-client
     - pulseaudio
     - snmp
+    - nfs
+    - mountd
+    - rpc-bind
   notify:
     - reload firewall

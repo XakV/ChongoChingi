@@ -9,7 +9,6 @@
   - java-1.8.0-openjdk
   - smartmontools
   - NetworkManager-tui
-  - python-firewall
   - python3-firewall
   - python3-dnf-plugins-core
   - python3-dnf-plugins-extras-common
@@ -18,6 +17,7 @@
   - python-dnf
   - libXScrnSaver
   - lsof
+  - nfs-utils
 
 - name: Common | set up fstrim if ssdisk
   systemd:
@@ -40,3 +40,12 @@
     name: dnf-automatic-install.timer
     state: started
     enabled: true
+
+- name: Common | Mount Mods from Oliver unless Oliver
+  mount:
+    path: "{ ansible_user_home_dir }/.minecraft/mods"
+    src: ilum://home/oliver/.minecraft/mods
+    fstype: nfs
+    opts: _netdev
+    state: mounted
+  when: '"{ ansible_hostname }" != "ilum.grobble.lan"'

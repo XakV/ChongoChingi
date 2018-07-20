@@ -1,8 +1,0 @@
-user: nolan
-user_home: /home/nolan
-ssdisk: true
-nvidia: true
-amd: false
-qt: false
-mcserver: false
-isdesktop: true
