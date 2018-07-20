@@ -2,7 +2,7 @@
 - name: Host for nolan setup
   hosts: kathmandu.grobble.lan
   become: yes
-  become_user: nolan
+  become_user: root
 
   roles:
     - initiator

@@ -15,6 +15,8 @@
     permanent: true
     immediate: true
     state: enabled
+  become: yes
+  become_user: root
 
 # !!! Achtung !!! handler deletes any discoverydb entries when run
 
@@ -56,7 +58,9 @@
     target: "iqn.2018-05.local.c7-server:{{ iscsi_client_name }}"
     portal: "{{ iscsi_target_ip }}"
   register: returned_device
-#  notify: partition_device
+  notify: partition_device
+  become: yes
+  become_user: root
 
 - debug: 
     msg: "device is {{ returned_device['devicenodes'] }}"
@@ -66,6 +70,9 @@
     device: "{{ returned_device.devicenodes[0] }}"
     unit: MiB
   register: iscsi_dev_info
+  become: yes
+  become_user: root
+
 
 - debug:
     msg: "part info {{ iscsi_dev_info.partitions }}"
@@ -74,6 +81,8 @@
   filesystem:
     fstype: xfs
     dev: "{{ returned_device.devicenodes[0] }}"
+  become: yes
+  become_user: root
 
 - name: mount new FS
   mount: 
@@ -83,5 +92,5 @@
     opts: _netdev
     passno: 2
     state: present
-    
-
+  become: yes
+  become_user: root

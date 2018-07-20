@@ -43,7 +43,7 @@
 
 - name: Common | Mount Mods from Oliver unless Oliver
   mount:
-    path: "{ ansible_user_home_dir }/.minecraft/mods"
+    path: "{ ansible_user_dir }/.minecraft/mods"
     src: ilum://home/oliver/.minecraft/mods
     fstype: nfs
     opts: _netdev
