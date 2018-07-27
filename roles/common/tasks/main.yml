@@ -18,6 +18,19 @@
   - libXScrnSaver
   - lsof
   - nfs-utils
+  - tilix
+  - sysstat
+  - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+  - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+  - https://dl.folkswithhats.org/fedora/$(rpm -E %fedora)/RPMS/fedy-release.rpm
+  - fedy
+
+- name: Common | flat all the packs
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
 
 - name: Common | set up fstrim if ssdisk
   systemd:

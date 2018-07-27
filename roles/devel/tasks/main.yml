@@ -35,7 +35,7 @@
     - requests
     - xmltodict
 
-- name: devel | Install devel fonts
+- name: devel | Install devel packages
   dnf:
       state: latest
       name: "{{ item }}"
@@ -46,6 +46,15 @@
   - mozilla-fira-sans-fonts
   - overpass-mono-fonts
   - overpass-fonts
+  - gobby05
+  - pandoc
+  - tilix
+  - hugo
+  - lua
+  - lua-devel
+  - '@Fedora Packager'
+  - '@RPM Development Tools'
+  - '@C Development Tools and Libraries'
 
 - name: devel | user devel dir | user dev_dir set-up
   file:

@@ -4,7 +4,7 @@ lan_client_sources: "10.0.0.0/24"
 iscsi_target_ip: "10.0.0.199"
 # A list of ports we want open
 udp_ports: "4445/udp"
-tcp_ports: ["2551995-25569/tcp", "5222/tcp", "5432/tcp", "8953/udp", "2360/tcp"]
+tcp_ports: ["25565-25569/tcp", "5222/tcp", "5432/tcp", "8953/udp", "2360/tcp"]
 lan_client_sources: "10.0.0.0/24" 
 lan_services: ["ssh", "nfs"]
 
