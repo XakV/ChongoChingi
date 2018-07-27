@@ -36,5 +36,6 @@
     - nfs
     - mountd
     - rpc-bind
+    - samba-client
   notify:
     - reload firewall
