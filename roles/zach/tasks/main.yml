@@ -1,5 +1,5 @@
 ---
-- name: terminal configuration | create vim backup dir
+- name: Zach | create vim backup dir
   file:
     path: "{{ ansible_user_dir }}/.vim/tmp"
     state: directory
@@ -7,7 +7,7 @@
     group: "{{ ansible_user_id }}"
     mode: 0755
 
-- name: terminal configuration | create vim plugin dir
+- name: Zach | create vim plugin dir
   file:
     path: "{{ ansible_user_dir }}/.vim/plugged"
     state: directory
@@ -16,7 +16,7 @@
     mode: 0755
   notify: install plugged
 
-- name: terminal config | create Code dir
+- name: Zach | create Code dir
   file:
     path: "{{ ansible_user_dir }}/Code"
     state: directory
@@ -52,8 +52,36 @@
     state: directory
     mode: 0755
 
-- name Zach | minidlna config
+- name: Zach | minidlna config
   assemble:
     src: minidlna_frag
     dest: /etc/minidlna.conf
     delimiter: ### Ansible Added Directive
+
+- name: Zach | add copr_s
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/yum.repos.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+    seuser: _default
+    serole: _default
+    setype: _default
+  with_items:
+    - _copr_copart-restic.repo
+    - _copr_dagostinelli-prestopalette.repo
+    - _copr_tetradecahedron-Newsboat.repo
+    - _copr_thelocehiliosan-yadm.repo
+
+- name: Zach | install the copr_s
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - yadm
+    - prestopalette
+    - newsboat
+    - restic
+
+
