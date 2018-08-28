@@ -1,6 +1,6 @@
 #muckrobin - A MUCK-ROBIN is a child who deliberately enjoys annoying or disturbing adults.
 - name: Host for zach setup
-  hosts: staraya.tsundoku.pw
+  hosts: volgograd.tsundoku.pw
 
   roles:
     - initiator

@@ -53,7 +53,7 @@
 
 - name: Common | copy repo files
   copy: 
-    src: "/home/ansible/ChongoChingi/roles/files/repos/{{ item }}"
+    src: "/home/ansible/ChongoChingi/roles/common/files/repos/{{ item }}"
     dest: /etc/yum.repos.d/
     owner: root
     group: root
