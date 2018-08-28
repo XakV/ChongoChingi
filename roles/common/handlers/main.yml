@@ -4,3 +4,7 @@
     enabled: yes
     state: restarted
  
+- name: update
+  dnf:
+    name: "*"
+    state: latest

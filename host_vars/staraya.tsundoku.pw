@@ -4,7 +4,7 @@ ssdisk: true
 qt: false
 isdesktop: true
 mcserver: false
-home_dir_user: jebel
+home_dir_user: zach
 iscsi_client_name: muckrobin
 iscsi_target_ip: "10.0.0.199"
 restic_backup_hr: 15

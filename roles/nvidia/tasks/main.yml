@@ -4,18 +4,9 @@
       state: latest
       name: "{{ item }}"
   with_items:
-  - dkms-nvidia
-  - nvidia-driver
-  - nvidia-driver-libs.i686
-  - nvidia-driver-libs.x86_64
+  - xorg-x11-drv-nvidia.x86_64
   - nvidia-settings
   - nvidia-xconfig
-  - libglvnd
-  - libglvnd-egl
-  - libglvnd-gles
-  - libglvnd-glx
-  - libglvnd-opengl
-  - libglvnd-core-devel
-  - libglvnd-devel
-  - libvdpau
+  - nvidia-modprobe
+  - xorg-x11-drv-nvidia-libs.i686
 

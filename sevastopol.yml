@@ -1,6 +1,6 @@
 #Sevastopol - Russian City destroyed in WWII
 - name: Host for jebel_krong setup
-  hosts: sevastopol.grobble.lan
+  hosts: sevastopol.tsundoku.pw
 
   roles:
     - initiator

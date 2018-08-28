@@ -1,6 +1,6 @@
 
 - name: Host for nolan setup
-  hosts: kathmandu.grobble.lan
+  hosts: kathmandu.tsundoku.pw
   become: yes
   become_user: root
 

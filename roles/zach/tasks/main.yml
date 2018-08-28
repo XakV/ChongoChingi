@@ -22,24 +22,6 @@
     state: directory
     mode: 0755
 
-# TODO - figure out how to keep all this stuff in synch
-#  name: terminal configuration | clone dotfile repo
-#   git:
-#     repo: 'git@github.com:AffableZonkey/snooty_doots.git'
-#     dest: "{{ ansible_user_dir }}/Code/snooty_doots"
-#     accept_hostkey: yes
-#     update: yes
-#
-
-- name: Zach | install flatpaks
-  flatpak:
-    name: "{{ item }}"
-    state: present
-    method: user
-  with_items:
-    - com.github.babluboy.bookworm/x86_64/stable
-    - com.spotify.Client/x86_64/stable
-
 - name: Zach | minidlna
   dnf:
     name: minidlna
@@ -48,15 +30,22 @@
   become_user: root
 
 - name: Zach | shared Videos
-    file: /opt/Video
+  file: 
+    path: /opt/Video
     state: directory
     mode: 0755
+    owner: minidlna
+    group: minidlna
+  become: yes
+  become_user: root
 
-- name: Zach | minidlna config
-  assemble:
-    src: minidlna_frag
-    dest: /etc/minidlna.conf
-    delimiter: ### Ansible Added Directive
+# name: Zach | minidlna config
+# assemble:
+#   src: /home/ansible/ChongoChingi/roles/zach/files/minidlna_frag
+#   dest: /etc/minidlna.conf
+#   delimiter: ### Ansible Added Directive
+# become: yes
+# become_user: root
 
 - name: Zach | add copr_s
   copy:
@@ -73,6 +62,8 @@
     - _copr_dagostinelli-prestopalette.repo
     - _copr_tetradecahedron-Newsboat.repo
     - _copr_thelocehiliosan-yadm.repo
+  become: yes
+  become_user: root
 
 - name: Zach | install the copr_s
   dnf:
@@ -83,5 +74,5 @@
     - prestopalette
     - newsboat
     - restic
-
-
+  become: yes
+  become_user: root
