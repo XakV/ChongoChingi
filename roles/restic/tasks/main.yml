@@ -48,6 +48,12 @@
     minute: "{{ restic_prune_min }}"
     job: restic -r /opt/Backups/ forget --keep-last 7 --keep-weekly 4 --keep-monthly 3 --keep-yearly 1 --prune  
     
-    
+- name: copy cron.allow is important
+  copy:
+    src: cron.allow
+    dest: /etc/cron.allow
+    owner: root
+    group: root
+    mode: 0644    
   
     

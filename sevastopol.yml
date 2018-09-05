@@ -9,6 +9,7 @@
     - restic
     - firewall
     - common
+    - zach
 
 #- name: Do the unpriv thing
 #  hosts: skaidon

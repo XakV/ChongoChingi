@@ -8,5 +8,7 @@
     - restic
     - common
     - zach
+    - devel
+    - firewall
    
 
