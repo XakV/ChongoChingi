@@ -1,0 +1,21 @@
+#Sevastopol - Russian City destroyed in WWII
+- name: Host for jebel_krong setup
+  hosts: megalonyx.tsundoku.pw
+
+  roles:
+    - initiator
+    - devel
+    - sysstat
+    - restic
+    - firewall
+    - common
+    - zach
+    - gaming
+
+#- name: Do the unpriv thing
+#  hosts: skaidon
+#  become: true
+#  become_user: jkrong
+#  roles:
+#  - terminal
+

@@ -74,5 +74,6 @@
     - prestopalette
     - newsboat
     - restic
+    - gnome-tweak-tool
   become: yes
   become_user: root

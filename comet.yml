@@ -1,0 +1,10 @@
+
+- name: Host for oliver setup
+  hosts: comet.tsundoku.pw
+
+  roles:
+    - common
+    - firewall
+    - gaming
+   
+

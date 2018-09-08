@@ -20,6 +20,7 @@
   - nfs-utils
   - tilix
   - sysstat
+  - vim
 
 - name: Common | set up fstrim if ssdisk
   systemd:
@@ -59,8 +60,8 @@
     group: root
     mode: 0644
   with_items:
-  - che-llvm.repo
-  - che-mesa.repo
+# - che-llvm.repo
+# - che-mesa.repo
   - fedora-cisco-openh264.repo
   - rpmfusion-free.repo
   - rpmfusion-free-updates.repo
