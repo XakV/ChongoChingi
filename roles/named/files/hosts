@@ -1,0 +1,15 @@
+127.0.0.1     localhost			localhost.localdomain localhost4 localhost4.localdomain4
+::1           localhost 		localhost.localdomain localhost6 localhost6.localdomain6
+127.0.0.1     c7-server.tsundoku.pw     c7-server 	
+127.0.0.1     jebel-krong.tsundoku.pw   jebel-krong 	
+127.0.0.1     c7-repo.tsundoku.pw       c7-repo 		
+127.0.0.1     plex.tsundoku.pw          plex
+10.0.0.199    c7-server.tsundoku.pw     c7-server 	
+10.0.0.199    jebel-krong.tsundoku.pw   jebel-krong 	
+10.0.0.199    c7-repo.tsundoku.pw       c7-repo 		
+10.0.0.199    plex.tsundoku.pw          plex
+10.0.0.2      epic-sniper.tsundoku.pw   epic-sniper     		
+10.0.0.15     megalonyx.tsundoku.pw     megalonyx  	
+10.0.0.13     volgograd.tsundoku.pw     volgograd   	
+10.0.0.16     kathmandu.tsundoku.pw     kathmandu		
+10.0.0.27     xenothrix.tsundoku.pw	xenothrix

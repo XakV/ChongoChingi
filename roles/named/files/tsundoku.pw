@@ -1,0 +1,17 @@
+$TTL 3H
+@   IN SOA  @ hostmaster.tsundoku.pw. (
+                0   ; serial
+                3H  ; refresh
+                1H  ; retry
+                1W  ; expire
+                3H )    ; minimum
+@            IN   NS     c7-server.tsundoku.pw.
+@            IN   A      10.0.0.199
+c7-server    IN   A      10.0.0.199
+plex	     IN   A      10.0.0.199
+megalonyx    IN   A      10.0.0.15
+volgograd    IN   A      10.0.0.13
+kathmandu    IN   A      10.0.0.16
+epic-sniper  IN   A      10.0.0.2
+xenothrix    IN   A	 10.0.0.27
+www          IN   CNAME  tsundoku.pw.
