@@ -52,6 +52,7 @@
   - hugo
   - lua
   - lua-devel
+  - pipenv
   - '@Fedora Packager'
   - '@RPM Development Tools'
   - '@C Development Tools and Libraries'
