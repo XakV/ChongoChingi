@@ -16,7 +16,7 @@
     src: named.conf
     dest: /etc/named.conf
     owner: root
-    group: root
+    group: named
     mode: 0644
     backup: yes
 
@@ -25,7 +25,7 @@
     src: named.rfc1912.zones
     dest: /etc/named.rfc1912.zones
     owner: root
-    group: root
+    group: named
     mode: 0640
     backup: yes
 
@@ -34,7 +34,7 @@
     src: tsundoku.pw
     dest: /var/named/tsundoku.pw
     owner: root
-    group: root
+    group: named
     mode: 0644
    
 - name: named | copy host file
