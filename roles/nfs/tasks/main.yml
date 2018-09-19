@@ -1,0 +1,47 @@
+---
+- name: nfs | install the packages
+  dnf:
+    name: "{{ items }}"
+    state: latest
+  with_items:
+    - nfs-utils
+    - rpcbind
+
+- name: nfs | configure zone
+  firewalld:
+    zone: public
+    source: 10.0.0.0/24
+    interface: "{{ ansible_default_ipv4.interface }}"
+    state: enabled
+    permanent: true
+  notify:
+    - reload firewall
+
+- name: nfs | add zone services
+  firewalld:
+    zone: public
+    state: enabled
+    permanent: true
+    service: "{{ item }}"
+  with_items:
+    - ssh
+    - mdns
+    - nfs
+    - pulseaudio
+    - rpc-bind
+  notify:
+    - reload firewall
+
+- name: nfs | add zone ports
+  firewalld:
+    zone: public
+    state: enabled
+    permanent: true
+    port: "{{ item }}"
+  with_items:
+    - 3260/tcp
+    - 25565/tcp
+    - 32400/tcp
+  notify:
+    - reload firewall
+    
