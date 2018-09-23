@@ -1,0 +1,2 @@
+/srv/mods	10.0.0.0/24(rw,no_root_squash)
+/srv/resticrepo 10.0.0.0/24(rw,no_root_squash)

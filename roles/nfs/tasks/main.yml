@@ -1,7 +1,7 @@
 ---
 - name: nfs | install the packages
   dnf:
-    name: "{{ items }}"
+    name: "{{ item }}"
     state: latest
   with_items:
     - nfs-utils
@@ -9,7 +9,7 @@
 
 - name: nfs | configure zone
   firewalld:
-    zone: public
+    zone: home
     source: 10.0.0.0/24
     interface: "{{ ansible_default_ipv4.interface }}"
     state: enabled
@@ -19,7 +19,7 @@
 
 - name: nfs | add zone services
   firewalld:
-    zone: public
+    zone: home
     state: enabled
     permanent: true
     service: "{{ item }}"
@@ -34,7 +34,7 @@
 
 - name: nfs | add zone ports
   firewalld:
-    zone: public
+    zone: home
     state: enabled
     permanent: true
     port: "{{ item }}"
@@ -45,3 +45,18 @@
   notify:
     - reload firewall
     
+- name: nfs | copy exports
+  copy:
+    src: exports
+    dest: /etc/exports
+    owner: root
+    group: root
+  notify:
+    - reload exports
+
+- name: nfs | export the exports
+  command: exportfs -rv
+
+- name: nfs | show the exports
+  command: showmount -e localhost
+  register: showmnt_result
