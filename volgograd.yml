@@ -3,12 +3,11 @@
   hosts: volgograd.tsundoku.pw
 
   roles:
-    - initiator
-    - sysstat
-    - restic
     - common
     - zach
     - devel
+    - restic
     - firewall
+    - gaming
    
 
