@@ -1,20 +1,9 @@
-#Sevastopol - Russian City destroyed in WWII
-- name: Host for jebel_krong setup
-  hosts: sevastopol.tsundoku.pw
+#sorex - an extict genus of shrew
+- name: sorex - rpi2
+  hosts: sorex.tsundoku.pw
+  become: true
 
   roles:
-    - initiator
-    - devel
-    - sysstat
-    - restic
     - firewall
-    - common
-    - zach
-
-#- name: Do the unpriv thing
-#  hosts: skaidon
-#  become: true
-#  become_user: jkrong
-#  roles:
-#  - terminal
+    - nfs
 

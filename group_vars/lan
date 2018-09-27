@@ -1,5 +1,1 @@
-# Local DNS Search
-# search: samarkand.local
-
-# Default Shell
-shell: /usr/bin/bash
+group_firewalld_zone: home

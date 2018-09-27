@@ -1,7 +1,7 @@
 ---
 - name: Firewall | configure zone interface
   firewalld:
-      zone: home
+      zone: FedoraServer
       source: 10.0.0.0/24
       interface: "{{ ansible_default_ipv4.interface }}"
       state: enabled
@@ -11,7 +11,7 @@
 
 - name: Firewall | configure zone port
   firewalld:
-      zone: home
+      zone: FedoraServer
       state: enabled
       port: "4445/udp"
       permanent: true
@@ -21,7 +21,7 @@
 
 - name: Firewall | configure zone services
   firewalld:
-      zone: home
+      zone: FedoraServer
       state: enabled
       permanent: true
       service: "{{ item }}"
