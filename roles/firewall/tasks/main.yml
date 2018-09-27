@@ -1,41 +1,23 @@
 ---
-- name: Firewall | configure zone interface
+- name: Firewall | configure zone ports
   firewalld:
-      zone: FedoraServer
-      source: 10.0.0.0/24
+      zone: "{{ group_firewalld_zone }}"
+      source: "{{ lan_sources }}" 
       interface: "{{ ansible_default_ipv4.interface }}"
+      port: "{{ item }}"
       state: enabled
       permanent: true
+  loop: "{{ group_ports }}"
   notify:
     - reload firewall
-
-- name: Firewall | configure zone port
-  firewalld:
-      zone: FedoraServer
-      state: enabled
-      port: "4445/udp"
-      permanent: true
-  notify:
-    - reload firewall
-
 
 - name: Firewall | configure zone services
   firewalld:
-      zone: FedoraServer
+      zone: "{{ group_firewalld_zone }}"
+      source: "{{ lan_sources }}" 
+      interface: "{{ ansible_default_ipv4.interface }}"
       state: enabled
       permanent: true
-      service: "{{ item }}"
-  with_items:
-    - ssh
-    - mdns
-    - dhcpv6-client
-    - ipp
-    - ipp-client
-    - pulseaudio
-    - snmp
-    - nfs
-    - mountd
-    - rpc-bind
-    - samba-client
+  loop: "{{ group_services }}"
   notify:
     - reload firewall
