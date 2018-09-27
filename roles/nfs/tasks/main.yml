@@ -9,7 +9,6 @@
 
 - name: nfs | configure zone
   firewalld:
-    zone: FedoraServer
     source: 10.0.0.0/24
     interface: "{{ ansible_default_ipv4.interface }}"
     state: enabled
@@ -19,7 +18,6 @@
 
 - name: nfs | add zone services
   firewalld:
-    zone: FedoraServer
     state: enabled
     permanent: true
     service: "{{ item }}"
@@ -34,7 +32,6 @@
 
 - name: nfs | add zone ports
   firewalld:
-    zone: FedoraServer
     state: enabled
     permanent: true
     port: "{{ item }}"

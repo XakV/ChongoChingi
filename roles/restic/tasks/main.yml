@@ -9,6 +9,10 @@
   - python3-paramiko
   - python3-dnf-plugins-extras-common
   - python3-dnf-plugins-core
+  - autofs
+
+#TODO - template the automount
+#TODO - start the autofs daemon
 
 - name: copr enable restic repo
   shell: dnf copr enable -y copart/restic
@@ -76,5 +80,3 @@
     owner: root
     group: root
     mode: 0644    
-  
-    
