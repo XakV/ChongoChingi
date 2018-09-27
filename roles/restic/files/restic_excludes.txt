@@ -16,7 +16,6 @@
 .steampid
 Sync
 .xsession-errors
-.thunderbird
 .var
 .wget-hsts
 .wine
@@ -24,3 +23,7 @@ Sync
 .PlayOnLinux
 .config
 VM
+Downloads
+Public
+Sync
+Templates

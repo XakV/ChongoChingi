@@ -41,12 +41,22 @@
   become: yes
   become_user: "{{ home_dir_user }}"
 
+- name: copy cron.allow is important
+  copy:
+    src: cron.allow
+    dest: /etc/cron.allow
+    owner: root
+    group: root
+    mode: 0644    
+ 
 - name: schedule backups
   cron:
     name: homedirbackup
     hour: "{{ restic_backup_hr }}"
     minute: "{{ restic_backup_min }}"
     job: restic -r /opt/Backups/ backup "/home/{{ home_dir_user }}" --exclude-file /opt/Backups/restic_excludes.txt --password-file "/home/{{ home_dir_user }}/.restic_info"
+  notify:
+  - reload cron
 
 - name: prune daily backups
   cron:
@@ -55,6 +65,9 @@
     hour: "{{ restic_prune_hr }}"
     minute: "{{ restic_prune_min }}"
     job: restic -r /opt/Backups/ forget --keep-last 7 --keep-weekly 4 --keep-monthly 3 --keep-yearly 1 --prune  
+  notify:
+  - reload cron
+
     
 - name: copy cron.allow is important
   copy:

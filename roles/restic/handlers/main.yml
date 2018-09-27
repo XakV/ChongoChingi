@@ -1,6 +1,6 @@
-- name: restart cups
+- name: reload cron
   systemd:
-    name: cups 
+    name: crond 
     enabled: yes
     state: restarted
  

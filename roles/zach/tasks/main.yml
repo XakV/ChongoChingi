@@ -29,24 +29,6 @@
   become: yes
   become_user: root
 
-- name: Zach | shared Videos
-  file: 
-    path: /opt/Video
-    state: directory
-    mode: 0755
-    owner: minidlna
-    group: minidlna
-  become: yes
-  become_user: root
-
-# name: Zach | minidlna config
-# assemble:
-#   src: /home/ansible/ChongoChingi/roles/zach/files/minidlna_frag
-#   dest: /etc/minidlna.conf
-#   delimiter: ### Ansible Added Directive
-# become: yes
-# become_user: root
-
 - name: Zach | add copr_s
   copy:
     src: "{{ item }}"

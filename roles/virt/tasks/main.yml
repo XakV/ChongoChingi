@@ -3,4 +3,4 @@
       state: latest
       name: "{{ item }}"
   with_items:
-  - '@virtualization'
+  - 'Virtualization'

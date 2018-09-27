@@ -1,7 +1,8 @@
 - name: update-all
   command: '/usr/bin/dnf update --refresh -y'
 
-- name: add xpad module
-  modprobe:
-    name: xpad
-    state: present
+- name: restart xboxdrv
+  systemd:
+    name: xboxdrv
+    state: restarted
+    enabled: true
