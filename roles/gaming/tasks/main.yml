@@ -5,12 +5,6 @@
       name: "{{ item }}"
   with_items:
   - gcc
-  - acpid
-  - pkgconfig
-  - mesa-vdpau-drivers.x86_64
-  - mesa-vdpau-drivers.i686
-  - vulkan.x86_64
-  - vulkan.i686
   - xboxdrv
   - mesa-vulkan-drivers
   notify:

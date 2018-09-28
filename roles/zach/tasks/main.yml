@@ -46,13 +46,15 @@
     - _copr_thelocehiliosan-yadm.repo
   become: yes
   become_user: root
+  notify:
+    - update pkgs
 
 - name: Zach | install the copr_s
   dnf:
     name: "{{ item }}"
     state: latest
   with_items:
-    - yadm
+#    - yadm
     - prestopalette
     - newsboat
     - restic
