@@ -40,7 +40,6 @@
     serole: _default
     setype: _default
   with_items:
-    - _copr_copart-restic.repo
     - _copr_dagostinelli-prestopalette.repo
     - _copr_tetradecahedron-Newsboat.repo
     - _copr_thelocehiliosan-yadm.repo
@@ -57,7 +56,6 @@
 #    - yadm
     - prestopalette
     - newsboat
-    - restic
     - gnome-tweak-tool
   become: yes
   become_user: root

@@ -1,5 +1,5 @@
 ---
-- name: Common | Install common packages
+- name: Restic  | Install restic packages
   dnf:
     state: latest
     name: "{{ item }}"
@@ -21,6 +21,13 @@
   dnf:
     state: latest
     name: restic
+
+- name: restic | make sure the backup dir exists
+  file:
+    path: /opt/Backups
+    state: directory
+    owner: "{{ home_dir_user }}"
+    mode: 0755
 
 - name: copy exclude file
   copy:
