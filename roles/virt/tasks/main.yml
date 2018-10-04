@@ -3,4 +3,9 @@
       state: latest
       name: "{{ item }}"
   with_items:
+<<<<<<< HEAD
   - 'Virtualization'
+=======
+  - '@Virtualization'
+  - '@Vagrant with libvirt support'
+>>>>>>> devel
