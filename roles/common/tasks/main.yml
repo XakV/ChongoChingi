@@ -1,0 +1,69 @@
+---
+- name: Common | Install common packages
+  dnf:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - weechat
+  - inkscape
+  - java-1.8.0-openjdk
+  - smartmontools
+  - NetworkManager-tui
+  - python3-firewall
+  - python3-dnf-plugins-core
+  - python3-dnf-plugins-extras-common
+  - python3-dnf-plugin-system-upgrade
+  - dnf-automatic
+  - python-dnf
+  - libXScrnSaver
+  - lsof
+  - nfs-utils
+  - sysstat
+  - vim
+
+- name: Common | set up fstrim if ssdisk
+  systemd:
+    name: fstrim.timer
+    state: started
+    enabled: true
+  when:
+    ssdisk == true
+
+- name: Common | copy dnf-automatic files
+  copy:
+     src: dnf
+     dest: /etc/dnf/
+     owner: root
+     group: root
+     mode: 0644
+
+- name: Common | activate dnf-automatic
+  systemd:
+    name: dnf-automatic-install.timer
+    state: started
+    enabled: true
+
+- name: Common | Mount Mods from server
+  mount:
+    path: "/home/{{ home_dir_user }}/.minecraft/mods"
+    src: vulpes.tsundoku.pw://srv/mods
+    fstype: nfs
+    opts: _netdev,retry=15
+    state: mounted
+
+- name: Common | copy repo files
+  copy: 
+    src: "/home/greyman/ChongoChingi/roles/common/files/repos/{{ item }}"
+    dest: /etc/yum.repos.d/
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+  - rpmfusion-free.repo
+  - rpmfusion-free-updates.repo
+  - rpmfusion-free-updates-testing.repo
+  - rpmfusion-nonfree.repo
+  - rpmfusion-nonfree-updates.repo
+  - rpmfusion-nonfree-updates-testing.repo
+  notify:
+    - update

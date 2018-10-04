@@ -1,0 +1,8 @@
+nvidia: false
+amd: false
+qt: false
+isdesktop: false
+home_dir_user: greyman
+ansible_connect: local
+ansible_user: root
+ansible_become: true

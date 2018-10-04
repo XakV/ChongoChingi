@@ -1,0 +1,13 @@
+
+- name: Host for nolan setup
+  hosts: kathmandu.tsundoku.pw
+  become: yes
+  become_user: root
+
+  roles:
+    - initiator
+    - restic
+    - sysstat
+    - common
+   
+

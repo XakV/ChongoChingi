@@ -1,0 +1,9 @@
+#sorex - an extict genus of shrew
+- name: sorex - rpi2
+  hosts: sorex.tsundoku.pw
+  become: true
+
+  roles:
+    - firewall
+    - nfs
+

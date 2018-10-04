@@ -1,0 +1,8 @@
+- name: update-all
+  command: '/usr/bin/dnf update --refresh -y'
+
+- name: restart xboxdrv
+  systemd:
+    name: xboxdrv
+    state: restarted
+    enabled: true

@@ -1,0 +1,15 @@
+- name: restart_iscsi
+  systemd:
+    name: iscsi 
+    enabled: yes
+    state: restarted
+
+- name: flush_discovdb
+  shell: iscsiadm -m discovery -p "{{ iscsi_target_ip }}" -o delete
+
+- name: partition_device
+  parted: 
+    device: "{{ returned_device.devicenodes[0] }}"
+    number: 1
+    state: present
+  register: partition_info

@@ -1,0 +1,22 @@
+---
+- name: Common | Install common packages
+  dnf:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - syncthing
+  - syncthing-inotify
+  - syncthing-tools
+
+- name: enable syncthing
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+    user: yes
+  with_items:
+  - syncthing
+  - syncthing-inotify
+  become: true
+  become_method: su
+  become_user: "{{ ansible_user_id }}"

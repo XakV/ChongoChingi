@@ -1,0 +1,87 @@
+---
+- name: initiator | Install initiator packages
+  dnf:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - iscsi-initiator-utils
+  - python3-firewall
+  become: yes
+  become_user: root
+
+- name: open firewall port for iscsi
+  firewalld:
+    port: 3260/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+# !!! Achtung !!! handler deletes any discoverydb entries when run
+
+- name: Copy a new initiatorname.iscsi file | back up original
+  template:
+    src: initiatorname.j2
+    dest: /etc/iscsi/initiatorname.iscsi
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes    
+  notify:
+    - restart_iscsi
+    - flush_discovdb
+  become: yes
+  become_user: root
+
+- name: Create the mountpoint 
+  file:
+    path: /opt/Backups
+    state: directory
+    owner: "{{ home_dir_user }}"
+    group: "{{ home_dir_user }}"
+    mode: 0755
+  become: yes
+  become_user: root
+
+- name: disover targets
+  open_iscsi:
+    show_nodes: yes
+    discover: yes
+    portal: "{{ iscsi_target_ip }}"
+  become: yes
+  become_user: root
+  
+- name: login to target
+  open_iscsi:
+    login: yes
+    target: "iqn.2018-05.local.c7-server:{{ iscsi_client_name }}"
+    portal: "{{ iscsi_target_ip }}"
+  register: returned_device
+  notify: partition_device
+
+- debug: 
+    msg: "device is {{ returned_device['devicenodes'] }}"
+
+- name: capture partition info of new device
+  parted:
+    device: "{{ returned_device.devicenodes[0] }}"
+    unit: MiB
+  register: iscsi_dev_info
+
+- debug:
+    msg: "part info {{ iscsi_dev_info.partitions }}"
+    
+- name: create filesystem
+  filesystem:
+    fstype: xfs
+    dev: "{{ returned_device.devicenodes[0] }}"
+
+- name: mount new FS
+  mount: 
+    path: /opt/Backups
+    src: "{{ returned_device.devicenodes[0] }}" 
+    fstype: xfs
+    opts: _netdev
+    passno: 2
+    state: present
+    
+

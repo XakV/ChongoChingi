@@ -1,0 +1,12 @@
+
+- name: Host for oliver setup
+  hosts: epic-sniper.tsundoku.pw
+
+  roles:
+    - initiator
+    - restic
+    - sysstat
+    - nvidia
+    - gaming
+   
+

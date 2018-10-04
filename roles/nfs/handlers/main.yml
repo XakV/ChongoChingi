@@ -1,0 +1,16 @@
+- name: reload firewall
+  systemd:
+    name: firewalld
+    state: restarted
+    daemon_reload: yes
+    enabled: true
+
+- name: reload exports
+  systemd:
+    name: "{{ items }}"
+    state: restarted
+    daemon_reload: yes
+    enabled: true
+  with_items:
+    - nfs-server
+    - rpcbind

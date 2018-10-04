@@ -1,0 +1,11 @@
+---
+- name: gaming | Install generic gaming drivers
+  dnf:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - gcc
+  - xboxdrv
+  - mesa-vulkan-drivers
+  notify:
+    - restart xboxdrv

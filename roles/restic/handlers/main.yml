@@ -1,0 +1,6 @@
+- name: reload cron
+  systemd:
+    name: crond 
+    enabled: yes
+    state: restarted
+ 

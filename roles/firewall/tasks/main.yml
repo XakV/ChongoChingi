@@ -1,0 +1,32 @@
+---
+- name: Firewall | configure zone
+  firewalld:
+      zone: "{{ group_firewalld_zone }}"
+      source: "{{ lan_sources }}" 
+      interface: "{{ ansible_default_ipv4.interface }}"
+      state: enabled
+      permanent: true
+  notify:
+    - reload firewall
+
+- name: Firewall | configure zone ports
+  firewalld:
+      zone: "{{ group_firewalld_zone }}"
+      source: "{{ lan_sources }}" 
+      port: "{{ item }}"
+      state: enabled
+      permanent: true
+  loop: "{{ group_ports }}"
+  notify:
+    - reload firewall
+
+
+- name: Firewall | configure zone services
+  firewalld:
+      zone: "{{ group_firewalld_zone }}"
+      source: "{{ lan_sources }}" 
+      state: enabled
+      permanent: true
+  loop: "{{ group_services }}"
+  notify:
+    - reload firewall

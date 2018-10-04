@@ -1,0 +1,89 @@
+---
+- name: Restic  | Install restic packages
+  dnf:
+    state: latest
+    name: "{{ item }}"
+  with_items:
+  - python2-scp
+  - python3-scp
+  - python3-paramiko
+  - python3-dnf-plugins-extras-common
+  - python3-dnf-plugins-core
+  - autofs
+
+#TODO - template the automount
+#TODO - start the autofs daemon
+
+- name: copr enable restic repo
+  shell: dnf copr enable -y copart/restic
+
+- name: copr install restic
+  dnf:
+    state: latest
+    name: restic
+
+- name: restic | make sure the backup dir exists
+  file:
+    path: /opt/Backups
+    state: directory
+    owner: "{{ home_dir_user }}"
+    mode: 0755
+
+- name: copy exclude file
+  copy:
+    src: restic_excludes.txt
+    dest: /opt/Backups/restic_excludes.txt
+    owner: "{{ home_dir_user }}"
+    group: "{{ home_dir_user }}"
+    mode: 0644
+
+- name: copy restic pwd file
+  copy:
+    src: .restic_info
+    dest: "/home/{{ home_dir_user }}/"
+    owner: "{{ home_dir_user }}"
+    group: "{{ home_dir_user }}"
+    mode: 0644
+
+- name: create restic repository
+  shell: 'restic init --repo /opt/Backups --password-file  "/home/{{ home_dir_user }}/.restic_info"'
+  args:
+    creates: /opt/Backups/config
+  become: yes
+  become_user: "{{ home_dir_user }}"
+
+- name: copy cron.allow is important
+  copy:
+    src: cron.allow
+    dest: /etc/cron.allow
+    owner: root
+    group: root
+    mode: 0644    
+ 
+- name: schedule backups
+  cron:
+    name: homedirbackup
+    hour: "{{ restic_backup_hr }}"
+    minute: "{{ restic_backup_min }}"
+    job: restic -r /opt/Backups/ backup "/home/{{ home_dir_user }}" --exclude-file /opt/Backups/restic_excludes.txt --password-file "/home/{{ home_dir_user }}/.restic_info"
+  notify:
+  - reload cron
+
+- name: prune daily backups
+  cron:
+    name: prune snapshots with restic
+    weekday: 0
+    hour: "{{ restic_prune_hr }}"
+    minute: "{{ restic_prune_min }}"
+    job: restic -r /opt/Backups/ forget --keep-last 7 --keep-weekly 4 --keep-monthly 3 --keep-yearly 1 --prune  
+  notify:
+  - reload cron
+
+    
+- name: copy cron.allow is important
+  copy:
+    src: cron.allow
+    dest: /etc/cron.allow
+    owner: root
+    group: root
+    mode: 0644    

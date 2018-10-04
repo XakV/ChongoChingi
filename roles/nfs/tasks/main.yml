@@ -1,0 +1,68 @@
+---
+- name: nfs | install the packages
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - nfs-utils
+    - rpcbind
+
+- name: nfs | configure zone
+  firewalld:
+    source: 10.0.0.0/24
+    interface: "{{ ansible_default_ipv4.interface }}"
+    state: enabled
+    permanent: true
+  notify:
+    - reload firewall
+
+- name: nfs | add zone services
+  firewalld:
+    state: enabled
+    permanent: true
+    service: "{{ item }}"
+  with_items:
+    - ssh
+    - mdns
+    - nfs
+    - pulseaudio
+    - rpc-bind
+  notify:
+    - reload firewall
+
+- name: nfs | add zone ports
+  firewalld:
+    state: enabled
+    permanent: true
+    port: "{{ item }}"
+  with_items:
+    - 3260/tcp
+    - 25565/tcp
+    - 32400/tcp
+  notify:
+    - reload firewall
+    
+- name: nfs | template exports
+  copy:
+    src: "exports.{{ ansible_hostname }}"
+    dest: /etc/exports
+    owner: root
+    group: root
+  notify:
+    - reload exports
+
+- name: nfs | start the server
+  systemd: 
+    name: "{{ item }}"
+    state: restarted
+    enabled: yes
+  with_items:
+    - nfs-server
+    - rpcbind
+
+- name: nfs | export the exports
+  command: exportfs -rv
+
+- name: nfs | show the exports
+  command: showmount -e localhost
+  register: showmnt_result

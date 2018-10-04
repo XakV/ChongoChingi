@@ -1,0 +1,10 @@
+
+- name: Host for oliver setup
+  hosts: xenothrix.tsundoku.pw
+
+  roles:
+    - common
+    - firewall
+    - gaming
+   
+
