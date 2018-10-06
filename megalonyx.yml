@@ -5,17 +5,14 @@
   roles:
     - common
     - zach
-<<<<<<< HEAD
     - gaming
     - devel
     - restic
     - firewall
-=======
       #    - gaming
     - devel
     - restic
     - firewall
     - virt
->>>>>>> devel
   become: true
   become_user: root
