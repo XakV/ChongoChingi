@@ -4,4 +4,6 @@
       name: "{{ item }}"
   with_items:
   - '@Virtualization'
-  - '@Vagrant with libvirt support'
+  - podman
+  - buildah
+  - skopeo

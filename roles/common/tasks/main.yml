@@ -43,10 +43,16 @@
     state: started
     enabled: true
 
+- name: Common | make .minecraft exist
+  file:
+    name: "/home/{{ home_dir_user }}/.minecraft/mods"
+    state: directory
+    mode: 0755
+
 - name: Common | Mount Mods from server
   mount:
     path: "/home/{{ home_dir_user }}/.minecraft/mods"
-    src: vulpes.tsundoku.pw://srv/mods
+    src: 10.0.0.10://srv/mods
     fstype: nfs
     opts: _netdev,retry=15
     state: mounted
