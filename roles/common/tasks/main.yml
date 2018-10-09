@@ -20,6 +20,8 @@
   - nfs-utils
   - sysstat
   - vim
+  - vim-X11
+  - hexchat
 
 - name: Common | set up fstrim if ssdisk
   systemd:
