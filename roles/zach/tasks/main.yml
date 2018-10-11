@@ -1,33 +1,39 @@
 ---
 - name: Zach | create vim backup dir
   file:
-    path: "{{ ansible_user_dir }}/.vim/tmp"
+    path: "/home/{{ home_dir_user }}/.vim/tmp"
     state: directory
-    owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_id }}"
+    owner: "{{ home_dir_user }}"
+    group: "{{ home_dir_user }}"
     mode: 0755
+  become: yes
+  become_user: "{{ home_dir_user }}"
 
 - name: Zach | create vim plugin dir
   file:
-    path: "{{ ansible_user_dir }}/.vim/plugged"
+    path: "/home/{{ home_dir_user }}/.vim/tmp"
     state: directory
-    owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_id }}"
+    owner: "{{ home_dir_user }}"
+    group: "{{ home_dir_user }}"
     mode: 0755
   notify: install plugged
+  become: yes
+  become_user: "{{ home_dir_user }}"
 
 - name: Zach | create Code dir
   file:
-    path: "{{ ansible_user_dir }}/Code"
+    path: "/home/{{ home_dir_user }}/Code"
     state: directory
     mode: 0755
+  become: yes
+  become_user: "{{ home_dir_user }}"
 
 - name: Zach | Do the Doooots
   copy:
     src: "{{ item }}"
-    dest: "{{ ansible_user_dir }}/{{ item }}"
-    owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_id }}"
+    dest: "/home/{{ home_dir_user}}/{{ item }}"
+    owner: "{{ home_dir_user }}"
+    group: "{{ home_dir_user }}"
     decrypt: yes
   with_items:
   - .gnupg
@@ -39,4 +45,7 @@
   - .restic_info
   - .taskrc
   - .vimrc
+  become: yes
+  become_user: "{{ home_dir_user }}"
+
 
