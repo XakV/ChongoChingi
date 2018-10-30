@@ -1,0 +1,17 @@
+- name: Host for zach setup | with priv
+  hosts: primus.tsundoku.pw
+  become: yes
+  roles:
+    - firewall
+    - common
+    - devel
+    - gaming
+   
+- name: Host for zach setup
+  hosts: primus.tsundoku.pw
+  roles:
+    - zach
+    - restic
+    - entertainment
+
+

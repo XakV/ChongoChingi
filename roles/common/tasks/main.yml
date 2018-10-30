@@ -28,8 +28,6 @@
     name: fstrim.timer
     state: started
     enabled: true
-  when:
-    ssdisk == true
 
 - name: Common | copy dnf-automatic files
   copy:
@@ -44,22 +42,6 @@
     name: dnf-automatic-install.timer
     state: started
     enabled: true
-
-- name: Common | make .minecraft exist
-  file:
-    name: "/home/{{ home_dir_user }}/.minecraft/mods"
-    state: directory
-    mode: 0755
-    owner: "{{ home_dir_user }}"
-    group: "{{ home_dir_user }}"
-
-- name: Common | Mount Mods from server
-  mount:
-    path: "/home/{{ home_dir_user }}/.minecraft/mods"
-    src: 10.0.0.10://srv/mods
-    fstype: nfs
-    opts: _netdev,retry=15
-    state: mounted
 
 - name: Common | copy repo files
   copy: 

@@ -7,3 +7,7 @@
   - podman
   - buildah
   - skopeo
+  - vagrant
+  - vagrant-libvirt
+  - vagrant-sshfs
+  - vagrant-hostmanager
