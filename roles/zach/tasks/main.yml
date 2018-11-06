@@ -1,12 +1,4 @@
 ---
-- name: Zach | create vim backup dir
-  file:
-    path: "{{ ansible_user_dir }}/.vim/tmp"
-    state: directory
-    owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_id }}"
-    mode: 0755
-
 - name: Zach | create vim plugin dir
   file:
     path: "{{ ansible_user_dir }}/.vim/tmp"
@@ -15,12 +7,6 @@
     group: "{{ ansible_user_id }}"
     mode: 0755
   notify: install plugged
-
-- name: Zach | create Code dir
-  file:
-    path: "{{ ansible_user_dir }}/Code"
-    state: directory
-    mode: 0755
 
 - name: Zach | Do the Doooots
   copy:

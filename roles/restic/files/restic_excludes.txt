@@ -27,3 +27,4 @@ Downloads
 Public
 Sync
 Templates
+Backups

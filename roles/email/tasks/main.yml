@@ -1,0 +1,10 @@
+---
+- name: email | Install email packages
+  dnf:
+      state: latest
+      name: thunderbird
+  
+- name: email | see no Evol
+  dnf:
+      state: absent
+      name: evolution

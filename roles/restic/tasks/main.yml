@@ -27,7 +27,7 @@
 
 - name: restic | make sure the backup dir exists
   file:
-    path: /opt/Backups
+    path: "{{ ansible_user_dir }}/Backups"
     state: directory
     owner: "{{ ansible_user }}"
     mode: 0755
@@ -35,7 +35,7 @@
 - name: copy exclude file
   copy:
     src: restic_excludes.txt
-    dest: /opt/Backups/restic_excludes.txt
+    dest: "{{ ansible_user_dir }}/Backups/restic_excludes.txt"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0644
@@ -49,9 +49,9 @@
     mode: 0644
 
 - name: create restic repository
-  shell: 'restic init --repo /opt/Backups --password-file  "{{ ansible_user_dir }}/.restic_info"'
+  shell: "restic init --repo {{ ansible_user_dir }}/Backups --password-file  {{ ansible_user_dir }}/.restic_info"
   args:
-    creates: /opt/Backups/config
+    creates: "{{ ansible_user_dir }}/Backups/config"
 
 - name: copy cron.allow is important
   copy:
@@ -60,13 +60,14 @@
     owner: root
     group: root
     mode: 0644    
+  become: True
  
 - name: schedule backups
   cron:
     name: homedirbackup
     hour: 05
     minute: 30
-    job: restic -r /opt/Backups/ backup "{{ ansible_user_dir }}" --exclude-file /opt/Backups/restic_excludes.txt --password-file "{{ ansible_user_dir }}/.restic_info"
+    job: restic -r "{{ ansible_user_dir }}/Backups" backup "{{ ansible_user_dir }}" --exclude-file "{{ ansible_user_dir }}/Backups/restic_excludes.txt" --password-file "{{ ansible_user_dir }}/.restic_info"
   notify:
   - reload cron
 
@@ -76,6 +77,6 @@
     weekday: 0
     hour: 23
     minute: 45
-    job: restic -r /opt/Backups/ forget --keep-last 7 --keep-weekly 4 --keep-monthly 3 --keep-yearly 1 --prune  
+    job: restic -r "{{ ansible_user_dir }}/Backups" forget --keep-last 7 --keep-weekly 4 --keep-monthly 3 --keep-yearly 1 --prune  
   notify:
   - reload cron
