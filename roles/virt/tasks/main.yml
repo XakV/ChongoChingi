@@ -1,3 +1,12 @@
+- name: virt | install packages for bridge
+  dnf:
+      state: latest
+      name: "{{ item }}"
+  with_items:
+  - nm-connection-editor
+  - policycoreutils-python
+
+
 - name: virt | Install virt packages
   dnf:
       state: latest
@@ -7,7 +16,3 @@
   - podman
   - buildah
   - skopeo
-  - vagrant
-  - vagrant-libvirt
-  - vagrant-sshfs
-  - vagrant-hostmanager

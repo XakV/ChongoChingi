@@ -13,7 +13,6 @@
   - python3-pygments
   - python3-pygments-markdown-lexer
   - hugo
-  - pipenv
   - git
   - rubygems
   - ruby-devel
@@ -24,7 +23,10 @@
   - overpass-fonts
   - gobby05
   - pandoc
-  - pipenv
+  - cockpit
+  - cockpit-ws
+  - cockpit-docker
+  - cockpit-storaged
   - '@Fedora Packager'
   - '@RPM Development Tools'
   - '@C Development Tools and Libraries'

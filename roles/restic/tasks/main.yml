@@ -4,6 +4,7 @@
     state: latest
     name: "{{ item }}"
   with_items:
+  - restic
   - python2-scp
   - python3-scp
   - python3-paramiko
@@ -17,12 +18,6 @@
 
 - name: copr enable restic repo
   shell: dnf copr enable -y copart/restic
-  become: True
-
-- name: copr install restic
-  dnf:
-    state: latest
-    name: restic
   become: True
 
 - name: restic | make sure the backup dir exists
