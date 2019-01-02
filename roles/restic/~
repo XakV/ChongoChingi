@@ -30,7 +30,6 @@
   - auto.backups
   notify:
   - reload_autofs
-  become: True
   
 - name: copy exclude file
   copy:
@@ -60,18 +59,9 @@
 - name: schedule backups
   cron:
     name: homedirbackup
-    hour: 22
-    minute: "{{ host_backup_time }}"
-    job: restic -r /srv/backups backup /home/zach --exclude-file /srv/backups/restic_excludes --password-file=/srv/backups/.restic_info
-  notify:
-  - reload cron
-
-- name: Restic | email snapshot list
-  cron:
-    name: reschecker
-    hour: 22
-    minute: 45
-    job: python3 /home/zach/Python/reschecker/reschecker.py
+    hour: 05
+    minute: 30
+    job: restic -r "{{ ansible_user_dir }}/Backups" backup "{{ ansible_user_dir }}" --exclude-file "{{ ansible_user_dir }}/Backups/restic_excludes.txt" --password-file "{{ ansible_user_dir }}/.restic_info"
   notify:
   - reload cron
 
@@ -81,7 +71,6 @@
     weekday: 0
     hour: 23
     minute: 45
-    job: restic -r /srv/backups forget --keep-last 10 keep-weekly 4 --keep-monthly 3 --keep-yearly 1 --prune --password-file=/srv/backups/.restic_info 
-  when: ansible_host == "tori.tsundoku.pw"
+    job: restic -r "{{ ansible_user_dir }}/Backups" forget --keep-last 7 --keep-weekly 4 --keep-monthly 3 --keep-yearly 1 --prune  
   notify:
   - reload cron
