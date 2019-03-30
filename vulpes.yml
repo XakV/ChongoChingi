@@ -1,8 +1,0 @@
-#vulpes macrotis macrotis - Southern California Kit fox
-- name: vulpes server | ansible and named
-  hosts: vulpes.tsundoku.pw
-
-  roles:
-    - firewall
-    - named
-    - nfs
