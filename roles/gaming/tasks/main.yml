@@ -3,9 +3,4 @@
   dnf:
       state: latest
       name: "{{ item }}"
-  with_items:
-  - gcc
-  - xboxdrv
-  - mesa-vulkan-drivers
-  notify:
-    - restart xboxdrv
+  loop: ['gcc', 'mesa-vulkan-drivers', 'mesa-vdpau-drivers']

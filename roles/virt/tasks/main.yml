@@ -1,18 +1,5 @@
 - name: virt | install packages for bridge
   dnf:
       state: latest
-      name: "{{ item }}"
-  with_items:
-  - nm-connection-editor
-  - policycoreutils-python
-
-
-- name: virt | Install virt packages
-  dnf:
-      state: latest
-      name: "{{ item }}"
-  with_items:
-  - '@Virtualization'
-  - podman
-  - buildah
-  - skopeo
+      name: "{{ ['nm-connection-editor', 'policycoreutils-python', '@Virtualization', \ 
+      'podman', 'buildah', 'skopeo'] }}"

@@ -2,26 +2,10 @@
 - name: Common | Install common packages
   dnf:
       state: latest
-      name: "{{ item }}"
-  with_items:
-  - weechat
-  - inkscape
-  - java-1.8.0-openjdk
-  - smartmontools
-  - NetworkManager-tui
-  - python3-firewall
-  - python3-dnf-plugins-core
-  - python3-dnf-plugins-extras-common
-  - python3-dnf-plugin-system-upgrade
-  - dnf-automatic
-  - python-dnf
-  - libXScrnSaver
-  - lsof
-  - nfs-utils
-  - sysstat
-  - vim
-  - vim-X11
-  - hexchat
+      name: ['java-1.8.0-openjdk', 'smartmontools', 'python3-firewall', 'lsof',  
+      'python3-dnf-plugins-core', 'python3-dnf-plugins-extras-common', 'vim',  
+      'python3-dnf-plugin-system-upgrade', 'dnf-automatic', 'libXScrnSaver',  
+      'nfs-utils', 'sysstat', 'vim-X11', 'syncthing']
 
 - name: Common | set up fstrim if ssdisk
   systemd:
@@ -43,19 +27,11 @@
     state: started
     enabled: true
 
-    # name: Common | copy repo files
-    # copy: 
-    #   src: "/home/greyman/ChongoChingi/roles/common/files/repos/{{ item }}"
-    #   dest: /etc/yum.repos.d/
-    #   owner: root
-    #   group: root
-    #   mode: 0644
-    # with_items:
-    # - rpmfusion-free.repo
-    # - rpmfusion-free-updates.repo
-    # - rpmfusion-free-updates-testing.repo
-    # - rpmfusion-nonfree.repo
-    # - rpmfusion-nonfree-updates.repo
-    # - rpmfusion-nonfree-updates-testing.repo
-    # notify:
-    #   - update
+- name: Common | start syncthing as user
+  systemd:
+    name: syncthing
+    state: started
+    enabled: true
+    scope: user
+  become: True
+  become_user: 'zach'

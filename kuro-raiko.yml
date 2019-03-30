@@ -1,5 +1,5 @@
 - name: Host for zach setup | with priv
-  hosts: tori.tsundoku.pw
+  hosts: kuro-raiko.tsundoku.pw
   become: yes
   roles:
     - firewall
@@ -7,8 +7,5 @@
     - devel
     - gaming
     - virt
-    - email
-    - restic
-    - zach
 
 
