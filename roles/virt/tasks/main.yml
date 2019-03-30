@@ -2,4 +2,5 @@
   dnf:
       state: latest
       name: "{{ ['nm-connection-editor', 'policycoreutils-python', '@Virtualization', \ 
-      'podman', 'buildah', 'skopeo'] }}"
+      'podman', 'buildah', 'skopeo', 'podman-docker', 'pcp-pmda-podman'] }}"
+      

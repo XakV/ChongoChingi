@@ -1,0 +1,31 @@
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 3: A collection of database servers in the 'dbservers' group
+
+
+[all]
+teru-janku.tsundoku.pw
+kuro-raiko.tsundoku.pw
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[control]
+teru-janku.tsundoku.pw
+
+[control:vars]
+ansible_connection_type=local 
+
+[server]
+teru-janku.tsundoku.pw
+
+[desktops]
+kuro-raiko.tsundoku.pw 
