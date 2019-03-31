@@ -1,14 +1,6 @@
 127.0.0.1     localhost			localhost.localdomain localhost4 localhost4.localdomain4
 ::1           localhost 		localhost.localdomain localhost6 localhost6.localdomain6
-127.0.0.1     vulpes.tsundoku.pw        vulpes 	
-127.0.0.1     jebel-krong.tsundoku.pw   jebel-krong 	
-127.0.0.1     plex.tsundoku.pw          plex
-10.0.0.10     vulpes.tsundoku.pw        vulpes 	
-10.0.0.10     jebel-krong.tsundoku.pw   jebel-krong 	
-10.0.0.10     plex.tsundoku.pw          plex
-10.0.0.2      epic-sniper.tsundoku.pw   epic-sniper     		
-10.0.0.15     megalonyx.tsundoku.pw     megalonyx  	
-10.0.0.13     volgograd.tsundoku.pw     volgograd   	
-10.0.0.16     kathmandu.tsundoku.pw     kathmandu		
-10.0.0.27     xenothrix.tsundoku.pw	xenothrix
-10.0.0.14     sorex.tsundoku.pw         sorex
+127.0.0.1     janku.tsundoku.pw         janku 	
+10.0.0.24     janku.tsundoku.pw         janku 	
+10.0.0.5      kinomi.tsundoku.pw        kinomi     		
+10.0.0.9      kuro.tsundoku.pw          kuro  	

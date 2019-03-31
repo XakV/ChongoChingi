@@ -1,4 +1,14 @@
 ---
+- name: Firewall | install
+  pkg: firewalld
+    state: latest
+
+- name: Firewall | start enable
+  systemd:
+    name: firewalld
+    state: started
+    enabled: True
+
 - name: Firewall | configure zone
   firewalld:
       zone: "{{ group_firewalld_zone }}"

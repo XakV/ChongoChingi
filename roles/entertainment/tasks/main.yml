@@ -1,10 +1,28 @@
 ---
 - name: entertainment | set some directories
   file:
-      dest: "{{ansible_user_dir}}/{{ item }}"
-      owner: "{{ansible_user}}"
-      group: "{{ansible_user}}"
-      state: directory
+    dest: "{{ansible_user_dir}}/{{ item }}"
+    owner: "{{ansible_user}}"
+    group: "{{ansible_user}}"
+    state: directory
   with_items:
   - "Podcasts"
   - "Library"
+
+- name: entertainment | Install a few useful things
+  pkg:
+    name: "{{ ['python3-venv', 'chromium-chromedriver', 'sqlite', 'imagemagick', 'python-gobject', 'ffmpeg', 'syncthing', 'python-cherrypy3', 'python3-cherrypy3'] }}"
+    state: latest
+
+- name: entertainment | activate syncthing
+  systemd:
+    name: syncthing
+    state: started
+    enabled: True
+    scope: global
+
+- name: entertainment | get cherrypi
+  unarchive:
+    src: https://github.com/devsnd/cherrymusic/archive/0.41.2.tar.gz
+    dest: /home/pi/
+    remote_src: yes

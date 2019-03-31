@@ -12,20 +12,24 @@
 
 
 [all]
-teru-janku.tsundoku.pw
-kuro-raiko.tsundoku.pw
+teru.tsundoku.pw
+kuro.tsundoku.pw
+kinomi.tsundoku.pw
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
 
 [control]
-teru-janku.tsundoku.pw
+janku.tsundoku.pw
 
 [control:vars]
-ansible_connection_type=local 
+ansible_connection=local 
 
 [server]
-teru-janku.tsundoku.pw
+janku.tsundoku.pw
 
 [desktops]
-kuro-raiko.tsundoku.pw 
+kuro.tsundoku.pw 
+
+[debian]
+kinomi.tsundoku.pw

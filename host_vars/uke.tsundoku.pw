@@ -1,8 +1,0 @@
-nvidia: false
-amd: false
-ssdisk: true
-qt: false
-isdesktop: true
-mcserver: false
-home_dir_user: zach
-host_backup_time: 30

@@ -1,5 +1,5 @@
 - name: Host for zach setup | with priv
-  hosts: kuro-raiko.tsundoku.pw
+  hosts: kuro.tsundoku.pw
   become: yes
   roles:
     - firewall

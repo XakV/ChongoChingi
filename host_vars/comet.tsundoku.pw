@@ -1,7 +1,0 @@
-ssdisk: true
-nvidia: false
-amd: false
-qt: false
-mcserver: false
-isdesktop: true
-home_dir_user: oliver

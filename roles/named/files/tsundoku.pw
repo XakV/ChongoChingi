@@ -5,14 +5,9 @@ $TTL 3H
                 1H  ; retry
                 1W  ; expire
                 3H )    ; minimum
-@            IN   NS     vulpes.tsundoku.pw.
-@            IN   A      10.0.0.10
-vulpes	     IN   A      10.0.0.10
-plex	     IN   A      10.0.0.10
-megalonyx    IN   A      10.0.0.15
-volgograd    IN   A      10.0.0.13
-kathmandu    IN   A      10.0.0.16
-epic-sniper  IN   A      10.0.0.2
-xenothrix    IN   A	 10.0.0.27
-sorex	     IN   A      10.0.0.14
+@            IN   NS     janku.tsundoku.pw.
+@            IN   A      10.0.0.24
+janku	     IN   A      10.0.0.24
+kuro	     IN   A      10.0.0.9
+kinomi       IN   A      10.0.0.5
 www          IN   CNAME  tsundoku.pw.
