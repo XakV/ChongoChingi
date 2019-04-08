@@ -2,7 +2,8 @@
   hosts: janku.tsundoku.pw
   become: yes
   roles:
-    - firewall
-    - ansible-control
+#   - firewall
+#   - ansible-control
+    - named
 
 

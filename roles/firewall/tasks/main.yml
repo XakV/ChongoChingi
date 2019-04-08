@@ -1,6 +1,7 @@
 ---
 - name: Firewall | install
-  pkg: firewalld
+  package: 
+    name: firewalld
     state: latest
 
 - name: Firewall | start enable

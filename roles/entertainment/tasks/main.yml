@@ -10,16 +10,9 @@
   - "Library"
 
 - name: entertainment | Install a few useful things
-  pkg:
+  package:
     name: "{{ ['python3-venv', 'chromium-chromedriver', 'sqlite', 'imagemagick', 'python-gobject', 'ffmpeg', 'syncthing', 'python-cherrypy3', 'python3-cherrypy3'] }}"
     state: latest
-
-- name: entertainment | activate syncthing
-  systemd:
-    name: syncthing
-    state: started
-    enabled: True
-    scope: global
 
 - name: entertainment | get cherrypi
   unarchive:

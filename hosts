@@ -15,6 +15,7 @@
 teru.tsundoku.pw
 kuro.tsundoku.pw
 kinomi.tsundoku.pw
+renga.tsundoku.pw
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
@@ -30,6 +31,7 @@ janku.tsundoku.pw
 
 [desktops]
 kuro.tsundoku.pw 
+renga.tsundokuw.pw
 
 [debian]
 kinomi.tsundoku.pw

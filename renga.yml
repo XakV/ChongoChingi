@@ -1,8 +1,11 @@
 - name: Host for zach setup | with priv
-  hosts: kinomi.tsundoku.pw
+  hosts: renga.tsundoku.pw
   become: yes
   roles:
     - firewall
-    - entertainment
+    - common
+    - devel
+    - gaming
+    - virt
 
 

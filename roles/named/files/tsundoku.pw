@@ -10,4 +10,5 @@ $TTL 3H
 janku	     IN   A      10.0.0.24
 kuro	     IN   A      10.0.0.9
 kinomi       IN   A      10.0.0.5
+renga        IN   A      10.0.0.23
 www          IN   CNAME  tsundoku.pw.
