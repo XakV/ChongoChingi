@@ -1,6 +1,11 @@
 - name: virt | install packages for bridge
   dnf:
       state: latest
-      name: "{{ ['nm-connection-editor', 'policycoreutils-python', '@Virtualization', \ 
-      'podman', 'buildah', 'skopeo', 'podman-docker', 'pcp-pmda-podman'] }}"
-      
+      name: "['nm-connection-editor', 'policycoreutils-python', '@Virtualization', \ 
+      'podman', 'buildah', 'skopeo', 'podman-docker', 'pcp-pmda-podman']"
+
+- name: virt | enable start libvirt
+  systemd:
+    name: libvirtd
+    stated: started
+    enabled: True

@@ -1,0 +1,49 @@
+---
+- name: tftp | install tftp and dhcpd
+  dnf:
+    state: latest
+    name: "['dhcp', 'tftp-server']"
+
+- name: tftp | copy dhcp conf files
+  copy:
+    src: dhcpd.conf
+    dest: /etc/dhcp/dhcpd.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: tftp | create tftpboot and pxelinux.cfg directories
+  file:
+    path: /var/lib/tftpboot/pxelinux/pxelinux.cfg
+    state: directory
+
+- name: tftp | copy pxelinux.0
+  copy:
+    src: pxelinux.0
+    dest: /var/lib/tftpboot/pxelinux/pxelinux.0
+
+- name: tftp | copy pxelinux.0
+  copy:
+    src: default
+    dest: /var/lib/tftpboot/pxelinux/pxelinux.cfg/default
+
+- name: tftp | make images directory
+  file:
+    path: /var/lib/tftpboot/images
+    state: directory
+
+- name: tftp | copy initrd and vmlinux to images
+  synchronize:
+    src: images
+    dest: /var/lib/tftpboot/images
+
+- name: tftp | enable - start tftp and dhcp
+  systemd:
+    state: started
+    name: "{{ item }}"
+    daemon-reload: yes
+    enabled: yes
+  loop:
+  - dhcpd
+  - xinetd

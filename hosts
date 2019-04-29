@@ -16,6 +16,7 @@ teru.tsundoku.pw
 kuro.tsundoku.pw
 kinomi.tsundoku.pw
 renga.tsundoku.pw
+emgine.tsundoku.pw
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
@@ -28,6 +29,7 @@ ansible_connection=local
 
 [server]
 janku.tsundoku.pw
+emgine.tsundoku.pw
 
 [desktops]
 kuro.tsundoku.pw 

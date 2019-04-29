@@ -35,3 +35,4 @@
     scope: user
   become: True
   become_user: 'zach'
+  when: isdesktop == true

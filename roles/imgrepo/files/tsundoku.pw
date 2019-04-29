@@ -1,0 +1,14 @@
+$TTL 3H
+@   IN SOA  @ hostmaster.tsundoku.pw. (
+                0   ; serial
+                3H  ; refresh
+                1H  ; retry
+                1W  ; expire
+                3H )    ; minimum
+@            IN   NS     janku.tsundoku.pw.
+@            IN   A      10.0.0.24
+janku	     IN   A      10.0.0.24
+kuro	     IN   A      10.0.0.9
+kinomi       IN   A      10.0.0.5
+renga        IN   A      10.0.0.23
+www          IN   CNAME  tsundoku.pw.
