@@ -1,0 +1,15 @@
+[Unit]
+Description=Waterfall Server
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=zach
+WorkingDirectory=/srv/waterfall
+ExecStart=/usr/bin/tmux new -d -s waterfall "/usr/bin/java -jar -Xmn256M -Xmx512M -XX:+UseConcMarkSweepGC /srv/waterfall/waterfall-284.jar nogui"
+ExecReload=/usr/bin/tmux send-keys waterfall -t reload Enter
+ExecStop=/usr/bin/tmux send-keys waterfall -t stop Enter
+
+[Install]
+WantedBy=multi-user.target

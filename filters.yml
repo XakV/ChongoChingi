@@ -1,0 +1,15 @@
+- name: filters
+  hosts: zach
+  become: True
+  tasks:
+    - name: get some data
+      raw: "sar -n EDEV -f /var/log/sa/sa{{ item }}"
+      with_sequence: start=15 end=20 stride=1
+      register: sarout
+
+    - name: debug the sar
+      debug:
+        var: item
+      loop: "{{ sarout.results }}"
+      loop_control: 
+        label: "{{ item.stdout_lines }}"

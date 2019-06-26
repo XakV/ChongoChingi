@@ -6,24 +6,19 @@
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_id }}"
     mode: 0755
-  notify: install plugged
+# notify: install plugged
 
-  # name: Zach | Do the Doooots
-  # copy:
-  #   src: "{{ item }}"
-  #   dest: "{{ ansible_user_dir}}/{{ item }}"
-  #   owner: "{{ ansible_user_id }}"
-  #   group: "{{ ansible_user_id }}"
-  #   decrypt: yes
-  # with_items:
-  # - .gnupg
-  # - .task
-  # - .vim
-  # - .bash_profile
-  # - .gitconfig
-  # - .pagureconfig
-  # - .restic_info
-  # - .taskrc
-  # - .vimrc
-  # - .ssh
-
+- name: Zach | Do the Doooots
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir}}/{{ item }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    decrypt: yes
+  with_items:
+  - .gnupg
+  - .vim
+  - .bash_profile
+  - .pagureconfig
+  - .restic_info
+  - .vimrc

@@ -1,0 +1,9 @@
+- name: Host for zach setup | with priv
+  hosts: kotokami.two-bit.space
+  become: yes
+  roles:
+    - firewall-lan
+    - common
+    - devel
+    - gaming
+    - zach

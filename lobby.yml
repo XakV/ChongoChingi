@@ -1,0 +1,12 @@
+- name: mc lobby setup
+  hosts: lobby.wefartin.space
+  become: yes
+  vars:
+    backup_dir: ['/srv/waterfall', '/srv/duck']
+    ports_dict: {'port': '25577/tcp', 'source': '0.0.0.0/24'}
+    standard_source: '75.118.89.135'
+  roles:
+  # - firewall
+  # - common
+  # - mc_lobby
+    - restic

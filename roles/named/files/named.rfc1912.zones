@@ -39,7 +39,11 @@ zone "0.in-addr.arpa" IN {
 	file "named.empty";
 	allow-update { none; };
 };
-zone "tsundoku.pw" IN {
+zone "two-bit.space" IN {
 	type master;
-	file "tsundoku.pw";
+	file "two-bit.space";
+};
+zone "9.0.0.10.in-addr.arpa" IN {
+	type master;
+	file "two-bit.rdns";
 };

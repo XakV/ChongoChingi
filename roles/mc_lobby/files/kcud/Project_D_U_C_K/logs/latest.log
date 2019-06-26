@@ -1,0 +1,281 @@
+[00:20:34] [Server thread/INFO]: Starting minecraft server version 1.14
+[00:20:34] [Server thread/INFO]: Loading properties
+[00:20:34] [Server thread/INFO]: This server is running CraftBukkit version git-Spigot-c8d4cef-1fee35b (MC: 1.14) (Implementing API version 1.14-R0.1-SNAPSHOT)
+[00:20:35] [Server thread/INFO]: Debug logging is disabled
+[00:20:35] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[00:20:35] [Server thread/INFO]: Using 4 threads for Netty based IO
+[00:20:35] [Server thread/INFO]: Default game type: SURVIVAL
+[00:20:35] [Server thread/INFO]: Generating keypair
+[00:20:35] [Server thread/INFO]: Starting Minecraft server on 127.0.0.1:25565
+[00:20:35] [Server thread/INFO]: Using epoll channel type
+[00:20:44] [Server thread/INFO]: [WorldEdit] Loading WorldEdit v7.0.0-rc-2;7be00cc
+[00:20:45] [Server thread/INFO]: Got request to register class com.sk89q.worldedit.bukkit.BukkitServerInterface with WorldEdit [com.sk89q.worldedit.extension.platform.PlatformManager@7db080b1]
+[00:20:45] [Server thread/INFO]: Using com.sk89q.worldedit.bukkit.adapter.impl.Spigot_v1_14_R1 as the Bukkit adapter
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=0]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=1]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=2]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=3]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=4]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=5]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=6]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=7]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=8]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=9]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=10]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=11]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=12]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=13]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=14]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:sign[rotation=15]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:wall_sign[facing=north]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:wall_sign[facing=south]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:wall_sign[facing=west]
+[00:20:47] [Server thread/WARN]: Unknown block: minecraft:wall_sign[facing=east]
+[00:20:47] [Server thread/WARN]: Unknown item: minecraft:sign
+[00:20:47] [Server thread/WARN]: Unknown item: minecraft:rose_red
+[00:20:47] [Server thread/WARN]: Unknown item: minecraft:cactus_green
+[00:20:47] [Server thread/WARN]: Unknown item: minecraft:dandelion_yellow
+[00:20:47] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[00:20:47] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
+[00:20:47] [Server thread/WARN]: Whilst this makes it possible to use BungeeCord, unless access to your server is properly restricted, it also opens up the ability for hackers to connect with any username they choose.
+[00:20:47] [Server thread/WARN]: Please see http://www.spigotmc.org/wiki/firewall-guide/ for further information.
+[00:20:47] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[00:20:47] [Server thread/INFO]: Preparing level "world"
+[00:20:47] [Server thread/INFO]: Reloading ResourceManager: Default, bukkit
+[00:20:49] [Server thread/INFO]: Loaded 6 recipes
+[00:20:50] [Server thread/INFO]: -------- World Settings For [world] --------
+[00:20:50] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Desert: 14357617 Igloo: 14357618 Jungle: 14357619 Swamp: 14357620 Monument: 10387313Ocean: 14357621 Shipwreck: 165745295 Slime: 987234911
+[00:20:50] [Server thread/INFO]: Max TNT Explosions: 100
+[00:20:50] [Server thread/INFO]: Experience Merge Radius: 3.0
+[00:20:50] [Server thread/INFO]: Mob Spawn Range: 6
+[00:20:50] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[00:20:50] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[00:20:50] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[00:20:50] [Server thread/INFO]: Cane Growth Modifier: 100%
+[00:20:50] [Server thread/INFO]: Melon Growth Modifier: 100%
+[00:20:50] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[00:20:50] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[00:20:50] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[00:20:50] [Server thread/INFO]: Beetroot Growth Modifier: 100%
+[00:20:50] [Server thread/INFO]: Carrot Growth Modifier: 100%
+[00:20:50] [Server thread/INFO]: Potato Growth Modifier: 100%
+[00:20:50] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[00:20:50] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[00:20:50] [Server thread/INFO]: Vine Growth Modifier: 100%
+[00:20:50] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[00:20:50] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Mi 16 / Tiv true
+[00:20:50] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[00:20:50] [Server thread/INFO]: View Distance: 10
+[00:20:50] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[00:20:50] [Server thread/INFO]: Item Merge Radius: 2.5
+[00:20:50] [Server thread/INFO]: Item Despawn Rate: 6000
+[00:20:50] [Server thread/INFO]: Arrow Despawn Rate: 1200
+[00:20:50] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[00:20:50] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[00:20:51] [Server thread/INFO]: -------- World Settings For [world_the_end] --------
+[00:20:51] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Desert: 14357617 Igloo: 14357618 Jungle: 14357619 Swamp: 14357620 Monument: 10387313Ocean: 14357621 Shipwreck: 165745295 Slime: 987234911
+[00:20:51] [Server thread/INFO]: Max TNT Explosions: 100
+[00:20:51] [Server thread/INFO]: Experience Merge Radius: 3.0
+[00:20:51] [Server thread/INFO]: Mob Spawn Range: 6
+[00:20:51] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[00:20:51] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[00:20:51] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[00:20:51] [Server thread/INFO]: Cane Growth Modifier: 100%
+[00:20:51] [Server thread/INFO]: Melon Growth Modifier: 100%
+[00:20:51] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[00:20:51] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[00:20:51] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[00:20:51] [Server thread/INFO]: Beetroot Growth Modifier: 100%
+[00:20:51] [Server thread/INFO]: Carrot Growth Modifier: 100%
+[00:20:51] [Server thread/INFO]: Potato Growth Modifier: 100%
+[00:20:51] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[00:20:51] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[00:20:51] [Server thread/INFO]: Vine Growth Modifier: 100%
+[00:20:51] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[00:20:51] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Mi 16 / Tiv true
+[00:20:51] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[00:20:51] [Server thread/INFO]: View Distance: 10
+[00:20:51] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[00:20:51] [Server thread/INFO]: Item Merge Radius: 2.5
+[00:20:51] [Server thread/INFO]: Item Despawn Rate: 6000
+[00:20:51] [Server thread/INFO]: Arrow Despawn Rate: 1200
+[00:20:51] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[00:20:51] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[00:20:52] [Server thread/INFO]: Preparing start region for dimension 'world'/minecraft:overworld
+[00:20:57] [User Authenticator #1/INFO]: UUID of player Gr3yman is 25afc2ac-d7ca-4898-b651-1da16a6e4a38
+[00:21:05] [User Authenticator #2/INFO]: UUID of player kabuk1kitten is 68c8a67e-68b5-44ba-8dd6-0d8e745ef55d
+[00:21:21] [User Authenticator #3/INFO]: UUID of player GoGarretGo is 79fd52c9-b7e6-482e-bd41-f1d5ce958161
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:22] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:23] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:23] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:24] [Server-Worker-1/INFO]: Preparing spawn area: 7%
+[00:21:24] [Server-Worker-1/INFO]: Preparing spawn area: 29%
+[00:21:25] [Server-Worker-1/INFO]: Preparing spawn area: 85%
+[00:21:25] [Server thread/INFO]: Time elapsed: 33304 ms
+[00:21:25] [Server thread/INFO]: Preparing start region for dimension 'world_the_end'/minecraft:the_end
+[00:21:26] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:26] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:26] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:27] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:27] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:28] [Server-Worker-1/INFO]: Preparing spawn area: 0%
+[00:21:28] [Server-Worker-1/INFO]: Preparing spawn area: 1%
+[00:21:29] [Server-Worker-1/INFO]: Preparing spawn area: 1%
+[00:21:29] [Server-Worker-1/INFO]: Preparing spawn area: 1%
+[00:21:30] [Server-Worker-1/INFO]: Preparing spawn area: 1%
+[00:21:30] [Server-Worker-1/INFO]: Preparing spawn area: 1%
+[00:21:31] [Server-Worker-1/INFO]: Preparing spawn area: 1%
+[00:21:31] [Server-Worker-1/INFO]: Preparing spawn area: 67%
+[00:21:31] [Server thread/INFO]: Time elapsed: 6251 ms
+[00:21:31] [Server thread/INFO]: [WorldEdit] Enabling WorldEdit v7.0.0-rc-2;7be00cc
+[00:21:31] [Server thread/INFO]: WEPIF: Using the Bukkit Permissions API.
+[00:21:31] [Server thread/INFO]: Registering commands with com.sk89q.worldedit.bukkit.BukkitServerInterface
+[00:21:31] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[00:21:32] [Server thread/INFO]: Done (44.677s)! For help, type "help"
+[00:21:32] [Server thread/INFO]: com.mojang.authlib.GameProfile@67a66b87[id=25afc2ac-d7ca-4898-b651-1da16a6e4a38,name=Gr3yman,properties={textures=[com.mojang.authlib.properties.Property@31cace3f]},legacy=false] (/75.118.89.135:34045) lost connection: Disconnected
+[00:21:35] [Server thread/INFO]: kabuk1kitten[/75.118.89.135:34463] logged in with entity id 42 at ([world]-1237.3419475476949, 4.0, 1158.3086522942388)
+[00:21:36] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 4500ms or 90 ticks behind
+[00:21:37] [Server thread/INFO]: GoGarretGo lost connection: Disconnected
+[00:21:37] [Server thread/INFO]: GoGarretGo left the game
+[00:21:42] [User Authenticator #4/INFO]: UUID of player GoGarretGo is 79fd52c9-b7e6-482e-bd41-f1d5ce958161
+[00:21:43] [Server thread/INFO]: GoGarretGo[/75.22.98.134:58701] logged in with entity id 62 at ([world]-1514.3311095244178, 29.016296133126033, 1091.2277645492964)
+[00:21:59] [Server thread/INFO]: GoGarretGo issued server command: //stack 50
+[00:23:26] [Server thread/INFO]: GoGarretGo issued server command: //set red_nether_brick_slab
+[00:23:38] [Server thread/INFO]: kabuk1kitten issued server command: //fill spruce_planks 40
+[00:25:02] [Server thread/INFO]: kabuk1kitten issued server command: /tp @e[name=Trailmix] kabuk1kitten
+[00:25:02] [Server thread/INFO]: [kabuk1kitten: Teleported Trailmix to kabuk1kitten]
+[00:25:05] [Server thread/INFO]: kabuk1kitten issued server command: /tp @e[name=Trailmix] kabuk1kitten
+[00:25:05] [Server thread/INFO]: [kabuk1kitten: Teleported Trailmix to kabuk1kitten]
+[00:25:08] [Server thread/INFO]: kabuk1kitten issued server command: /tp @e[name=Trailmix] kabuk1kitten
+[00:25:08] [Server thread/INFO]: [kabuk1kitten: Teleported Trailmix to kabuk1kitten]
+[00:26:38] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 2175ms or 43 ticks behind
+[00:28:44] [Async Chat Thread - #0/INFO]: <GoGarretGo> "family"[m
+[00:28:58] [Server thread/INFO]: kabuk1kitten has made the advancement [The Parrots and the Bats]
+[00:31:22] [Server thread/INFO]: GoGarretGo issued server command: /tp @e[type=minecraft:wither_skeleton] @s
+[00:31:22] [Server thread/INFO]: [GoGarretGo: Teleported 14 entities to GoGarretGo]
+[00:31:29] [Server thread/INFO]: GoGarretGo issued server command: /tp @e[type=minecraft:wither_skeleton] @s
+[00:31:29] [Server thread/INFO]: [GoGarretGo: Teleported 14 entities to GoGarretGo]
+[00:31:32] [Server thread/INFO]: GoGarretGo issued server command: /tp @e[type=minecraft:wither_skeleton] @s
+[00:31:32] [Server thread/INFO]: [GoGarretGo: Teleported 14 entities to GoGarretGo]
+[00:31:35] [Server thread/INFO]: GoGarretGo issued server command: /tp @e[type=minecraft:wither_skeleton] @s
+[00:31:35] [Server thread/INFO]: [GoGarretGo: Teleported 14 entities to GoGarretGo]
+[00:31:43] [Server thread/INFO]: GoGarretGo issued server command: /tp @e[type=minecraft:wither_skeleton] @s
+[00:31:43] [Server thread/INFO]: [GoGarretGo: Teleported 14 entities to GoGarretGo]
+[00:31:48] [Server thread/INFO]: GoGarretGo issued server command: /tp @e[type=minecraft:wither_skeleton] @s
+[00:31:48] [Server thread/INFO]: [GoGarretGo: Teleported 14 entities to GoGarretGo]
+[00:32:06] [Server thread/INFO]: GoGarretGo issued server command: /tp @e[type=minecraft:wither_skeleton] @s
+[00:32:06] [Server thread/INFO]: [GoGarretGo: Teleported 14 entities to GoGarretGo]
+[00:32:16] [Server thread/INFO]: GoGarretGo issued server command: /tp @e[type=minecraft:wither_skeleton] @s
+[00:32:16] [Server thread/INFO]: [GoGarretGo: Teleported 12 entities to GoGarretGo]
+[00:32:27] [Server thread/INFO]: kabuk1kitten issued server command: /tp GoGarretGo
+[00:32:27] [Server thread/INFO]: [kabuk1kitten: Teleported kabuk1kitten to GoGarretGo]
+[00:34:09] [Server thread/INFO]: kabuk1kitten issued server command: /thru
+[00:34:13] [Server thread/INFO]: kabuk1kitten issued server command: /tp GoGarretGo
+[00:34:13] [Server thread/INFO]: [kabuk1kitten: Teleported kabuk1kitten to GoGarretGo]
+[00:35:51] [Server thread/INFO]: GoGarretGo issued server command: /tp @e[name=trailmix] @s
+[00:35:58] [Server thread/INFO]: GoGarretGo issued server command: /tp @e[name=Trailmix] @s
+[00:38:17] [Server thread/INFO]: kabuk1kitten issued server command: //move 1
+[00:39:08] [Server thread/INFO]: GoGarretGo issued server command: //stack 1
+[00:39:16] [Server thread/INFO]: GoGarretGo issued server command: //undo
+[00:39:17] [Server thread/INFO]: GoGarretGo issued server command: //stack 1
+[00:39:38] [Server thread/INFO]: GoGarretGo issued server command: //stack 30
+[00:39:43] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 5322ms or 106 ticks behind
+[00:39:43] [Server thread/WARN]: kabuk1kitten moved too quickly! 6.329811137709612,0.0,-44.024446824729466
+[00:39:43] [Server thread/INFO]: GoGarretGo issued server command: //undo
+[00:39:49] [Server thread/INFO]: GoGarretGo issued server command: //stack 30
+[00:39:55] [Server thread/INFO]: GoGarretGo issued server command: //undo
+[00:40:04] [Server thread/INFO]: GoGarretGo issued server command: //stack 30
+[00:40:08] [Server thread/INFO]: GoGarretGo issued server command: //stack 50
+[00:40:20] [Server thread/INFO]: GoGarretGo issued server command: //stack 50
+[00:41:54] [Server thread/INFO]: GoGarretGo issued server command: //move 3
+[00:43:17] [Server thread/INFO]: GoGarretGo issued server command: //set dark_oak_log
+[00:43:21] [Server thread/INFO]: GoGarretGo issued server command: //set dark_oak_log
+[00:43:30] [Server thread/INFO]: GoGarretGo issued server command: //stack 1
+[00:43:37] [Server thread/INFO]: GoGarretGo issued server command: //stack 4
+[00:44:23] [Server thread/INFO]: GoGarretGo issued server command: //stack 7
+[00:45:24] [Server thread/INFO]: kabuk1kitten lost connection: Disconnected
+[00:45:24] [Server thread/INFO]: kabuk1kitten left the game
+[00:45:35] [Server thread/INFO]: GoGarretGo issued server command: //set dark_oak_log
+[00:45:42] [Server thread/INFO]: GoGarretGo issued server command: //set dark_oak_log
+[00:45:52] [Server thread/INFO]: GoGarretGo issued server command: //set dark_oak_log
+[00:45:56] [Server thread/INFO]: GoGarretGo issued server command: //set dark_oak_log
+[00:47:40] [Server thread/INFO]: GoGarretGo issued server command: //stack 40
+[00:47:46] [Server thread/INFO]: GoGarretGo issued server command: //stack 44
+[00:49:21] [Server thread/INFO]: GoGarretGo issued server command: //stack 1
+[00:50:34] [Server thread/INFO]: GoGarretGo lost connection: Disconnected
+[00:50:34] [Server thread/INFO]: GoGarretGo left the game
+[01:26:21] [Server thread/INFO]: Stopping the server
+[01:26:21] [Server thread/INFO]: Stopping server
+[01:26:21] [Server thread/INFO]: [WorldEdit] Disabling WorldEdit v7.0.0-rc-2;7be00cc
+[01:26:21] [Server thread/INFO]: Unregistering com.sk89q.worldedit.bukkit.BukkitServerInterface from WorldEdit
+[01:26:21] [Server thread/INFO]: Saving players
+[01:26:21] [Server thread/INFO]: Saving worlds
+[01:26:21] [Server thread/INFO]: Saving chunks for level 'world'/minecraft:overworld
+[01:26:21] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[01:26:21] [Server thread/INFO]: Saving chunks for level 'world_the_end'/minecraft:the_end
+[01:26:21] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[01:26:21] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[01:26:21] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[01:26:21] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[01:26:21] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved

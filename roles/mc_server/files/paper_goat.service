@@ -1,0 +1,17 @@
+[Unit]
+Description=PaperMC Server
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+Restart=always
+RestartSec=2
+User=zach
+WorkingDirectory=/srv/Project_BEAR
+ExecStart=/usr/bin/tmux new -d -s BEAR	"/usr/bin/java -jar -Xmn1024M -Xmx2048M -XX:+UseConcMarkSweepGC /srv/Project_BEAR/server.jar nogui"
+ExecReload=/usr/bin/tmux send-keys -t BEAR reload Enter
+ExecStop=/usr/bin/tmux send-keys -t BEAR stop Enter
+
+[Install]
+WantedBy=multi-user.target

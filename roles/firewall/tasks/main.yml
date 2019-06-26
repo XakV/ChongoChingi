@@ -1,6 +1,6 @@
 ---
 - name: Firewall | install
-  package: 
+  dnf: 
     name: firewalld
     state: latest
 
@@ -10,34 +10,28 @@
     state: started
     enabled: True
 
-- name: Firewall | configure zone
+- name: Firewall | assign interface to zones
   firewalld:
-      zone: "{{ group_firewalld_zone }}"
-      source: "{{ lan_sources }}" 
-      interface: "{{ ansible_default_ipv4.interface }}"
-      state: enabled
-      permanent: true
-  notify:
-    - reload firewall
+    zone: "FedoraServer"
+    interface: "{{ ansible_default_ipv4.interface }}"
+    permanent: yes
+    state: enabled
 
-- name: Firewall | configure zone ports
+- name: Firewall | Create port rules for zones
   firewalld:
-      zone: "{{ group_firewalld_zone }}"
-      source: "{{ lan_sources }}" 
-      port: "{{ item }}"
-      state: enabled
-      permanent: true
-  loop: "{{ group_ports }}"
-  notify:
-    - reload firewall
+    zone: "FedoraServer"
+    port: "{{ ports_dict.port }}"
+    source: "{{ ports_dict.source }}"
+    permanent: yes
+    state: enabled
 
-
-- name: Firewall | configure zone services
+- name: Firewall | Create service rules for zones
   firewalld:
-      zone: "{{ group_firewalld_zone }}"
-      source: "{{ lan_sources }}" 
-      state: enabled
-      permanent: true
-  loop: "{{ group_services }}"
-  notify:
-    - reload firewall
+    zone: "FedoraServer"
+    rich_rule: rule family="ipv4" source address="{{ standard_source }}" accept
+    source: "{{ standard_source }}"
+    permanent: yes
+    state: enabled
+
+- name: Firewall | Reload it
+  command: firewall-cmd --reload

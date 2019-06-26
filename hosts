@@ -12,28 +12,38 @@
 
 
 [all]
-teru.tsundoku.pw
 kuro.tsundoku.pw
 kinomi.tsundoku.pw
-renga.tsundoku.pw
-emgine.tsundoku.pw
+kotokami.two-bit.space
+alfheim.two-bit.space
+midgard.two-bit.space
+drittenheim.two-bit.space 
+mc.wefartin.space
+lobby.wefartin.space
+
+[zach]
+kotokami.two-bit.space
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
 
 [control]
-janku.tsundoku.pw
+kuro.tsundoku.pw
 
 [control:vars]
 ansible_connection=local 
 
 [server]
-janku.tsundoku.pw
-emgine.tsundoku.pw
+mc.wefartin.space
+
+[lobby]
+lobby.wefartin.space
 
 [desktops]
 kuro.tsundoku.pw 
-renga.tsundokuw.pw
+kotokami.two-bit.space
 
 [debian]
 kinomi.tsundoku.pw
+alfheim.two-bit.space
+midgard.two-bit.space

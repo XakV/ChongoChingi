@@ -2,12 +2,12 @@
 - name: devel | Install devel packages
   dnf:
     state: latest
-    name: "{{ ['go-compilers-golang-compiler', 'golang-bin', 'love', 'lua',  'lua-devel',\
-    'openssl-devel', 'python3-pygments', 'python3-pygments-markdown-lexer', 'hugo', \
-    'git','rubygems', 'ruby-devel', 'levien-inconsolata-fonts', \
-      'mozilla-fira-mono-fonts', 'mozilla-fira-sans-fonts', 'overpass-mono-fonts', \ 
-      'overpass-fonts', 'gobby05', 'pandoc', 'cockpit', 'cockpit-ws', 'cockpit-docker',\ 
-      'cockpit-storaged', '@Fedora Packager', '@RPM Development Tools', \
+    name: "{{ ['go-compilers-golang-compiler', 'golang-bin', 'love', 'lua',  'lua-devel',
+    'openssl-devel', 'python3-pygments', 'python3-pygments-markdown-lexer', 'hugo', 
+    'git','rubygems', 'ruby-devel', 'levien-inconsolata-fonts', 
+      'mozilla-fira-mono-fonts', 'mozilla-fira-sans-fonts', 'overpass-mono-fonts',  
+      'overpass-fonts', 'gobby05', 'pandoc', 'cockpit', 'cockpit-ws', 'cockpit-docker',
+      'cockpit-storaged', '@Fedora Packager', '@RPM Development Tools', 
       '@C Development Tools and Libraries'] }}"
 
 - name: devel | enable cockpit

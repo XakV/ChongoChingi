@@ -4,8 +4,8 @@
       state: latest
       name: ['java-1.8.0-openjdk', 'smartmontools', 'python3-firewall', 'lsof',  
       'python3-dnf-plugins-core', 'python3-dnf-plugins-extras-common', 'vim',  
-      'python3-dnf-plugin-system-upgrade', 'dnf-automatic', 'libXScrnSaver',  
-      'nfs-utils', 'sysstat', 'vim-X11', 'syncthing']
+      'python3-dnf-plugin-system-upgrade', 'dnf-automatic', 
+      'nfs-utils', 'sysstat', 'htop']
 
 - name: Common | set up fstrim if ssdisk
   systemd:
@@ -26,13 +26,3 @@
     name: dnf-automatic-install.timer
     state: started
     enabled: true
-
-- name: Common | start syncthing as user
-  systemd:
-    name: syncthing
-    state: started
-    enabled: true
-    scope: user
-  become: True
-  become_user: 'zach'
-  when: isdesktop == true

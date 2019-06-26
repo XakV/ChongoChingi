@@ -1,0 +1,15 @@
+[Unit]
+Description=PaperMC Server
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=zach
+WorkingDirectory=/srv/duck
+ExecStart=/usr/bin/tmux new-session -d -s DUCK "/usr/bin/java -jar -Xmn1024M -Xmx1024M -XX:+UseConcMarkSweepGC /srv/duck/server.jar nogui"
+ExecReload="/usr/bin/tmux send-keys -t DUCK reload Enter"
+ExecStop="/usr/bin/tmux send-keys -t DUCK stop Enter"
+
+[Install]
+WantedBy=multi-user.target

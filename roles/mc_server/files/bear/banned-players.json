@@ -1,0 +1,26 @@
+[
+  {
+    "uuid": "07c6e298-28cb-43c2-9c3f-f5e313be43fd",
+    "name": "Lit",
+    "created": "2019-05-05 23:37:04 +0000",
+    "source": "GoGarretGo",
+    "expires": "forever",
+    "reason": "Banned by an operator."
+  },
+  {
+    "uuid": "f46087a3-29f6-4e78-ab39-8e93ecccffff",
+    "name": "yourfantastic",
+    "created": "2019-05-06 20:00:02 +0000",
+    "source": "kabuk1kitten",
+    "expires": "forever",
+    "reason": "Banned by an operator."
+  },
+  {
+    "uuid": "8c3efcff-d600-46e1-a339-379b7858a9be",
+    "name": "lol",
+    "created": "2019-05-06 01:24:42 +0000",
+    "source": "GoGarretGo",
+    "expires": "forever",
+    "reason": "Banned by an operator."
+  }
+]

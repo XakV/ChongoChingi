@@ -1,6 +1,8 @@
 127.0.0.1     localhost			localhost.localdomain localhost4 localhost4.localdomain4
 ::1           localhost 		localhost.localdomain localhost6 localhost6.localdomain6
-127.0.0.1     janku.tsundoku.pw         janku 	
-10.0.0.24     janku.tsundoku.pw         janku 	
-10.0.0.5      kinomi.tsundoku.pw        kinomi     		
-10.0.0.9      kuro.tsundoku.pw          kuro  	
+127.0.0.1     folkvangr.two-bit.space   folkvangr  	
+10.0.0.20     alfheim.two-bit.space     alfheim 	
+10.0.0.8      midgard.two-bit.space     midgard     		
+10.0.0.9      folkvangr.two-bit.space   folkvangr  	
+10.0.0.25     muspelheim.two-bit.space  muslpelheim
+10.0.0.23     jotunheim.two-bit.space   jotunheim

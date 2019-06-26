@@ -1,0 +1,2 @@
+05 22 * * * restic -r /srv/backups backup /home/zach --exclude-file /srv/backups/restic_excludes --password-file=/srv/backups/.restic_info
+45 22 * * * python3 /home/zach/Python/reschecker/reschecker.py

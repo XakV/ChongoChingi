@@ -1,0 +1,30 @@
+- name: lobby server setup
+  hosts: lobby.wefartin.space
+  become: yes
+  vars:
+    server_dirs: 
+    - 'duck'
+    version_target: '1.14.3'
+  tasks:
+    - name: download the newest paper
+      get_url: 
+        url: "https://papermc.io/api/v1/paper/{{ version_target }}/latest/download"
+        dest: "/srv/{{ item }}/server.jar"
+        force: yes
+        backup: yes
+        owner: zach
+        group: zach
+      loop: "{{ server_dirs }}"
+    
+    - name: stop and start the servers
+      block:
+        - name: 
+          systemd:
+            name: paper_duck
+            state: stopped
+      always:
+        - name: restart the servers
+          systemd:
+            name: paper_duck
+            state: started
+            daemon-reload: yes

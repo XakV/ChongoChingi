@@ -1,0 +1,43 @@
+---
+- name: mc_lobby | install pre-reqs
+  dnf:
+    name: ['git', 'java-1.8.0-openjdk', 'tmux']
+    state: latest
+
+- name: mc_lobby | open port
+  firewalld:
+    port: 25577/tcp
+    state: enabled
+    permanent: yes
+
+- name: mc_lobby | disable SELinux
+  selinux:
+    policy: targeted
+    state: permissive
+
+- name: mc_lobby | copy and create directories
+  copy:
+    src: "{{ item }}"
+    dest: /srv/
+    force: no
+  loop: ['waterfall', 'duck'] 
+
+- name: mc_lobby | copy server service files
+  copy:
+    src: "{{ item }}"
+    dest: "/usr/lib/systemd/system/{{ item }}"
+  loop: ['waterfall.service', 'paper_duck.service']
+
+- name: mc_server | link server.jar
+  file:
+    path: /srv/duck/paper-59.jar
+    dest: /srv/duck/server.jar
+    state: link
+
+- name: mc_lobby | enable_start the servers
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+    daemon-reload: yes
+    enabled: true
+  loop: ['waterfall.service', 'paper_duck.service']

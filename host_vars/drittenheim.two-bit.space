@@ -1,0 +1,10 @@
+nvidia: true
+amd: false
+ssdisk: true
+qt: false
+isdesktop: true
+mcserver: false
+home_dir_user: oliver
+host_backup_time: 05
+ansible_become_pass: 'kabuki snacks'
+

@@ -1,0 +1,10 @@
+- name: test conditional
+  hosts: all
+  become: yes
+  tasks:
+    - name: msg thing
+      debug:
+        msg: "startswith"
+      when: ansible_hostname.startswith('k') == true
+
+
