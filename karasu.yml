@@ -1,0 +1,14 @@
+- name: Host for zach setup | with priv
+  hosts: karasu.two-bit.space
+  become: yes
+  roles:
+    - firewall-lan
+    - common
+    - devel
+    - gaming
+    - virt
+    - virt-net
+    - zach
+    - nvidia
+
+
