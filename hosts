@@ -12,25 +12,23 @@
 
 
 [all]
-karasu.two-bit.space
-kinomi.tsundoku.pw
+kowareta.two-bit.space
 kotokami.two-bit.space
-alfheim.two-bit.space
-midgard.two-bit.space
-drittenheim.two-bit.space 
+funf.two-bit.space
+uberpi.two-bit.space
+zweipi.two-bit.space
 mc.wefartin.space
 lobby.wefartin.space
 
 [zach]
 kotokami.two-bit.space
-karasu.two-bit.space
+kowareta.two-bit.space
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
 
 [control]
-kuro.tsundoku.pw
-karasu.two-bit.space
+kowareta.two-bit.space
 
 [control:vars]
 ansible_connection=local 
@@ -43,9 +41,10 @@ lobby.wefartin.space
 
 [desktops]
 kotokami.two-bit.space
-karasu.two-bit.space
+kowareta.two-bit.space
 
-[debian]
-kinomi.tsundoku.pw
-alfheim.two-bit.space
-midgard.two-bit.space
+[pi]
+funf.two-bit.space
+uberpi.two-bit.space
+zweipi.two-bit.space
+

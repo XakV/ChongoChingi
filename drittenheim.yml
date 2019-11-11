@@ -1,9 +1,0 @@
-- name: Host for oliver setup | with priv
-  hosts: drittenheim.two-bit.space
-  become: yes
-  roles:
-    - firewall
-    - common
-    - gaming
-
-
