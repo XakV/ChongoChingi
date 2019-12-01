@@ -2,11 +2,5 @@
   dnf:
     state: latest
     name: "{{ item }}"
-  loop: ['policycoreutils-python-utils', '@Virtualization', 'podman', 'buildah', 'skopeo', 
+  loop: ['policycoreutils-python-utils', 'podman', 'buildah', 'skopeo', 
     'cockpit', 'cockpit-podman', 'cockpit-bridge', 'cockpit-machines', 'cockpit-storaged', 'cockpit-system']
-
-- name: virt | enable start libvirt
-  systemd:
-    name: libvirtd
-    state: started
-    enabled: True
