@@ -3,7 +3,7 @@
   dnf:
     state: latest
     name: "{{ item }}"
-  with_items:
+  loop:
   - restic
   - python2-scp
   - python3-scp
@@ -13,75 +13,57 @@
   - autofs
   become: True
 
-- name: Restic | make sure /srv exists and is owned by user
-  file:
-    path: /srv/backups
-    state: directory
-    mode: 0755
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+- name: Restic | prepare creds
+  lineinfile:
+    path: /home/zach/.bashrc
+    line: "{{ item }}"
+    create: yes
+  loop:
+  - "export AWS_ACCESS_KEY_ID={{ s3_key_id }}"
+  - "export AWS_SECRET_ACCESS_KEY={{ s3_access_key }}"
+  - "export RESTIC_PASSWORD={{ restic_pass }}"
+  - "export RESTIC_REPOSITORY={{ restic_repo }}"
+  - "export S3_BUCKET={{ s3_bucket }}"
 
-- name: Restic | set up automounter
-  copy:
-    src: "{{ item }}"
-    dest: /etc/
-  with_items:
-  - auto.master
-  - auto.backups
-  notify:
-  - reload_autofs
-  become: True
-  
-- name: copy exclude file
-  copy:
-    src: restic_excludes.txt
-    dest: /srv/backups/
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: 0644
+- name: Restic | test for repo
+  command: 'restic -r s3:s3.amazonaws.com/$S3_BUCKET repos'
+  register: test_repo_exist
 
-- name: copy restic pwd file
-  copy:
-    src: .restic_info
-    dest: /srv/backups/
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: 0644
+- name: Restic | init repo if not created
+  command: 'restic -r s3:s3.amazonaws.com/$S3_BUCKET init'
+  register: new_repo
+  when: test_repo_exist.rc != 0
 
-- name: copy cron.allow is important
+- name: Restic | copy the restic include file
   copy:
-    src: cron.allow
-    dest: /etc/cron.allow
-    owner: root
-    group: root
-    mode: 0644    
-  become: True
- 
-- name: schedule backups
+    src: backup_includes
+    dest: /home/zach/.backup_includes
+
+- name: Restic | run first backup if new repo
+  command: 'restic -r s3:s3.amazon.aws.com/$S3_BUCKET --files-from /home/zach/backup_includes'
+  when: new_repo exists and new_repo.rc == 0
+
+- name: Restic | create the cron backup job
   cron:
-    name: homedirbackup
-    hour: 22
-    minute: "{{ host_backup_time }}"
-    job: restic -r /srv/backups backup /home/zach --exclude-file /srv/backups/restic_excludes --password-file=/srv/backups/.restic_info
-  notify:
-  - reload cron
+    name: backup
+    weekday: "1"
+    minute: "15"
+    hour: "1"
+    user: "zach"
+    job: "restic -r s3:s3.amazonaws.com/$S3_BUCKET backup --files-from /home/zach/.restic-includes"
 
-- name: Restic | email snapshot list
+- name: Restic | create the cron prune job
   cron:
-    name: reschecker
-    hour: 22
-    minute: 45
-    job: python3 /home/zach/Python/reschecker/reschecker.py
-  notify:
-  - reload cron
+    name: prune
+    weekday: "6"
+    minute: "15"
+    hour: "1"
+    user: "zach"
+    job: "restic -r s3:s3.amazonaws.com/$S3_BUCKET forget --keep-last 3 --prune"
 
-- name: prune daily backups
-  cron:
-    name: prune snapshots with restic
-    weekday: 0
-    hour: 23
-    minute: 45
-    job: restic -r /srv/backups forget --keep-last 10 keep-weekly 4 --keep-monthly 3 --keep-yearly 1 --prune --password-file=/srv/backups/.restic_info 
-  when: ansible_host == "tori.tsundoku.pw"
-  notify:
-  - reload cron
+- name: reload restart user cron
+  systemd:
+    name: crond
+    state: restarted
+    daemon-reload: yes
+    scope: user
