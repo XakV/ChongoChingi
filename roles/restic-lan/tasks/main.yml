@@ -5,13 +5,12 @@
     name: "{{ item }}"
   loop:
   - restic
-  - python2-scp
   - python3-scp
   - python3-paramiko
   - python3-dnf-plugins-extras-common
   - python3-dnf-plugins-core
-  - autofs
   become: True
+  become_user: root
 
 - name: Restic | prepare creds
   lineinfile:
@@ -26,12 +25,12 @@
   - "export S3_BUCKET={{ s3_bucket }}"
 
 - name: Restic | test for repo
-  command: 'restic -r s3:s3.amazonaws.com/$S3_BUCKET repos'
+  command: 'restic -r s3:s3.amazonaws.com/$S3_BUCKET snapshots'
   register: test_repo_exist
+  failed_when: test_repo_exist.rc == 127
 
 - name: Restic | init repo if not created
-  command: 'restic -r s3:s3.amazonaws.com/$S3_BUCKET init'
-  register: new_repo
+  shell: 'restic -r s3:s3.amazonaws.com/$S3_BUCKET init'
   when: test_repo_exist.rc != 0
 
 - name: Restic | copy the restic include file
@@ -39,9 +38,8 @@
     src: backup_includes
     dest: /home/zach/.backup_includes
 
-- name: Restic | run first backup if new repo
-  command: 'restic -r s3:s3.amazon.aws.com/$S3_BUCKET --files-from /home/zach/backup_includes'
-  when: new_repo exists and new_repo.rc == 0
+- name: Restic | run a backup if new repo
+  shell: 'restic -r s3:s3.amazonaws.com/$S3_BUCKET backup --files-from=/home/zach/.backup_includes'
 
 - name: Restic | create the cron backup job
   cron:

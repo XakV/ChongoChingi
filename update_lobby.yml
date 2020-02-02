@@ -4,7 +4,7 @@
   vars:
     server_dirs: 
     - 'duck'
-    version_target: '1.14.3'
+    version_target: '1.15.1'
   tasks:
     - name: download the newest paper
       get_url: 

@@ -12,23 +12,23 @@
 
 
 [all]
-kowareta.two-bit.space
-kotokami.two-bit.space
-funf.two-bit.space
-uberpi.two-bit.space
-zweipi.two-bit.space
+gomoku.segfawlty.space
+kotokami.segfawlty.space
 mc.wefartin.space
 lobby.wefartin.space
+pi3b0.segfawlty.space
+kohei4pi.segfawlty.space
+proxy.segfawlty.space
 
 [zach]
-kotokami.two-bit.space
-kowareta.two-bit.space
+kotokami.segfawlty.space
+gomoku.segfawlty.space
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
 
 [control]
-kowareta.two-bit.space
+gomoku.segfawlty.space
 
 [control:vars]
 ansible_connection=local 
@@ -40,11 +40,15 @@ mc.wefartin.space
 lobby.wefartin.space
 
 [desktops]
-kotokami.two-bit.space
-kowareta.two-bit.space
+kotokami.segfawlty.space
+gomoku.segfawlty.space
+
+[virtual]
+proxy.segfawlty.space
 
 [pi]
-funf.two-bit.space
-uberpi.two-bit.space
-zweipi.two-bit.space
+pi3b0.segfawlty.space
+kohei4pi.segfawlty.space
 
+[hassio]
+hassio.segfawlty.space

@@ -1,0 +1,14 @@
+---
+- name: install dnsmasq
+  pkg:
+    name: ['dnsmasq', 'dnsmasq-utils', 'dnsutils', 'python3.7', 'python3.7-venv']
+    state: latest
+
+- name: send the config files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - { 'src': 'hosts', 'dest': '/etc/hosts' }
+    - { 'src': 'dnsmasq.conf', 'dest': '/etc/dnsmasq.conf' }
+  notify: stenable_dnsmasq

@@ -1,5 +1,5 @@
 # A list of ports we want open
 group_ports: ["4445/udp", "25560-25569/tcp", "8384/tcp", "5222/tcp", "5432/tcp", "8953/udp", "2360/tcp"]
-lan_sources: "10.0.0.0/24" 
+lan_sources: "10.23.19.0/24" 
 group_services: ["ssh", "nfs", "rpc-bind", "mdns", "pulseaudio", "cockpit"]
 group_firewalld_zone: "home"
