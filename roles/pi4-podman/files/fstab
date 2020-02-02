@@ -1,0 +1,4 @@
+UUID=96a7d256-5af0-4b28-91c0-c414e8249b38  / ext4    defaults,noatime 0 0
+UUID=16CB-DE38  /boot vfat    defaults,noatime 0 0
+UUID=8322aeee-a657-49db-b257-46d8e4467591  swap swap    defaults,noatime 0 0
+/dev/ssd/podpool /var/lib/containers/storage  xfs  defaults,noatime 0 0

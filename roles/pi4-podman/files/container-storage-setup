@@ -1,0 +1,143 @@
+# Specify storage driver one wants to use with container runtimes.
+# Default is devicemapper.
+# Other possible options are overlay, overlay2 and "". Empty string means do
+# not do any storage setup.
+STORAGE_DRIVER=devicemapper
+
+# Set extra options that will be appended to the generated STORAGE_OPTIONS
+# variable. These options will be passed to the container runtime daemon
+# as-is and should be valid container runtime storage options.
+# EXTRA_STORAGE_OPTIONS="--storage-opt dm.fs=ext4"
+
+# A quoted, space-separated list of devices to be used.  This currently
+# expects the devices to be unpartitioned drives.  If "VG" is not specified,
+# then use of the root disk's extra space is implied.
+#
+DEVS=/dev/sda
+
+# Specify the thinpool name for the lvm thinpool, when using the
+# devicemapper STORAGE_DRIVER.  This is the logical volume name
+# for the newly created thin pool volume.
+#
+CONTAINER_THINPOOL=podpool
+
+# The volume group to use for container runtime storage.  Defaults to the
+# volume group where the root filesystem resides.  If VG is specified and the
+# volume group does not exist, it will be created (which requires that "DEVS"
+# be nonempty, since we don't currently support putting a second partition on
+# the root disk).
+#
+VG=ssd
+
+# The size to which the root filesystem should be grown.
+# Value should be acceptable to -L option of lvextend.
+#
+# ROOT_SIZE can take values acceptable to "lvcreate -L" as well as some
+# values acceptable to "lvcreate -l". If user intends to pass values
+# acceptable to "lvcreate -l", then only those values which contains "%"
+# in syntax are acceptable.  If value does not contain "%" it is assumed
+# value is suitable for "lvcreate -L".
+#
+# ROOT_SIZE=8G
+
+# The desired size for the container runtime data LV.  Defaults to using 40%
+# of FREE space.
+#
+# DATA_SIZE can take values acceptable to "lvcreate -L" as well as some
+# values acceptable to "lvcreate -l". If user intends to pass values
+# acceptable to "lvcreate -l", then only those values which contains "%"
+# in syntax are acceptable.  If value does not contain "%" it is assumed
+# value is suitable for "lvcreate -L".
+#
+DATA_SIZE=40%FREE
+
+# MIN_DATA_SIZE specifies the minimum size of data volume otherwise pool
+# creation fails.
+#
+# Value should be a number followed by a optional suffix. "bBsSkKmMgGtTpPeE"
+# are valid suffixes. If no suffix is specified then value will be considered
+# as mebibyte unit.
+#
+# Both upper and lower case suffix represent same unit of size. Use suffix B
+# for Bytes, S for sectors as 512 bytes, K for kibibytes (1024 bytes), M for
+# mebibytes (1024 kibibytes), G for gibibytes, T for tebibytes, P for
+# pebibytes and E for exbibytes.
+#
+MIN_DATA_SIZE=2G
+
+# The desired size for the thin pool metadata volume.  Defaults to using .1%
+# of FREE space in Volume Group.
+#
+# Values passed should be suitable to be used by --poolmetadatasize option
+# of lvcreate. It should be a number followed by a optional suffix.
+# "bBsSkKmMgGtTpPeE" are valid suffixes. If no suffix is specified then value
+# will be considered as mebibyte unit.
+#
+# Both upper and lower case suffix represent same unit of size. Use suffix B
+# for Bytes, S for sectors as 512 bytes, K for kibibytes (1024 bytes), M for
+# mebibytes (1024 kibibytes), G for gibibytes, T for tebibytes, P for
+# pebibytes and E for exbibytes.
+#POOL_META_SIZE=16M
+
+# Controls the chunk size/block size of thin pool. Value of CHUNK_SIZE
+# be suitable to be passed to --chunk-size option of lvconvert.
+#
+CHUNK_SIZE=512K
+
+# Enable resizing partition table backing root volume group. By default it
+# is disabled until and unless GROWPART=true is specified.
+#
+GROWPART=true
+
+# Enable/disable automatic pool extension using lvm
+AUTO_EXTEND_POOL=yes
+
+# Auto pool extension threshold (in % of pool size)
+POOL_AUTOEXTEND_THRESHOLD=60
+
+# Extend the pool by specified percentage when threshold is hit.
+POOL_AUTOEXTEND_PERCENT=20
+
+# Device wait timeout in seconds. This is generic timeout which can be used by
+# container storage setup service to wait on various kind of block devices.
+# Setting a value of 0 can disable this wait.
+DEVICE_WAIT_TIMEOUT=60
+
+# Wipe any signatures (partition, filesystem, lvm etc) found on disk.
+# This could mean wiping the signature explicitly or using force options
+# of various commands to wipe/overwrite signatures. By default signatures
+# are not wiped and user needs to wipe these. One can change default behavior
+# by setting WIPE_SIGNATURES=true. Be careful before using this option
+# as this means if there was any leftover data on disk, it will be lost.
+WIPE_SIGNATURES=true
+
+# By default no new volume and filesystem will be setup for container runtime
+# root dir. For example the docker engine creates /var/lib/docker/ on top of
+# underlying filesystem for storing images and containers.
+#
+# Logical volume name that will be mounted on CONTAINER_ROOT_LV_MOUNT_PATH.
+# Setting CONTAINER_ROOT_LV_MOUNT_PATH requires CONTAINER_ROOT_LV_NAME be set
+CONTAINER_ROOT_LV_NAME="pod-root-lv"
+
+# Specify the desired size for container root lv volume. It defaults to 40% of
+# all free space.
+#
+# CONTAINER_ROOT_LV_SIZE can take values acceptable to "lvcreate -L" as well
+# as some values acceptable to "lvcreate -l". If user intends to pass
+# values acceptable to "lvcreate -l", then only those values which
+# contains "%" in syntax are acceptable.  If value does not contain "%" it
+# is assumed value is suitable for "lvcreate -L".
+#
+# Note: If both STORAGE_DRIVER=devicemapper and CONTAINER_ROOT_LV_NAME is
+# set, container-storage-setup would set up the thin pool for devicemapper
+# first, followed by container runtime root volume. e.g if free space in the
+# volume group is 10G, devicemapper thin pool size would be 4G (40% of 10G)
+# and containe runtime root volume would be 2.4G (40% of 6G).
+CONTAINER_ROOT_LV_SIZE=40%FREE
+
+# Creates a logical volume named $CONTAINER_ROOT_LV_NAME and mount it on
+# $CONTAINER_ROOT_LV_MOUNT_PATH. By default no new logical volume will
+# be created. e.g. Specifying CONTAINER_ROOT_LV_MOUNT_PATH=/var/lib/containers/container-runtime
+# will carve out a logical volume, create a filesystem on it and mount
+# it on /var/lib/containers/container-runtime.
+CONTAINER_ROOT_LV_MOUNT_PATH="/var/lib/containers/container-runtime"

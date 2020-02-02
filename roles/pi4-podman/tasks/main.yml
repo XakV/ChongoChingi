@@ -1,0 +1,66 @@
+---
+- name: copy yum.repos
+  copy:
+    src: "{{ repo_file }}"
+    dest: "/etc/yum.repos.d/{{ repo_file }}"
+  loop:
+    vars:
+      repo_file:
+        - CentOS-Base.repo
+        - CentOS-fasttrack.repo
+
+- name: install epel
+  yum:
+    name: epel-release
+    state: latest
+
+- name: install packages
+  yum:
+    name: "{{ package }}"
+    state: latest
+  loop:
+    vars:
+      package:
+        - container-storage-setup
+        - lvm2
+        - vim
+        - cockpit
+        - podman
+        - buildah
+
+- name: update all pkgs
+  yum:
+    name: *
+    state: latest
+
+- name: copy fstab and storage cfg
+  copy:
+    src: "{{ stor_cfg.item }}"
+    dest: "{{ stor_cfg.dest }}"
+  loop:
+    vars:
+      stor_cfg:
+        - { 'item': fstab, 'dest': '/etc/fstab' }
+        - { 'item': container-storage-setup, 'dest': '/usr/share/container-storage-setup' }
+
+- name: run container storage setup
+  command: 
+    argv:
+      - container-storage-setup -o /etc/containers/storage.conf podstorage
+      - /usr/share/container-storage-setup/container-storage-setup
+
+- name: reboot for new kernel and mounts
+  reboot:
+
+- name: set selinux for storage
+  sefcontext:
+    target: '/var/lib/containers(/.*)?'
+    setype: 'container_var_lib_t'
+    state: present
+  register: sel_chgd
+
+- name: restore context
+  command: restorecon -r /var/lib/containers
+  when: sel_chgd.changed
+
+
