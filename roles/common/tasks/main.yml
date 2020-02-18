@@ -21,6 +21,19 @@
      group: root
      mode: 0644
 
+- name: Common | install some basic packages
+  dnf:
+    name: "{{ dnf_items }}"
+    state: present
+  vars:
+    dnf_items:
+      - python3-dnf
+      - python3-dnf-plugins-core
+      - python3-dnf-plugin-versionlock
+      - python3-dnf-plugins-extras-common
+      - dnf-automatic
+      - smartmontools
+
 - name: Common | activate dnf-automatic
   systemd:
     name: dnf-automatic-install.timer

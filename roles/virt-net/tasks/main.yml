@@ -1,20 +1,33 @@
-- name: virt-net | copy the files
-  copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-  with_items:
-    - { src: '10-bridge.netdev', dest: '/etc/systemd/network/10-bridge.netdev' }
-    - { src: '20-wired.network', dest: '/etc/systemd/network/20-wired.network' }
-    - { src: '30-bridge.network', dest: '/etc/systemd/network/30-bridge.network' }
+- name: virt-net | install the req packages
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - python3-networkmanager
+    - nm-connection-editor
+    - glib-networking
+    - NetworkManager-libnm
+    - python3-libnmstate
 
-- name: virt-net | enable start systemd-networkd
-  systemd:
-    name: systemd-networkd
-    state: started
-    enabled: True
+- name: virt-net | create a bridge
+  nmcli:
+    type: bridge
+    conn_name: 'br0'
+    ip4: '10.23.19.91'
+    gw4: '10.23.19.1'
+    dns4:
+      - '10.23.19.51'
+      - '1.1.1.1'
+      - '8.8.8.8'
+    dns4_search:
+      - 'segfawlty.space'
+    state: present
 
-- name: virt-net | disable stop NetworkManager
-  systemd:
-    name: NetworkManager
-    state: stopped
-    enabled: False
+- name: virt-net | config if for bridge support
+  nmcli:
+    type: bridge-slave
+    conn_name: "br-{{ item }}"
+    ifname: "{{ item }}"
+    master: 'br0'
+    state: present
+    loop: "{{ ansible_interfaces[:2] }}"

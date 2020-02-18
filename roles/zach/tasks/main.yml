@@ -1,4 +1,25 @@
 ---
+- name: install a few normal things
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - tilix
+    - vim
+    - syncthing
+
+- name: start up user services
+  systemd:
+    name: "{{ item }}"
+    enabled: yes
+    daemon-reload: yes
+    state: restarted
+    scope: user
+  become_user: zach
+  loop:
+    - syncthing
+    - io.podman
+
 - name: Add the flathub flatpak repository remote to the user installation
   flatpak_remote:
     name: flathub
@@ -24,3 +45,5 @@
     - im.riot.Riot
     - org.gnome.Music
     - org.telegram.desktop
+    - com.jetbrains.PyCharm-Professional
+    - com.github.bleakgrey.tootle

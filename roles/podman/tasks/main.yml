@@ -1,0 +1,78 @@
+---
+- name: install packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - lvm2
+    - vim
+    - cockpit
+    - podman
+    - buildah
+
+- name: create a thinpool
+  lvol:
+    vg: "{{ runt_vg }}"
+    thinpool: "{{ runt_tp }}"
+    size: "{{ tp_size }}"
+
+# set these in host_vars
+- name: create lv for pod stor
+  lvol:
+    vg: "{{ stor_vg }}"
+    lv: "{{ stor_lv }}"
+    thinpool: "{{ stor_tp }}"
+    size: "{{ stor_size }}"
+
+- name: create lv for pod runtime
+  lvol:
+    vg: "{{ runt_vg }}"
+    lv: "{{ runt_lv }}"
+    thinpool: "{{ runt_tp }}"
+    size: "{{ runt_size }}"
+
+- name: create fs on the new lvs
+  filesystem:
+    fstype: xfs
+    dev: "{{ item }}"
+  loop:
+    - "/dev/{{ runt_vg }}/{{ runt_lv }}"
+    - "/dev/{{ stor_vg }}/{{ stor_lv }}"
+
+- name: mount the new fs in the places
+  mount:
+    path: "/home/zach/.local/share/containers/{{ item.lv_mnt }}"
+    src: "{{ item.lv_dev }}"
+    fstype: "xfs"
+    opts: "noatime"
+    state: "mounted"
+  loop:
+    - { "lv_dev": "/dev/{{ runt_vg }}/{{ runt_lv }}", "lv_mnt": "cache" }
+    - { "lv_dev": "/dev/{{ stor_vg }}/{{ stor_lv }}", "lv_mnt": "storage" }
+
+- name: set chownership
+  file:
+    path: /home/zach/.local/share/containers
+    state: directory
+    recurse: yes
+    owner: zach
+    group: zach
+
+- name: set selinux for storage
+  sefcontext:
+    target: '/home/zach/.local/share/containers(/.*)?'
+    setype: 'container_var_lib_t'
+    state: present
+  register: sel_chgd
+
+- name: restore context
+  command: restorecon -R /home/zach/.local/share/containers
+  when: sel_chgd.changed
+
+- name: activate podman user service
+  systemd:
+    name: io.podman
+    state: restarted
+    daemon-reload: yes
+    scope: user
+  become_user: zach

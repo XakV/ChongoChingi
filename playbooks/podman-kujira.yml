@@ -1,0 +1,14 @@
+- name: podman for zach setup | with priv
+  hosts: kujira.segfawlty.space
+  become: yes
+  connection: local
+  vars:
+    stor_vg: 'vault'
+    stor_lv: 'pod_storage'
+    stor_size: '200G'
+    runt_vg: 'ssd'
+    runt_lv: 'pod_run'
+    runt_size: '50G'
+  roles:
+    - podman
+

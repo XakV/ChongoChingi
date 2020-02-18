@@ -25,12 +25,13 @@
   - "export S3_BUCKET={{ s3_bucket }}"
 
 - name: Restic | test for repo
-  command: 'restic -r s3:s3.amazonaws.com/$S3_BUCKET snapshots'
+  shell: | 
+    "restic -r s3:s3.amazonaws.com/{{ s3_bucket }} snapshots"
   register: test_repo_exist
-  failed_when: test_repo_exist.rc == 127
+  ignore_errors: yes
 
 - name: Restic | init repo if not created
-  shell: 'restic -r s3:s3.amazonaws.com/$S3_BUCKET init'
+  shell: "restic -r s3:s3.amazonaws.com/{{ s3_bucket }} init"
   when: test_repo_exist.rc != 0
 
 - name: Restic | copy the restic include file
