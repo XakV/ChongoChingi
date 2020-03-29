@@ -10,7 +10,7 @@
     - podman
     - buildah
 
-- name: create a thinpool
+- name: create a thinpool for runtime
   lvol:
     vg: "{{ runt_vg }}"
     thinpool: "{{ runt_tp }}"

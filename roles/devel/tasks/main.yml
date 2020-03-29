@@ -6,8 +6,7 @@
     'openssl-devel', 'python3-pygments', 'python3-pygments-markdown-lexer', 'hugo', 
     'git','rubygems', 'ruby-devel', 'levien-inconsolata-fonts', 
       'mozilla-fira-mono-fonts', 'mozilla-fira-sans-fonts', 'overpass-mono-fonts',  
-      'overpass-fonts', 'pandoc', 'cockpit', 'cockpit-ws', 'cockpit-docker',
-      'cockpit-storaged', '@Fedora Packager', '@RPM Development Tools', 
+      'overpass-fonts', 'pandoc', 'cockpit', 'cockpit-ws', 'cockpit-storaged', '@Fedora Packager', '@RPM Development Tools', 
       '@C Development Tools and Libraries'] }}"
 
 - name: devel | enable cockpit

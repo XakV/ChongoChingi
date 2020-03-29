@@ -1,6 +1,6 @@
 ---
 - name: install dnsmasq
-  pkg:
+  apt:
     name: ['dnsmasq', 'dnsmasq-utils', 'dnsutils', 'python3.7', 'python3.7-venv']
     state: latest
 

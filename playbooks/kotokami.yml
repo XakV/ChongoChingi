@@ -1,8 +1,8 @@
 - name: Host for zach setup | with priv
-  hosts: kotokami.two-bit.space
+  hosts: kotokami.segfawlty.space
   become: yes
   roles:
-    - firewall-lan
+#   - firewall-lan
     - common
     - devel
     - gaming

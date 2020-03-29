@@ -4,9 +4,9 @@ ff02::1		ip6-allnodes
 ff02::2		ip6-allrouters
 
 127.0.1.1	pi3b0.segfawlty.space pi3b0
-10.23.19.91	gomoku.segfawlty.space gomoku
+10.23.19.91	kujira.segfawlty.space kujira
 10.23.19.216	hassio.segfawlty.space hassio
-10.23.19.19     kohei4pi.segfawlty.space kohei4pi
+10.23.19.19     f3do2a.segfawlty.space f3do2a
 10.23.19.21     proxy.segfawlty.space proxy
 10.23.19.51     pi3b0.segfawlty.space pi3b0
 10.23.19.51	netdata.segfawlty.space netdata
