@@ -1,0 +1,18 @@
+- hosts: all
+  become: yes
+  tasks:
+
+    - name: unlock the vault
+      command: "/home/zach/.local/bin/bw login {{ bw_user }} {{ bw_pass }}"
+
+#   - name: export some stuff
+      command: "export {{ item.name }}={{ item.value }}"
+      loop:
+        - B2_ACCOUNT_ID
+        - B2_ACCOUNT_KEY
+        - RESTIC_REPOSITORY
+        - RESTIC_PASSWORD_COMMAND
+      
+#   - name: copy the excludes file
+
+#   - name: 
