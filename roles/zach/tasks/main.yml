@@ -8,6 +8,11 @@
     - vim
     - syncthing
 
+- name: make vim right
+  shell: |
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 - name: start up user services
   systemd:
     name: "{{ item }}"
@@ -18,7 +23,8 @@
   become_user: zach
   loop:
     - syncthing
-    - io.podman
+    - podman.socket
+    - podman-auto-update.service
 
 - name: Add the flathub flatpak repository remote to the user installation
   flatpak_remote:
@@ -38,12 +44,23 @@
     - com.getpostman.Postman
     - com.github.babluboy.bookworm
     - com.github.optyfr.JRomManager
-    - com.leinardi.gwe
     - com.mojang.Minecraft
-    - com.spotify.Client
     - com.valvesoftware.Steam
     - im.riot.Riot
-    - org.gnome.Music
-    - org.telegram.desktop
-    - com.jetbrains.PyCharm-Professional
-    - com.github.bleakgrey.tootle
+    - com.obsproject.Studio
+    - com.github.tchx84.Flatseal
+    - com.github.johnfactotum.Foliate
+    - de.haeckerfelix.Fragments
+    - com.discordapp.Discord
+    - com.github.unrud.VideoDownloader
+    - org.jitsi.jitsi-meet
+    - de.haeckerfelix.Shortwave
+    - com.github.louis77.tuner
+    - com.jetbrains.PyCharm-Community
+    - im.riot.Riot
+    - com.microsoft.Teams
+    - org.gnome.Polari
+    - edu.stanford.Almond
+    - com.bitwarden.desktop
+    - org.gnome.Firmware
+    - org.gnome.seahorse.Application

@@ -12,27 +12,24 @@
 
 
 [all]
-kujira.segfawlty.space
-kotokami.segfawlty.space
+shoryuji.badkuub.club
+kotokami.badkuub.club
 mc.wefartin.space
 lobby.wefartin.space
-pi3b0.segfawlty.space
-f3do2api.segfawlty.space
-proxy.segfawlty.space
 
 [zach]
-kotokami.segfawlty.space
-kujira.segfawlty.space
+kotokami.badkuub.club
+shoryuji.badkuub.club
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
 
 [control]
-kujira.segfawlty.space
+kujira.badkuub.club
 
 [lan-server]
-kohei4pi.segfawlty.space
-kujira.segfawlty.space
+kohei4pi.badkuub.club
+kujira.badkuub.club
 
 [control:vars]
 ansible_connection=local 
@@ -44,15 +41,16 @@ mc.wefartin.space
 lobby.wefartin.space
 
 [desktops]
-kotokami.segfawlty.space
-kujira.segfawlty.space
+kotokami.badkuub.club
+kujira.badkuub.club
 
 [virtual]
-proxy.segfawlty.space
+proxy.badkuub.club
 
 [pi]
-pi3b0.segfawlty.space
-f3do2api.segfawlty.space
+pi3b0.badkuub.club
+f3do2api.badkuub.club
 
 [hassio]
-hassio.segfawlty.space
+hassio.badkuub.club
+shoryuji-jo.badkuub.club
