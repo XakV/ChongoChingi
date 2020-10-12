@@ -1,0 +1,11 @@
+- name: Host for zach setup | with priv
+  hosts: shoryuji.badkuub.club
+  become: yes
+  connection: local
+  roles:
+    # common
+    # devel
+    # gaming
+    - zach
+    # dnsmasq
+

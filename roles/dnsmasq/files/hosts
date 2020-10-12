@@ -1,13 +1,7 @@
-127.0.0.1	localhost
-::1		localhost ip6-localhost ip6-loopback
-ff02::1		ip6-allnodes
-ff02::2		ip6-allrouters
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+10.1.9.19   
+10.1.9.129  doc-pi-four.badkuub.club doc-pi-four
+10.1.8.181  kotokami.badkuub.club kotokami
+10.1.9.1    router.badkuub.club router
 
-127.0.1.1	pi3b0.segfawlty.space pi3b0
-10.23.19.91	kujira.segfawlty.space kujira
-10.23.19.216	hassio.segfawlty.space hassio
-10.23.19.19     f3do2a.segfawlty.space f3do2a
-10.23.19.21     proxy.segfawlty.space proxy
-10.23.19.51     pi3b0.segfawlty.space pi3b0
-10.23.19.51	netdata.segfawlty.space netdata
-10.23.18.111    kotokami.segfawlty.space kotokami
