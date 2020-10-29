@@ -14,43 +14,12 @@
 [all]
 shoryuji.badkuub.club
 kotokami.badkuub.club
-mc.wefartin.space
-lobby.wefartin.space
-
-[zach]
-kotokami.badkuub.club
-shoryuji.badkuub.club
+pi3b0.badkuub.club
+doc-pi-four.badkuub.club
+smol.badkuub.club
+azuchi.badkuub.club
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
 
-[control]
-kujira.badkuub.club
 
-[lan-server]
-kohei4pi.badkuub.club
-kujira.badkuub.club
-
-[control:vars]
-ansible_connection=local 
-
-[server]
-mc.wefartin.space
-
-[lobby]
-lobby.wefartin.space
-
-[desktops]
-kotokami.badkuub.club
-kujira.badkuub.club
-
-[virtual]
-proxy.badkuub.club
-
-[pi]
-pi3b0.badkuub.club
-f3do2api.badkuub.club
-
-[hassio]
-hassio.badkuub.club
-shoryuji-jo.badkuub.club

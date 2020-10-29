@@ -1,6 +1,0 @@
----
-- name: gaming | Install generic gaming drivers
-  dnf:
-      state: latest
-      name: "{{ item }}"
-  loop: ['gcc', 'mesa-vulkan-drivers', 'mesa-vdpau-drivers']

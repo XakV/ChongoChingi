@@ -2,3 +2,5 @@
 *.swp
 notes/*
 log/**
+roles/nebulae/files/*
+roles/nebulae/files/*
