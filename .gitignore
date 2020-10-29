@@ -4,3 +4,4 @@ notes/*
 log/**
 roles/nebulae/files/*
 roles/nebulae/files/*
+roles/nebulae/vars/*
