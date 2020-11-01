@@ -1,5 +1,7 @@
 ---
 - include_vars: "{{ ansible_hostname }}.yml"
+- include_vars: "{{ ansible_distribution_file_variety }}.yml"
+- include_vars: default.yml
 
 - name: make the etc dir
   file:
@@ -27,7 +29,7 @@
 
 - name: move binary
   copy:
-    src: nebula
+    src: "{{ ansible_architecture }}/nebula"
     dest: /usr/local/bin/nebula
     owner: root
     group: root
@@ -50,11 +52,12 @@
     permanent: yes
     state: enabled
     immediate: yes
+  when: ansible_distribution != 'Debian'
 
 - name: copy the service file
   copy:
     src: nebula.service
-    dest: /usr/lib/systemd/system/nebula.service
+    dest: "{{ systemd_service_dir }}/nebula.service"
     owner: root
     group: root
     mode: 0644
