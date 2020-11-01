@@ -241,7 +241,9 @@ firewall:
     # Allow icmp between any nebula hosts
     - port: any
       proto: icmp
-      host: any
+      groups:
+        - servers
+        - pi
 
     # Allow tcp/443 from servers pi
     - port: 443
