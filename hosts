@@ -12,14 +12,9 @@
 
 
 [all]
-shoryuji.badkuub.club
+shoryuji.badkuub.club connection=local
 kotokami.badkuub.club
 pi3b0.badkuub.club
-doc-pi-four.badkuub.club
-smol.badkuub.club
+kiyosu.badkuub.club
+tanaka.badkuub.club
 azuchi.badkuub.club
-
-[all:vars]
-ansible_python_interpreter=/usr/bin/python3
-
-

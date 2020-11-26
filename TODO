@@ -1,0 +1,8 @@
+## Things to Ansible
+
+1. Restic -> B2 backups
+2. nginx as reverse proxy for;
+   a. library.badkuub.club
+   b. blog.badkuub.club
+3. TLS Cert
+4. Blog in python container - probably pelican

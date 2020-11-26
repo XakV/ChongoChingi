@@ -1,0 +1,18 @@
+---
+# This role installs bw the bitwarden cli
+
+- name: get the bundle from github
+  get_url:
+    url: https://vault.bitwarden.com/download/?app=cli&platform=linux
+    dest: /tmp/
+    owner: zach
+    group: zach
+  register: bw_file
+
+- name: unzip bw bundle to usr local
+  unarchive:
+    src: "{{ bw_file.dest }}"
+    dest: /usr/local/bin/
+    owner: root
+    group: root
+    mode: 0755

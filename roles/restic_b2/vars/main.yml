@@ -1,0 +1,6 @@
+bw_passwd: 'azarath metrion zinthos'
+B2_ACCOUNT_ID: '0020b9f41e40ca50000000001'
+B2_ACCOUNT_KEY: 'K0028OM1q1e6dq1DVaykm6kVcnppNrA'
+RESTIC_REPOSITORY: 'ko-uchi-gari'
+RESTIC_PASSWORD_COMMAND: '/usr/local/bin/bw list items --search backblaze | jq .[0]."fields"[0]."value"'
+

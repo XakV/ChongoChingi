@@ -1,0 +1,72 @@
+---
+- name: install restic
+  dnf:
+    name: restic
+    state: latest
+  become: yes
+
+- name: unlock the vault
+  expect:
+    command: /usr/local/bin/bw unlock --raw
+    responses:
+      password: "{{ bw_passwd }}"
+  register: bitwarden_vault
+
+- name: record the bw session response
+  set_fact:
+    bw_session: "{{ bitwarden_vault.stdout_lines[1] }}"
+  
+- name: create fact for restic passwd cmd shell var
+  shell: |
+      /usr/local/bin/bw list items --session {{ bw_session }} --search restic_b2 | /usr/bin/jq .[0].login.password
+  register: restic_sekret
+
+- name: create the sekret password file
+  copy:
+    content: restic_sekret.stdout
+    dest: /home/zach/.repo_sekret
+    owner: zach
+    group: zach
+    mode: 0600
+ 
+- name: copy cron.allow is important
+  copy:
+    src: cron.allow
+    dest: /etc/cron.allow
+    owner: root
+    group: root
+    mode: 0644    
+  become: True
+
+- name: schedule backups
+  cron: 
+    name: "backup_{{ item.folder }}"
+    hour: 01
+    minute: 15
+    weekday: "{{ item.dOw }}"
+    job: /usr/bin/restic -r b2:shoryuji-badkuub-club:/{{ item.folder }} backup /home/zach/Vault/{{ item.folder }} --password-file=/home/zach/.repo_sekret
+  loop:
+  - { 'dOw': '1', 'folder': 'Documents' }
+  - { 'dOw': '3', 'folder': 'Music' }
+  - { 'dOw': '5', 'folder': 'Pictures' }
+  - { 'dOw': '6', 'folder': 'Videos' }
+
+- name: prune daily backups
+  cron:
+    name: "prune {{ item.folder }}"
+    weekday: 0
+    hour: 1
+    minute: "{{ item.minute }}"
+    job: restic -r b2:shoryuji-badkuub-club:/{{ item.folder }} forget --keep-last 10 keep-weekly 4 --keep-monthly 3 --keep-yearly 1 --prune --password-file=/home/zach/.repo.sekret
+  loop:
+    - { 'folder': 'Documents', 'minute': '15' }
+    - { 'folder': 'Music', 'minute': '30' }
+    - { 'folder': 'Pictures', 'minute': '45' }
+    - { 'folder': 'Videos', 'minute': '00' }
+
+- name: enable start cron
+  systemd:
+    name: crond
+    state: restarted
+    enabled: yes
+    daemon-reload: yes
