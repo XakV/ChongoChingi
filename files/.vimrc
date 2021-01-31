@@ -16,10 +16,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'https://github.com/glench/vim-jinja2-syntax'
 Plug 'plasticboy/vim-markdown'
-Plug 'pearofducks/ansible-vim'
+Plug 'davidhalter/jedi-vim'
+Plug 'ervandew/supertab'
 Plug 'https://github.com/vimwiki/vimwiki.git', { 'branch': 'dev' }
-Plug 'dense-analysis/ale'
 Plug 'https://github.com/fcpg/vim-farout.git'
+Plug 'ts-26a/vim-darkspace'
+Plug 'https://github.com/rafalbromirski/vim-aurora.git'
 Plug 'https://github.com/fcpg/vim-orbital.git'
 Plug 'https://github.com/liuchengxu/space-vim-dark'
 Plug 'https://github.com/yuttie/inkstained-vim.git'
@@ -101,14 +103,24 @@ else
 endif " has("autocmd")
 
 " Netrw config
-" width of netrw window
-let g:netrw_winsize = 30
+" width of new window percent?
+let g:netrw_winsize = 25
+
+" use <leader>p to shrink netrw browser
+let g:netrw_usetab = 1
+nmap <leader>p <Plug>NetrwShrink
 
 " netrw view - tree view
 let g:netrw_liststyle = 3
 
-" netrw split right
-let g:netrw_altv=1
+" netrw <cr> opens in new tab
+let g:netrw_browse_split = 3
+
+" netrw vsplit right
+let g:netrw_altv = 1
+
+" netrw split below
+let g:netrw_alto = 1
 
 " netrw sort
 let g:netrw_sort_sequence = '[\/]$,*'
@@ -116,15 +128,6 @@ let g:netrw_sort_sequence = '[\/]$,*'
 " netrw open file behaviour
 let g:netrw_browse_split = 1
 
-" ALE config
-" Auto fix files on save
-let g:ale_fix_on_save = 1
-
-" ALE auto-completion
-let g:ale_completion_enabled = 1
-
-" ALE auto-complete from other modules
-let g:ale_completion_autoimport = 1
 
 " Lightline config
 set laststatus=2
@@ -160,10 +163,10 @@ nmap <leader>l :wincmd l<CR>
 nmap <leader>k :wincmd k<CR>
 
 " use leader to resize
-nmap <leader>+ :resize +20<CR>
-nmap <leader>_ :resize -20<CR>
-nmap <leader>= :vertical resize +20<CR>
-nmap <leader>- :vertical resize -20<CR>
+nmap <leader>= :vertical resize +50<CR>
+nmap <leader>- :vertical resize -50<CR>
+nmap <Leader>8 :vertical resize 80<CR>
+nmap <Leader>3 :vertical resize 30<CR>
 
 
 " Colorscheme config
