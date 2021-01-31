@@ -9,8 +9,8 @@
 
 - name: nfs | configure zone
   firewalld:
-    source: 10.0.0.0/24
-    interface: "{{ ansible_default_ipv4.interface }}"
+    zone: FedoraWorkstation
+    source: 10.1.8.0/22
     state: enabled
     permanent: true
   notify:
@@ -37,7 +37,7 @@
     port: "{{ item }}"
   with_items:
     - 3260/tcp
-    - 25565/tcp
+    - 4242/tcp
     - 32400/tcp
   notify:
     - reload firewall
