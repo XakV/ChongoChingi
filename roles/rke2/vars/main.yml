@@ -1,0 +1,3 @@
+---
+rke2_agent_ports: ['9345/tcp', '6443/tcp', '10250/tcp', '30000-32767/tcp']
+rke2_server_ports: ['2379-2380/tcp']

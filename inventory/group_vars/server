@@ -1,0 +1,7 @@
+# A list of ports we want open
+group_ports: ["4445/udp", "25560-25569/tcp", "5222/tcp", "5432/tcp", "8953/udp", "2360/tcp"]
+client_sources: "10.23.19.0/24" 
+group_services: ["ssh", "cockpit", "http", "https", "dns", "nfs", "rpc-bind", "mdns", "pulseaudio"]
+lan_sources: "10.23.19.0/24" 
+group_firewalld_zone: "FedoraServer"
+

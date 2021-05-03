@@ -1,0 +1,41 @@
+---
+- name: fix NetworkManager
+  ansible.builtin.copy:
+    src: rke2-canal.conf
+    dest: /etc/NetworkManager/conf.d/rke2-canal.conf
+    owner: root
+    group: root
+
+- name: restart NetworkManager
+  ansible.builtin.systemd:
+    name: NetworkManager.service
+    state: restarted
+    daemon-reload: yes
+    enabled: yes
+
+- debug:
+    msg: "{{ rke2_agent_ports | type_debug }}"    
+
+- name: firewalld open ports for agent nodes
+  ansible.posix.firewalld:
+    port: "{{ item | string }}"
+    state: enabled
+    permanent: yes
+  loop: "{{ rke2_agent_ports }}"
+  when: rke2_agent
+
+- name: firewalld open ports for server
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    state: enabled
+    permanent: yes
+  loop: "{{ rke2_server_ports }}"
+  when: rke2_server
+
+- name: reload and restart firewalld
+  ansible.builtin.systemd:
+    name: firewalld
+    daemon-reload: yes
+    state: restarted
+    enabled: yes
+      

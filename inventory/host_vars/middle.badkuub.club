@@ -1,0 +1,3 @@
+---
+rke2_agent: true
+rke2_server: false

@@ -1,0 +1,28 @@
+- hosts: all
+  become: yes
+  tasks:
+
+    - name: import keys
+      shell: rpm --import https://packages.microsoft.com/keys/microsoft.asc
+
+    - name: create repo
+      blockinfile:
+        create: yes
+        path: /etc/yum.repos.d/vscode.repo
+        state: present
+        block: |
+           [code]
+           name=Visual Studio Code
+           baseurl=https://packages.microsoft.com/yumrepos/vscode
+           enabled=1
+           gpgcheck=1
+           gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+
+    - name: do an update
+      shell: dnf -y update
+
+    - name: do the installation
+      dnf:
+        name: code
+        state: latest
+

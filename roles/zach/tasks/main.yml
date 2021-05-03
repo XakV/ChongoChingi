@@ -6,6 +6,7 @@
   loop:
     - tilix
     - vim
+    - buildah
     - syncthing
 
 - name: start up user services
@@ -18,7 +19,8 @@
   become_user: zach
   loop:
     - syncthing
-    - io.podman
+    - podman.socket
+    - podman-auto-update.timer
 
 - name: Add the flathub flatpak repository remote to the user installation
   flatpak_remote:
@@ -37,13 +39,8 @@
   loop: 
     - com.getpostman.Postman
     - com.github.babluboy.bookworm
-    - com.github.optyfr.JRomManager
-    - com.leinardi.gwe
     - com.mojang.Minecraft
-    - com.spotify.Client
-    - com.valvesoftware.Steam
     - im.riot.Riot
-    - org.gnome.Music
-    - org.telegram.desktop
-    - com.jetbrains.PyCharm-Professional
-    - com.github.bleakgrey.tootle
+    - info.mumble.Mumble
+    - org.gnome.Lollypop
+    - org.gnome.NetworkDisplays

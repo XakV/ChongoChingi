@@ -1,12 +1,4 @@
 ---
-# name: Common | Install common packages
-# dnf:
-#     state: latest
-#     name: ['java-1.8.0-openjdk', 'smartmontools', 'python3-firewall', 'lsof',  
-#     'python3-dnf-plugins-core', 'python3-dnf-plugins-extras-common', 'vim',  
-#     'python3-dnf-plugin-system-upgrade', 'dnf-automatic', 
-#     'nfs-utils', 'sysstat', 'htop']
-
 - name: Common | set up fstrim if ssdisk
   systemd:
     name: fstrim.timer
