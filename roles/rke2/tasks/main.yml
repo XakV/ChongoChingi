@@ -1,10 +1,30 @@
 ---
-- name: fix NetworkManager
+- name: NetworkManager shouldnt manage k8s ifaces
   ansible.builtin.copy:
-    src: rke2-canal.conf
-    dest: /etc/NetworkManager/conf.d/rke2-canal.conf
+    src: rke2-cni.conf
+    dest: /etc/NetworkManager/conf.d/rke2-cni.conf
     owner: root
     group: root
+
+- name: kernel modules for cri-o
+  ansible.builtin.copy:
+    src: crio.conf
+    dest: /etc/modules-load.d/crio.conf
+    owner: root
+    group: root
+
+- name: issue modprobe commands
+  shell: "modprobe {{ item }}"
+  loop:
+    - 'br_netfilter'
+    - 'overlay'
+
+- name: set sysctls
+  sysctl:
+    name: "net.ipv4.ip_forward"
+    value: "1"
+    sysctl_file: /etc/sysctl.d/99-kubernetes-cri.conf
+    sysctl_set: true
 
 - name: restart NetworkManager
   ansible.builtin.systemd:
@@ -12,9 +32,6 @@
     state: restarted
     daemon-reload: yes
     enabled: yes
-
-- debug:
-    msg: "{{ rke2_agent_ports | type_debug }}"    
 
 - name: firewalld open ports for agent nodes
   ansible.posix.firewalld:
@@ -39,3 +56,26 @@
     state: restarted
     enabled: yes
       
+- name: make rancher config dir
+  ansible.builtin.file:
+    path: /etc/rancher/rke2
+    state: directory
+    owner: root
+    group: root
+
+- name: write rancher server config
+  ansible.builtin.copy:
+    src: server_config.yaml
+    dest: /etc/rancher/rke2/config.yaml
+  when: rke2_server
+
+- name: run server install command
+  shell: 'curl -sfL https://get.rke2.io | sh -'
+  when: rke2_server
+
+- name: start enable rke2
+  ansible.builtin.systemd:
+    name: rke2-server.service
+    state: started
+    enabled: yes
+    daemon-reload: yes

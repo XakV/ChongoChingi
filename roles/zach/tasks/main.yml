@@ -9,6 +9,11 @@
     - buildah
     - syncthing
 
+- name: make vim right
+  shell: |
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 - name: start up user services
   systemd:
     name: "{{ item }}"
@@ -44,3 +49,12 @@
     - info.mumble.Mumble
     - org.gnome.Lollypop
     - org.gnome.NetworkDisplays
+    - com.github.tchx84.Flatseal
+    - com.github.johnfactotum.Foliate
+    - com.discordapp.Discord
+    - org.jitsi.jitsi-meet
+    - com.github.louis77.tuner
+    - edu.stanford.Almond
+    - com.bitwarden.desktop
+    - org.gnome.Firmware
+    - org.gnome.seahorse.Application

@@ -1,9 +1,9 @@
 - name: Host for zach setup | with priv
-  hosts: kotokami.segfawlty.space
+  hosts: kotokami.badkuub.club
   become: yes
   roles:
-#   - firewall-lan
-    - common
-    - devel
-    - gaming
-    - zach
+    - nebulae 
+      # common
+      # devel
+      # gaming
+      # zach

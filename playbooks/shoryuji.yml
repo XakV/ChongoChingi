@@ -1,0 +1,9 @@
+- name: Host for zach setup | with priv
+  hosts: all
+  become: yes
+  connection: local
+  roles:
+    - nebulae
+    # common
+    # zach
+

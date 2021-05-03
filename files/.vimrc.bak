@@ -4,28 +4,30 @@ syntax on
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source ~/.vimrc
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " Plugin Configuration
 " Plugin Directory and Plugins to load
 call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
-Plug 'wdhg/dragon-energy'
+Plug 'sheerun/vim-polyglot'
+Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
-Plug 'psf/black', { 'branch': 'stable' }
-Plug 'https://github.com/glench/vim-jinja2-syntax'
 Plug 'plasticboy/vim-markdown'
-Plug 'davidhalter/jedi-vim'
-Plug 'ervandew/supertab'
+Plug 'diepm/vim-rest-console'
 Plug 'https://github.com/vimwiki/vimwiki.git', { 'branch': 'dev' }
+Plug 'https://github.com/preocanin/greenwint.git'
+Plug 'https://github.com/vim-syntastic/syntastic.git'
 Plug 'https://github.com/fcpg/vim-farout.git'
-Plug 'ts-26a/vim-darkspace'
-Plug 'https://github.com/rafalbromirski/vim-aurora.git'
 Plug 'https://github.com/fcpg/vim-orbital.git'
+Plug 'https://github.com/lifepillar/vim-colortemplate'
+Plug 'https://github.com/WolfgangMehner/lua-support.git'
+Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'https://github.com/liuchengxu/space-vim-dark'
 Plug 'https://github.com/yuttie/inkstained-vim.git'
 Plug 'https://github.com/ajmwagar/vim-deus.git'
+Plug 'https://github.com/hauleth/blame.vim.git'
 Plug 'ajh17/spacegray.vim'
 
 call plug#end()
@@ -33,11 +35,9 @@ call plug#end()
 " Native Vim configuration
 
 " Vim Keys configuration
-" Backslash is Leader
-let mapleader = '\'
-
-" run Black as <leader> + B
-nnoremap <Leader>B :Black<CR>
+" leader - I commented this out to see if it was part of the problem where I
+" got junk when opening vim
+" let mapleader = ';'
 
 " Reload config ',v will reload config'
 map <Leader>9 :source ~/.vimrc<CR>:PlugInstall<CR>:bdelete<CR>
@@ -92,7 +92,7 @@ if has("autocmd")
     \ endif
 
   " Always start with netrw
-  autocmd VimEnter * :Vex
+  " autocmd VimEnter * :Vex
 
   augroup END
 
@@ -103,24 +103,14 @@ else
 endif " has("autocmd")
 
 " Netrw config
-" width of new window percent?
-let g:netrw_winsize = 25
-
-" use <leader>p to shrink netrw browser
-let g:netrw_usetab = 1
-nmap <leader>p <Plug>NetrwShrink
+" width of netrw window
+let g:netrw_winsize = 28
 
 " netrw view - tree view
 let g:netrw_liststyle = 3
 
-" netrw <cr> opens in new tab
-let g:netrw_browse_split = 3
-
-" netrw vsplit right
-let g:netrw_altv = 1
-
-" netrw split below
-let g:netrw_alto = 1
+" netrw split right
+let g:netrw_altv=1
 
 " netrw sort
 let g:netrw_sort_sequence = '[\/]$,*'
@@ -128,6 +118,12 @@ let g:netrw_sort_sequence = '[\/]$,*'
 " netrw open file behaviour
 let g:netrw_browse_split = 1
 
+" LuaSupport Config
+let g:Lua_MapLeader = '['
+
+
+" Tcomment config - ',cc will comment or uncomment a line'
+noremap <silent> <Leader>cc :TComment<CR>
 
 " Lightline config
 set laststatus=2
@@ -140,6 +136,22 @@ let g:lightline = {
       \ },
       \ 'component_function': {'gitbranch': 'fugitive#head'},
       \ }
+
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%{FugitiveStatusline()}
+"set statusline+=%*
+
+" Syntastic config
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Tabular config
+vnoremap <silent> <Leader>cee    :Tabularize /=<CR> ",cee - align tabs on '='
+vnoremap <silent> <Leader>cet    :Tabularize /#<CR> ",cet - align tabs on '#'
+vnoremap <silent> <Leader>cep    :Tabularize /\|<CR> ",cep - align tabs on '|'
 
 " VimWiki config
 let wiki_1 = {}
@@ -155,6 +167,12 @@ let wiki_2.ext = '.md'
 let wiki_2.nested_syntaxes = {'python':'python', 'bash':'bash', 'lua':'lua'}
 
 let g:vimwiki_list = [wiki_1, wiki_2]
+"let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+"let g:vimwiki_list = [{'syntax': 'markdown', 'path': '~/Documents/Wikkit/', 'ext': '.md', 'nested_syntaxes': {'python':'python', 'bash':'bash', 'lua':'lua'}, 'auto_toc': '1', 'index': 'index', 'folding': 'expr'}]
+
+" Vimwiki remap open links in split
+nmap <leader>we <Plug>vimwikiSplitLink
+nmap <leader>wv <Plug>VimwikiVSplitLink
 
 " and use leader to move through splits
 nmap <leader>h :wincmd h<CR>
@@ -163,10 +181,10 @@ nmap <leader>l :wincmd l<CR>
 nmap <leader>k :wincmd k<CR>
 
 " use leader to resize
-nmap <leader>= :vertical resize +50<CR>
-nmap <leader>- :vertical resize -50<CR>
-nmap <Leader>8 :vertical resize 80<CR>
-nmap <Leader>3 :vertical resize 30<CR>
+nmap <leader>+ :resize +20<CR>
+nmap <leader>_ :resize -20<CR>
+nmap <leader>= :vertical resize +20<CR>
+nmap <leader>- :vertical resize -20<CR>
 
 
 " Colorscheme config
