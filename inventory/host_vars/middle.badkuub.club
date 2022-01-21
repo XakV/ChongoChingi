@@ -1,3 +1,4 @@
 ---
 rke2_agent: true
 rke2_server: false
+k3s_first: no

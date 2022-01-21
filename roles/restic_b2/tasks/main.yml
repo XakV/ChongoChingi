@@ -10,6 +10,8 @@
     command: /usr/local/bin/bw unlock --raw
     responses:
       password: "{{ bw_passwd }}"
+  become: yes
+  become_user: zach
   register: bitwarden_vault
 
 - name: record the bw session response
@@ -19,6 +21,8 @@
 - name: create fact for restic passwd cmd shell var
   shell: |
       /usr/local/bin/bw list items --session {{ bw_session }} --search restic_b2 | /usr/bin/jq .[0].login.password
+  become: yes
+  become_user: zach
   register: restic_sekret
 
 - name: create the sekret password file
@@ -28,6 +32,8 @@
     owner: zach
     group: zach
     mode: 0600
+  become: yes
+  become_user: zach
  
 - name: copy cron.allow is important
   copy:

@@ -1,0 +1,57 @@
+---
+- name: NetworkManager shouldnt manage k8s ifaces
+  ansible.builtin.copy:
+    src: rke2-cni.conf
+    dest: /etc/NetworkManager/conf.d/rke2-cni.conf
+    owner: root
+    group: root
+
+- name: kernel modules 
+  ansible.builtin.copy:
+    src: br_nf.conf
+    dest: /etc/modules-load.d/br_nf.conf
+    owner: root
+    group: root
+
+- name: issue modprobe commands
+  shell: "modprobe {{ item }}"
+  loop:
+    - 'br_netfilter'
+    - 'overlay'
+
+- name: set sysctls
+  sysctl:
+    name: "net.ipv4.ip_forward"
+    value: "1"
+    sysctl_file: /etc/sysctl.d/99-kubernetes-cri.conf
+    sysctl_set: true
+
+- name: restart NetworkManager
+  ansible.builtin.systemd:
+    name: NetworkManager.service
+    state: restarted
+    daemon-reload: yes
+    enabled: yes
+
+- name: stop and disable firewalld
+  ansible.builtin.systemd:
+    name: firewalld
+    state: stopped
+    enabled: no
+
+- name: install selinux stuff
+  ansible.builtin.dnf:
+    name: ['container-selinux', 'selinux-policy-base']
+    state: latest
+
+- name: install k3s selinux stuff
+  ansible.builtin.dnf:
+    name: https://rpm.rancher.io/k3s/latest/common/centos/7/noarch/k3s-selinux-0.2-1.el7_8.noarch.rpm
+    state: present
+    disable_gpg_check: yes
+
+- name: run install script
+  ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -
+  environment: 
+    INSTALL_K3S_CHANNEL: latest
+  when: k3s_first

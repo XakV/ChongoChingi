@@ -7,3 +7,4 @@ roles/nebulae/files/*
 roles/nebulae/vars/*
 inventory/**
 roles/archive/**
+.venv/**
