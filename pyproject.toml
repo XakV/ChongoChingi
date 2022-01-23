@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "Xaxansible"
+version = "0.1.0"
+description = ""
+authors = ["XakV <zachvatwork@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+ansible = "5.1.0"
+ansible-core = "2.12.1"
+ansible-lint = "5.3.1"
+bracex = "2.2.1"
+cffi = "1.15.0"
+colorama = "0.4.4"
+commonmark = "0.9.1"
+cryptography = "36.0.1"
+enrich = "1.2.6"
+Jinja2 = "3.0.3"
+jmespath = "0.10.0"
+MarkupSafe = "2.0.1"
+packaging = "21.3"
+pycparser = "2.21"
+Pygments = "2.11.1"
+pyparsing = "3.0.6"
+PyYAML = "6.0"
+resolvelib = "0.5.4"
+rich = "10.16.1"
+tenacity = "8.0.1"
+wcmatch = "8.3"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
