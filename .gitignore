@@ -8,3 +8,4 @@ roles/nebulae/vars/*
 inventory/**
 roles/archive/**
 .venv/**
+.vscode/**

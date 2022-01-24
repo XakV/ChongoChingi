@@ -16,8 +16,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'https://github.com/glench/vim-jinja2-syntax'
 Plug 'plasticboy/vim-markdown'
-Plug 'davidhalter/jedi-vim'
-Plug 'ervandew/supertab'
 Plug 'https://github.com/vimwiki/vimwiki.git', { 'branch': 'dev' }
 Plug 'https://github.com/fcpg/vim-farout.git'
 Plug 'ts-26a/vim-darkspace'
@@ -27,7 +25,11 @@ Plug 'https://github.com/liuchengxu/space-vim-dark'
 Plug 'https://github.com/yuttie/inkstained-vim.git'
 Plug 'https://github.com/ajmwagar/vim-deus.git'
 Plug 'ajh17/spacegray.vim'
-
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-json'
+Plug 'neoclide/coc-yaml'
+Plug 'josa42/coc-sh'
+Plug 'fannheyward/coc-pyright'
 call plug#end()
 
 " Native Vim configuration
@@ -92,7 +94,7 @@ if has("autocmd")
     \ endif
 
   " Always start with netrw
-  autocmd VimEnter * :Vex
+"  autocmd VimEnter * :Vex
 
   augroup END
 
@@ -168,10 +170,54 @@ nmap <leader>- :vertical resize -50<CR>
 nmap <Leader>8 :vertical resize 80<CR>
 nmap <Leader>3 :vertical resize 30<CR>
 
+"coc and related
+" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
+" unicode characters in the file autoload/float.vim
+set encoding=utf-8
+
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" signcolumn from coc
+set signcolumn=number
+
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Colorscheme config
 set background=dark
-colorscheme spacegray
+colorscheme dragon-energy
 let g:spacegray_underline_search = 1
 
 " other useful keybinds
