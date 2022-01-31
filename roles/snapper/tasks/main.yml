@@ -1,0 +1,54 @@
+---
+- name: install snapper
+  ansible.builtin.dnf:
+    name: snapper
+    state: present
+
+- name: place root config template
+  ansible.builtin.template:
+    src: default_root.j2
+    dest: /etc/snapper/config-templates/default
+    owner: root
+    group: root
+    mode: 0644
+  register: config_update
+
+- name: snapper timers are stopped
+  ansible.builtin.systemd:
+    name: "{{ item }}.timer"
+    state: stopped
+  loop: ['snapper-timeline', 'snapper-cleanup']
+
+- name: delete old default configs except root
+  ansible.builtin.command: "snapper -c {{ item | trim | basename }} delete-config"
+  loop: "{{ default_subvol_paths }}"
+  failed_when: false
+
+- name: delete host special configs from vars
+  ansible.builtin.command: "snapper -c {{ item | trim | basename }} delete-config"
+  loop: "{{ host_subvol_paths }}"
+  failed_when: false
+
+- name: create config for root subvol
+  ansible.builtin.command: 'snapper -c root create-config {{ item | quote }}'
+  loop:
+    - '/'
+  failed_when: false
+
+- name: create new default configs from updated template except root
+  ansible.builtin.command: "snapper -c {{ item | trim | basename }} create-config {{ item | trim | quote }}"
+  loop: "{{ default_subvol_paths }}"
+  failed_when: false
+
+- name: create new host special configs from vars
+  ansible.builtin.command: "snapper -c {{ item | trim | basename }} create-config {{ item | trim | quote }}"
+  loop: "{{ host_subvol_paths }}"
+  failed_when: false
+
+- name: snapper timers are reloaded and restarted
+  ansible.builtin.systemd:
+    name: "{{ item }}.timer"
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+  loop: ['snapper-timeline', 'snapper-cleanup']

@@ -1,0 +1,7 @@
+# A list of ports we want open
+group_ports: []
+client_sources: "10.23.19.0/24" 
+group_services: ["ssh", "cockpit", "mdns"]
+lan_sources: "10.23.19.0/24" 
+group_firewalld_zone: "FedoraServer"
+
