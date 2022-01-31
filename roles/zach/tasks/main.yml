@@ -1,21 +1,18 @@
 ---
 - name: install a few normal things
-  dnf:
-    name: "{{ item }}"
+  ansible.builtin.dnf:
+    name: ['tilix', 'vim', 'buildah', 'syncthing']
     state: present
-  loop:
-    - tilix
-    - vim
-    - buildah
-    - syncthing
 
 - name: make vim right
-  shell: |
+  ansible.builtin.shell: |
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  become: yes
+  become_user: zach
 
 - name: start up user services
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ item }}"
     enabled: yes
     daemon-reload: yes
@@ -42,9 +39,7 @@
     method: user
   become_user: zach
   loop: 
-    - com.getpostman.Postman
     - com.github.babluboy.bookworm
-    - com.mojang.Minecraft
     - im.riot.Riot
     - info.mumble.Mumble
     - org.gnome.Lollypop
@@ -53,8 +48,14 @@
     - com.github.johnfactotum.Foliate
     - com.discordapp.Discord
     - org.jitsi.jitsi-meet
-    - com.github.louis77.tuner
-    - edu.stanford.Almond
     - com.bitwarden.desktop
     - org.gnome.Firmware
     - org.gnome.seahorse.Application
+    - io.gitlab.librewolf-community
+    - com.github.wwmm.easyeffects
+    - org.gnome.Connections
+    - com.github.fabiocolacio.marker
+    - com.visualstudio.code
+    - com.mattjakeman.ExtensionManager
+    - com.github.childishgiant.mixer
+    - org.signal.Signal

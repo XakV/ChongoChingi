@@ -1,12 +1,12 @@
 ---
 - name: Common | set up fstrim if ssdisk
-  systemd:
+  ansible.builtin.systemd:
     name: fstrim.timer
     state: started
     enabled: true
 
 - name: Common | copy dnf-automatic files
-  copy:
+  ansible.builtin.copy:
      src: dnf
      dest: /etc/dnf/
      owner: root
@@ -14,7 +14,7 @@
      mode: 0644
 
 - name: Common | install some basic packages
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ dnf_items }}"
     state: present
   vars:
@@ -29,7 +29,18 @@
       - smartmontools
 
 - name: Common | activate dnf-automatic
-  systemd:
+  ansible.builtin.systemd:
     name: dnf-automatic-install.timer
     state: started
     enabled: true
+
+- name: Common | set the fqdn
+  ansible.builtin.command: "hostnamectl set-hostname {{ inventory_hostname }}.verboxen.org"
+
+- name: Common | template the hosts file
+  ansible.builtin.template:
+    src: hosts.j2
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: 0644

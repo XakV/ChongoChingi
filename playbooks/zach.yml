@@ -1,7 +1,7 @@
 - name: Host for zach setup | with priv
-  hosts: all
+  hosts: zach
   become: yes
-  connection: local
+  become_user: root
   roles:
     - common
     - devel
