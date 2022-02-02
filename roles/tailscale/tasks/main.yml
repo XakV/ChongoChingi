@@ -1,0 +1,17 @@
+---
+- name: add the tailscale repo
+  ansible.builtin.command: dnf config-manager --add-repo https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+
+- name: install the tailscale rpm
+  ansible.builtin.dnf:
+    name: tailscale
+    state: present
+
+- name: start and enable ts service
+  ansible.builtin.systemd:
+    name: tailscaled
+    state: started
+    enabled: yes
+
+- name: run the ts up
+  ansible.builtin.shell: tailscale up
