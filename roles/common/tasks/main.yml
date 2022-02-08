@@ -20,11 +20,8 @@
   vars:
     dnf_items:
       - sysstat
-      - java-1.8.0-openjdk
       - python3-dnf
       - python3-dnf-plugins-core
-      - python3-dnf-plugin-versionlock
-      - python3-dnf-plugins-extras-common
       - dnf-automatic
       - smartmontools
 

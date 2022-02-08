@@ -14,4 +14,17 @@
     enabled: yes
 
 - name: run the ts up
-  ansible.builtin.shell: tailscale up
+  ansible.builtin.shell: tailscale up | tee -a /tmp/url.txt
+  async: 240
+  poll: 0
+
+- name: get the generated file
+  ansible.builtin.slurp:
+    src: /tmp/url.txt
+  register: urls
+
+- debug:
+    msg: "{{ urls['content'] | b64decode }}"
+
+    #- name: create the firefox tabs from the link
+    #  command: "firefox --new-tab 

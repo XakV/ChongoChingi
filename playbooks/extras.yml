@@ -1,0 +1,8 @@
+- hosts: all
+  become: yes
+  become_user: zach
+  tasks:
+    - name: extras tasks
+      import_role:
+        name: zach
+        tasks_from: extras.yml
