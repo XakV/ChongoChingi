@@ -16,3 +16,4 @@ host_subvol_paths:
   - '/vault/Containers'
   - '/vault/Library'
   - '/vault/Code'
+  - '/vault/Games'
