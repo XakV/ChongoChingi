@@ -2,5 +2,3 @@
 default_subvol_paths:
   - '/var'
   - '/home'
-
-host_subvol_paths: []

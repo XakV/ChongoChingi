@@ -21,29 +21,31 @@
 
 - name: delete old default configs except root
   ansible.builtin.command: "snapper -c {{ item | trim | basename }} delete-config"
+  args:
+    removes: "/etc/snapper/configs/{{ item | trim | basename }}"
   loop: "{{ default_subvol_paths }}"
-  failed_when: false
+  when: ansible_hostname != 'megalonyx'
 
 - name: delete host special configs from vars
   ansible.builtin.command: "snapper -c {{ item | trim | basename }} delete-config"
+  args:
+    removes: "/etc/snapper/configs/{{ item | trim | basename }}"
   loop: "{{ host_subvol_paths }}"
-  failed_when: false
-
-- name: create config for root subvol
-  ansible.builtin.command: 'snapper -c root create-config {{ item | quote }}'
-  loop:
-    - '/'
-  failed_when: false
+  when: ansible_hostname == 'megalonyx'
 
 - name: create new default configs from updated template except root
   ansible.builtin.command: "snapper -c {{ item | trim | basename }} create-config {{ item | trim | quote }}"
+  args:
+    creates: "{{ item }}/.snapshots"
   loop: "{{ default_subvol_paths }}"
-  failed_when: false
+  when: ansible_hostname != 'megalonyx'
 
 - name: create new host special configs from vars
   ansible.builtin.command: "snapper -c {{ item | trim | basename }} create-config {{ item | trim | quote }}"
+  args:
+    creates: "{{ item }}/.snapshots"
   loop: "{{ host_subvol_paths }}"
-  failed_when: false
+  when: ansible_hostname == 'megalonyx'
 
 - name: snapper timers are reloaded and restarted
   ansible.builtin.systemd:

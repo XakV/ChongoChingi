@@ -1,0 +1,54 @@
+---
+- hosts: microshift
+  become: yes
+  become_user: root
+  vars:
+    ushft_rpms: ['podman', 'firewalld']
+    ushft_ports: ['80', '443', '5353', '6443', '30000-32767']
+
+  tasks:
+    - name: install the rpms
+      ansible.builtin.dnf:
+        name: "{{ ushft_rpms }}"
+        state: installed
+
+    - name: make firewalld go
+      ansible.builtin.systemd:
+        name: firewalld
+        state: started
+        enabled: yes
+        daemon_reload: yes
+
+    - name: firewalld public ports
+      ansible.posix.firewalld:
+        port: "{{ item }}/tcp"
+        state: enabled
+        permanent: yes
+        immediate: yes
+      loop: "{{ ushft_ports }}"
+
+    - name: firewalld trusted zone
+      ansible.posix.firewalld:
+        zone: trusted
+        source: 10.42.0.0/16
+        state: enabled
+        permanent: yes
+        immediate: yes
+
+    - name: get the systemd service file
+      ansible.builtin.get_url:
+        url: 'https://raw.githubusercontent.com/redhat-et/microshift/main/packaging/systemd/microshift-containerized.service'
+        dest: /etc/systemd/system/microshift.service
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: reload services
+      command: systemctl daemon-reload
+
+    - name: enable start ushift
+      ansible.builtin.systemd:
+        name: microshift.service
+        state: started
+        enabled: yes
+        daemon_reload: yes
