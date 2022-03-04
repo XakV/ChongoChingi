@@ -42,16 +42,13 @@
     - com.github.babluboy.bookworm
     - im.riot.Riot
     - info.mumble.Mumble
-    - org.gnome.Lollypop
     - org.gnome.NetworkDisplays
     - com.github.tchx84.Flatseal
     - com.github.johnfactotum.Foliate
     - com.discordapp.Discord
-    - org.jitsi.jitsi-meet
     - com.bitwarden.desktop
     - org.gnome.Firmware
     - org.gnome.seahorse.Application
-    - io.gitlab.librewolf-community
     - com.github.wwmm.easyeffects
     - org.gnome.Connections
     - com.github.fabiocolacio.marker
@@ -59,3 +56,4 @@
     - com.mattjakeman.ExtensionManager
     - com.github.childishgiant.mixer
     - org.signal.Signal
+    - de.haeckerfelix.AudioSharing
