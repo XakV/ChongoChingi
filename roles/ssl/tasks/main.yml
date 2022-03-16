@@ -1,0 +1,19 @@
+---
+- name: install certificate tools
+  ansible.builtin.dnf:
+    name: 'ca-certificates'
+    state: present
+
+- name: copy ssl pem and crt
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}{{ item.src }}"
+    owner: root
+    group: root 
+    mode: 0644
+  loop:
+    - { 'src': 'GandiStandardSSLCA2.pem', 'dest': '/etc/pki/ca-trust/source/anchors/' }
+    - { 'src': 'verboxen.org.crt', 'dest': '/etc/pki/ca-trust/source/' }
+
+- name: install certificates to trust
+  ansible.builtin.command: update-ca-trust
