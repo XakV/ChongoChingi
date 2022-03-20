@@ -1,0 +1,8 @@
+---
+- name: reset_storage
+  file:
+    path: "{{ item }}/storage"
+    state: absent
+  loop:
+    - '/var/lib/containers'
+    - '/home/zach/.local/share/containers'

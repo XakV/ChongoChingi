@@ -1,37 +1,28 @@
 ---
-- name: install packages
-  yum:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - vim
-    - cockpit
-    - podman
-    - buildah
+- name: reset modules
+  command: "dnf module reset @{{ container_module }} -y"
 
-      # name: set chownership
-      # file:
-      #   path: /home/zach/.local/share/containers
-      #   state: directory
-      #   recurse: yes
-      #   owner: zach
-      #   group: zach
-      #
-      # name: set selinux for storage
-      # sefcontext:
-      #   target: '/home/zach/.local/share/containers(/.*)?'
-      #   setype: 'container_var_lib_t'
-      #   state: present
-      # register: sel_chgd
-      #
-      # name: restore context
-      # command: restorecon -R /home/zach/.local/share/containers
-      # when: sel_chgd.changed
+- name: enable module
+  command: "dnf module enable @{{ container_module }}:{{ mod_version }} -y"
+
+- name: install packages
+  dnf:
+    name: "{{ podman_pkgs }}"
+    state: latest
 
 - name: activate podman user service
   systemd:
-    name: io.podman
+    name: podman
     state: restarted
     daemon-reload: yes
     scope: user
   become_user: zach
+
+- name: activate podman system service
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+    daemon-reload: yes
+  loop:
+    - 'cri-o'
+    - 'podman'

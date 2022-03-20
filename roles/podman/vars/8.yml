@@ -1,0 +1,5 @@
+---
+container_module: ['container-tools']
+mod_vers: '4.0'
+podman_pkgs: ['@container-tools']
+storage_driver: ''
