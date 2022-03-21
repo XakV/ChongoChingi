@@ -1,0 +1,7 @@
+- name: podman setup
+  hosts: containers
+  become: yes
+  become_user: root
+  roles:
+    - podman
+

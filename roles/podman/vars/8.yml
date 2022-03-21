@@ -1,0 +1,8 @@
+---
+container_modules: [
+  'cri-o:1.21', 
+  'container-tools:4.0'
+]
+
+podman_pkgs: ['@container-tools', 'cri-o']
+storage_driver: '"overlay"'

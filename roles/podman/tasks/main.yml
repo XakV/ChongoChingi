@@ -1,37 +1,56 @@
 ---
-- name: install packages
-  yum:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - vim
-    - cockpit
-    - podman
-    - buildah
+- name: include centos vars
+  include_vars: '8.yml'
+  when: ansible_distribution_major_version == '8'
 
-      # name: set chownership
-      # file:
-      #   path: /home/zach/.local/share/containers
-      #   state: directory
-      #   recurse: yes
-      #   owner: zach
-      #   group: zach
-      #
-      # name: set selinux for storage
-      # sefcontext:
-      #   target: '/home/zach/.local/share/containers(/.*)?'
-      #   setype: 'container_var_lib_t'
-      #   state: present
-      # register: sel_chgd
-      #
-      # name: restore context
-      # command: restorecon -R /home/zach/.local/share/containers
-      # when: sel_chgd.changed
+- name: reset modules
+  command: "dnf module reset {{ item | split(':') | first }} -y"
+  loop: "{{ container_modules }}"
+
+- name: enable module
+  command: "dnf module enable {{ item }} -y"
+  loop: "{{ container_modules }}"
+
+- name: install packages
+  dnf:
+    name: "{{ podman_pkgs }}"
+    state: latest
+
+- name: btrfs storage driver for root fedora
+  lineinfile:
+    path: '/etc/containers/storage.conf'
+    regexp: '^driver'
+    line: 'driver = {{ storage_driver }}'
+  notify: reset_storage
+
+- name: create user storage config 
+  blockinfile:
+    path: /home/zach/.config/containers/storage.conf
+    owner: zach
+    group: zach
+    mode: 0644
+    create: yes
+    block: |
+      [storage]
+      driver = {{ storage_driver }}
+  notify: reset_storage
+
+- name: do the handlers before the service starts
+  meta: flush_handlers
 
 - name: activate podman user service
   systemd:
-    name: io.podman
+    name: podman
     state: restarted
     daemon-reload: yes
     scope: user
   become_user: zach
+
+- name: activate podman system service
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+    daemon-reload: yes
+  loop:
+    - 'crio'
+    - 'podman'
