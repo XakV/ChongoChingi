@@ -12,17 +12,10 @@
     name: coredns_vol
   register: vol_path
 
-- name: make a directory
-  ansible.builtin.file:
-    path: "{{ vol_path.volume['Mountpoint'] }}/srv/CoreDNS"
-    owner: root
-    group: root
-    mode: 0644 
-
 - name: copy zone file
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ vol_path.volume['Mountpoint'] }}/srv/CoreDNS/{{ item }}"
+    dest: "{{ vol_path.volume['Mountpoint'] }}/{{ item }}"
     owner: root
     group: root
     mode: 0644 
@@ -40,11 +33,12 @@
     recreate: yes
     network: bridge
     expose: 53/udp
-    ports: 100.74.215.41:53:53/udp
+    ports: "{{ ansible_tailscale0.ipv4.address }}:53:1053/udp"
     generate_systemd:
       path: /usr/lib/systemd/system
       restart_policy: always
       time: 120
+    workdir: /srv/CoreDNS
   register: dns_container
 
 - name: enable and start the dns service
@@ -53,3 +47,6 @@
     state: started
     daemon_reload: true
     enabled: true
+
+#TODO: Figure out how to set up firewalld or iptables
+#TODO: set resolver to tailscale0 iface containers
