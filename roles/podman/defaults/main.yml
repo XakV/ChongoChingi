@@ -1,4 +1,4 @@
 ---
-podman_pkgs: ['podman', 'builder', '@cri-o']
-container_module: 'cri-o'
-mod_vers: '1.22'
+podman_pkgs: ['podman', 'buildah', 'cri-o']
+container_modules: ['cri-o:1.22']
+storage_driver: '"btrfs"'
