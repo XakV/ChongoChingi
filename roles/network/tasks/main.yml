@@ -1,0 +1,38 @@
+---
+- name: start systemd-resolved
+  systemd:
+    name: systemd-resolved
+    state: started
+
+- name: remove /etc/resolv.conf
+  file:
+    path: /etc/resolv.conf
+    state: absent
+
+- name: link stub resolver
+  file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+
+- name: reload and restart
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+    daemon_reload: true
+    enabled: true
+  loop:
+    - NetworkManager
+    - systemd-resolved
+
+# find the interfaces we care about
+# disable ipv6
+# set up dns for coredns
+- name: disable ipv6 set nameservers
+  community.general.nmcli:
+    conn_name: "{{ item }}"
+    method6: disabled
+    dns4: ['100.78.73.46:1053', '1.1.1.1']
+    dns4_search: 'verboxen.org'
+    state: present
+  loop: "{{ ansible_interfaces | difference(['lo', 'cni-podman0']) }}"
