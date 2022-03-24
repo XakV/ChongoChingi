@@ -49,4 +49,3 @@
     enabled: true
 
 #TODO: Figure out how to set up firewalld or iptables
-#TODO: set resolver to tailscale0 iface containers

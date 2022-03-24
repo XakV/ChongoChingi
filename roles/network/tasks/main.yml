@@ -15,6 +15,26 @@
     dest: /etc/resolv.conf
     state: link
 
+- name: determine conn names
+  ansible.builtin.shell: nmcli -t -f NAME c show --active
+  register: conxns
+
+- name: disable ipv6 set nameservers on active connections
+  community.general.nmcli:
+    conn_name: "{{ item }}"
+    method6: disabled
+    dns4: ['100.78.73.46:1053', '1.1.1.1']
+    dns4_search: 'verboxen.org'
+    state: present
+  loop: "{{ conxns.stdout_lines | difference(['cni-podman0', 'tailscale0']) }}"
+
+- name: disable set nameservers on tailscale0 adapters
+  community.general.nmcli:
+    conn_name: 'tailscale0'
+    dns4: ['100.78.73.46:1053', '1.1.1.1']
+    dns4_search: 'verboxen.org'
+    state: present
+
 - name: reload and restart
   systemd:
     name: "{{ item }}"
@@ -25,14 +45,6 @@
     - NetworkManager
     - systemd-resolved
 
-# find the interfaces we care about
-# disable ipv6
-# set up dns for coredns
-- name: disable ipv6 set nameservers
-  community.general.nmcli:
-    conn_name: "{{ item }}"
-    method6: disabled
-    dns4: ['100.78.73.46:1053', '1.1.1.1']
-    dns4_search: 'verboxen.org'
-    state: present
-  loop: "{{ ansible_interfaces | difference(['lo', 'cni-podman0']) }}"
+- name: reload connections
+  ansible.builtin.shell: "nmcli c reload {{ item }} && nmcli c up {{ item }}"
+  loop: "{{ conxns.stdout_lines }}"
