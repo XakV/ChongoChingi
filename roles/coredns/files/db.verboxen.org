@@ -26,7 +26,7 @@ leviathan	IN	A	192.168.0.104
 leviathan	IN	A	100.90.67.34 
 mastodon	IN	A	192.168.0.136 
 mastodon	IN	A	100.87.20.23 
-megalonyx	IN	A	192.168.0.119 
+megalonyx	IN	A	192.168.0.219 
 megalonyx	IN	A	100.74.215.41 
 samarkand	IN	A	192.168.0.161 
 samarkand	IN	A	100.104.162.93
