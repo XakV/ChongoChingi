@@ -32,3 +32,4 @@ samarkand	IN	A	192.168.0.161
 samarkand	IN	A	100.104.162.93
 dobby		IN	A	192.168.0.39 
 dobby		IN	A	100.78.73.46 
+mega-vm         IN      A       192.168.0.236
