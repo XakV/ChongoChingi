@@ -1,5 +1,5 @@
-- hosts: all
-  become: yes
+- hosts: lan
+  become: True
   become_user: root
   roles:
     - devel
