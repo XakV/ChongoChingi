@@ -1,0 +1,9 @@
+---
+- name: add hashi repo
+  ansible.builtin.shell: dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+
+- name: install terra packer and podman-docker
+  ansible.builtin.dnf:
+    name: ['terraform', 'packer', 'podman-docker']
+    state: present
+    update_cache: yes

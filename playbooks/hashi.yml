@@ -1,0 +1,5 @@
+- hosts: hashi
+  become: True
+  become_user: root
+  roles:
+    - terraform

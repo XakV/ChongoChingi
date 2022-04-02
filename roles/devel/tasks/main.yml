@@ -2,7 +2,7 @@
 - name: devel | Install devel packages
   ansible.builtin.dnf:
     state: latest
-    name: ['go-compilers-golang-compiler', 'golang-bin', 'love', 'lua',  'lua-devel',
+    name: ['git', 'go-compilers-golang-compiler', 'golang-bin', 'love', 'lua',  'lua-devel',
            'openssl-devel', 'python3-pip', 'git', 'levien-inconsolata-fonts', 
            'mozilla-fira-mono-fonts', 'overpass-mono-fonts',  'pandoc', 'cockpit', 
            'cockpit-ws', 'cockpit-storaged', '@Fedora Packager', '@RPM Development Tools', 

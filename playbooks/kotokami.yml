@@ -1,9 +1,0 @@
-- name: Host for zach setup | with priv
-  hosts: kotokami.badkuub.club
-  become: yes
-  roles:
-    - nebulae 
-      # common
-      # devel
-      # gaming
-      # zach

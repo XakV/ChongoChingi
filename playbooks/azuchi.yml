@@ -1,8 +1,0 @@
-- name: Host for zach setup | with priv
-  hosts: all
-  become: yes
-  roles:
-    - nebulae
-    # common
-    # zach
-
