@@ -6,8 +6,8 @@ authors = ["XakV <zachvatwork@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-ansible = "5.1.0"
-ansible-core = "2.12.1"
+ansible = "^5.5.0"
+ansible-core = "^2.12.4"
 ansible-lint = "5.3.1"
 bracex = "2.2.1"
 cffi = "1.15.0"
