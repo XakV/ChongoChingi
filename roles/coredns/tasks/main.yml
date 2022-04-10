@@ -48,4 +48,8 @@
     daemon_reload: true
     enabled: true
 
-#TODO: Figure out how to set up firewalld or iptables
+- name: open ports for dns
+  ansible.posix.firewalld:
+    port: 1053/udp
+    permanent: yes
+    state: enabled
