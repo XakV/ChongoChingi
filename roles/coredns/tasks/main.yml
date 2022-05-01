@@ -33,7 +33,7 @@
     recreate: yes
     network: bridge
     expose: 53/udp
-    ports: "{{ ansible_tailscale0.ipv4.address }}:53:1053/udp"
+    ports: "{{ ansible_tailscale0.ipv4.address }}:53:53/udp"
     generate_systemd:
       path: /usr/lib/systemd/system
       restart_policy: always

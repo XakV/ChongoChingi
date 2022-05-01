@@ -1,4 +1,4 @@
-@       IN      SOA     ns1.gandi.net.      zach.verboxen.org. (
+@       IN      SOA     ns1.gandi.net.      verboxen.org. (
                         2022012101	; serial number YYMMDDNN
                         28800           ; Refresh
                         7200            ; Retry
@@ -14,22 +14,22 @@
 
 $ORIGIN verboxen.org.
 
-@ 		IN	A 	23.160.192.216
-drachen 	IN	A 	23.160.192.216
-drachen 	IN	A 	100.64.92.98
-www 		IN 	CNAME 	drachen.verboxen.org.
-plo-koon	IN	A	192.168.0.182 
-plo-koon	IN	A	100.74.219.90 
-sabretooth	IN	A	192.168.0.189 
-sabretooth	IN	A	100.81.144.6 
-leviathan	IN	A	192.168.0.104 
-leviathan	IN	A	100.90.67.34 
-mastodon	IN	A	192.168.0.136 
-mastodon	IN	A	100.87.20.23 
-megalonyx	IN	A	192.168.0.219 
-megalonyx	IN	A	100.74.215.41 
-samarkand	IN	A	192.168.0.161 
-samarkand	IN	A	100.104.162.93
-dobby		IN	A	192.168.0.39 
-dobby		IN	A	100.78.73.46 
-mega-vm         IN      A       192.168.0.236
+@ 		        IN	A 	23.160.192.216
+drachen         	IN	A 	23.160.192.216
+tsentry         	IN	A 	100.64.92.98
+www 	        	IN 	CNAME 	drachen.verboxen.org.
+plo-koon        	IN	A	192.168.0.182 
+plo-koon-ts        	IN	A	100.74.219.90 
+sabretooth	        IN	A	192.168.0.189 
+sabretooth-ts    	IN	A	100.81.144.6 
+leviathan	        IN	A	192.168.0.104 
+leviathan-ts    	IN	A	100.90.67.34 
+mastodon	        IN	A	192.168.0.136 
+mastodon-ts	        IN	A	100.87.20.23 
+megalonyx	        IN	A	192.168.0.219 
+megalonyx-ts    	IN	A	100.74.215.41 
+samarkand	        IN	A	192.168.0.161 
+samarkand-ts    	IN	A	100.104.162.93
+dobby		        IN	A	192.168.0.39 
+dobby-ts		IN	A	100.78.73.46 
+mega-vm                 IN      A       192.168.0.236

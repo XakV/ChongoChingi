@@ -16,25 +16,6 @@
     name: "{{ podman_pkgs }}"
     state: latest
 
-- name: btrfs storage driver for root fedora
-  lineinfile:
-    path: '/etc/containers/storage.conf'
-    regexp: '^driver'
-    line: 'driver = {{ storage_driver }}'
-  notify: reset_storage
-
-- name: create user storage config 
-  blockinfile:
-    path: /home/zach/.config/containers/storage.conf
-    owner: zach
-    group: zach
-    mode: 0644
-    create: yes
-    block: |
-      [storage]
-      driver = {{ storage_driver }}
-  notify: reset_storage
-
 - name: do the handlers before the service starts
   meta: flush_handlers
 
