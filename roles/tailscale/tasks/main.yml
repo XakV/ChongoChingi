@@ -17,3 +17,6 @@
   ansible.builtin.shell: "tailscale up --auth-key {{ tailscale_key }}"
   async: 240
   poll: 0
+
+- name: regather facts
+  setup:

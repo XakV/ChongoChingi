@@ -41,3 +41,27 @@
     owner: root
     group: root
     mode: 0644
+
+- name: Common | enable crp on EL
+  shell: "dnf config-manager --set-enabled crb -y"
+  when: ansible_distribution_major_version == '9'
+
+- name: Common | add distro-specific repos
+  dnf:
+    name: "{{ additional_repo_pkgs[ansible_distribution_major_version] }}"
+    state: installed
+    disable_gpg_check: yes
+
+- name: Common | add-on for fedora
+  shell: "dnf groupupdate {{ item }} -y"
+  loop:
+    - 'core'
+    - 'multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin'
+    - 'sound-and-video'
+  when: ansible_distribution_major_version in ['35', '36']
+
+- name: Common | update it all
+  dnf:
+    name: "*"
+    state: latest
+    disable_gpg_check: yes

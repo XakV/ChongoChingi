@@ -44,7 +44,6 @@
     - info.mumble.Mumble
     - org.gnome.NetworkDisplays
     - com.github.tchx84.Flatseal
-    - com.github.johnfactotum.Foliate
     - com.discordapp.Discord
     - com.bitwarden.desktop
     - org.gnome.Firmware

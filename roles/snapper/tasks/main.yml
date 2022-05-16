@@ -4,6 +4,14 @@
     name: snapper
     state: present
 
+- name: make config-templates directory
+  file:
+    path: /etc/snapper/config-templates
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+
 - name: place root config template
   ansible.builtin.template:
     src: default_root.j2

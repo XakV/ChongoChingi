@@ -1,0 +1,11 @@
+---
+home_dotfiles:
+  - '.wezterm.lua'
+  - '.vimrc'
+  - '.bashrc'
+  - '.bash_profile'
+  - '.profile'
+
+ssh_keys:
+  - 'id_ed25519'
+  - 'id_rsa'

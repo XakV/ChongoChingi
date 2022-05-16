@@ -1,0 +1,5 @@
+---
+additional_repo_pkgs:
+  { '9': ['epel-release'], '8': ['epel-release'],
+   '35': ['https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-35.noarch.rpm', 'https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-35.noarch.rpm'], 
+   '36': ['https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-36.noarch.rpm', 'https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-36.noarch.rpm'] }

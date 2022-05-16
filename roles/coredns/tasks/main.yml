@@ -32,8 +32,8 @@
       - coredns_vol:/srv/CoreDNS
     recreate: yes
     network: bridge
-    expose: 53/udp
-    ports: "{{ ansible_tailscale0.ipv4.address }}:53:53/udp"
+    expose: 1053/udp
+    ports: "{{ ansible_tailscale0.ipv4.address }}:1053:1053/udp"
     generate_systemd:
       path: /usr/lib/systemd/system
       restart_policy: always

@@ -22,12 +22,12 @@
     dns4: ['']
     dns4_search: ''
     state: present
-  loop: "{{ conxns.stdout_lines | difference(['cni-podman0', 'tailscale0']) }}"
+  loop: "{{ conxns.stdout_lines | difference(['br0enp3s0', 'cni-podman0', 'tailscale0']) }}"
 
 - name: set nameservers on active connections
   community.general.nmcli:
     conn_name: "{{ item }}"
-    dns4: ['100.78.73.46:1053', '1.1.1.1']
+    dns4: '1.1.1.1'
     dns4_search: 'verboxen.org'
     state: present
   loop: "{{ conxns.stdout_lines | difference(['cni-podman0', 'tailscale0']) }}"

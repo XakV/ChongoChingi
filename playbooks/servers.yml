@@ -1,11 +1,12 @@
-- hosts: zach
+- hosts: all
   become: yes
   become_user: root
   roles:
     - common
     - tailscale
     - podman
-    - network
+    # coredns
+    # network
     - devel
     - ssl
     - zach

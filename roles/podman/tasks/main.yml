@@ -1,14 +1,16 @@
 ---
-- name: include centos vars
-  include_vars: '8.yml'
-  when: ansible_distribution_major_version == '8'
+- name: include distro specific vars
+  include_vars: "{{ ansible_distribution_major_version }}.yml"
+  when: ansible_distribution_major_version not in ['35', '9']
 
 - name: reset modules
   command: "dnf module reset {{ item | split(':') | first }} -y"
+  when: ansible_distribution_major_version != '9'
   loop: "{{ container_modules }}"
 
 - name: enable module
   command: "dnf module enable {{ item }} -y"
+  when: ansible_distribution_major_version != '9'
   loop: "{{ container_modules }}"
 
 - name: install packages
