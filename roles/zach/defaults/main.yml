@@ -9,3 +9,25 @@ home_dotfiles:
 ssh_keys:
   - 'id_ed25519'
   - 'id_rsa'
+
+flatpaks:
+  - com.github.babluboy.bookworm
+  - im.riot.Riot
+  - info.mumble.Mumble
+  - org.gnome.NetworkDisplays
+  - com.github.tchx84.Flatseal
+  - com.discordapp.Discord
+  - com.bitwarden.desktop
+  - org.gnome.Firmware
+  - org.gnome.seahorse.Application
+  - com.github.wwmm.easyeffects
+  - org.gnome.Connections
+  - com.github.fabiocolacio.marker
+  - com.visualstudio.code
+  - com.mattjakeman.ExtensionManager
+  - com.github.childishgiant.mixer
+  - org.signal.Signal
+  - de.haeckerfelix.AudioSharing
+  - social.whalebird.WhalebirdDesktop
+  - org.pipewire.Helvum
+  - io.github.realmazharhussain.GdmSettings

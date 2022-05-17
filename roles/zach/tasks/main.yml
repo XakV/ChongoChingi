@@ -4,6 +4,13 @@
     name: ['tilix', 'vim', 'buildah', 'syncthing']
     state: present
 
+- name: install wezterm nightly
+  ansible.builtin.dnf:
+    name: https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly-fedora36.rpm
+    state: present
+    disable_gpg_check: yes
+  when: ansible_distribution_major_version == '36'
+
 - name: make vim right
   ansible.builtin.shell: |
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -38,21 +45,41 @@
     state: present
     method: user
   become_user: zach
-  loop: 
-    - com.github.babluboy.bookworm
-    - im.riot.Riot
-    - info.mumble.Mumble
-    - org.gnome.NetworkDisplays
-    - com.github.tchx84.Flatseal
-    - com.discordapp.Discord
-    - com.bitwarden.desktop
-    - org.gnome.Firmware
-    - org.gnome.seahorse.Application
-    - com.github.wwmm.easyeffects
-    - org.gnome.Connections
-    - com.github.fabiocolacio.marker
-    - com.visualstudio.code
-    - com.mattjakeman.ExtensionManager
-    - com.github.childishgiant.mixer
-    - org.signal.Signal
-    - de.haeckerfelix.AudioSharing
+  loop: "{{ flatpaks }}"
+
+- name: set up directories
+  ansible.builtin.file:
+    path: "/home/zach/{{ item.dir }}"
+    state: directory
+    owner: zach
+    group: zach
+    mode: "{{ item.mode }}"
+  loop: dotdirs
+
+- name: copy dotfiles
+  ansible.builtin.copy:
+    src: "{{ item.source }}"
+    dest: "{{ item.dest }}"
+    owner: zach
+    group: zach
+    mode: "{{ item.mode }}"
+  loop: dotfiles
+
+- name: set up poetry
+  ansible.builtin.shell: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+  args:
+    creates: "{{ ansible_user_dir }}/.poetry/bin/poetry"
+
+- name: install pipx
+  ansible.builtin.pip:
+    name: pipx
+    state: present
+    extra_args: --user
+
+- name: pipx do the path thing
+  ansible.builtin.command: python3 -m pipx ensurepath
+
+- name: must have wezterm
+  ansible.builtin.dnf:
+    name: https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly-fedora36.rpm
+    state: installed
