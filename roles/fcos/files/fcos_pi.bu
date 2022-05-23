@@ -1,0 +1,40 @@
+---
+variant: fcos
+version: 1.4.0
+passwd:
+  users:
+    - name: core
+      groups:
+        - wheel
+      ssh_authorized_keys:
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKO0vAMjed4HZhpczqMiexMmEDi9ElIHQkaEEbo7m1mC zach@fedora32
+systemd:
+  units:
+    # installing layered packages with rpm-ostree
+    - name: rpm-ostree-install-pkgs.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Layer packages
+        # We run after `systemd-machine-id-commit.service` to ensure that
+        # `ConditionFirstBoot=true` services won't rerun on the next boot.
+        After=systemd-machine-id-commit.service
+        After=network-online.target
+        Before=zincati.service
+        ConditionPathExists=!/var/lib/%N.stamp
+
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/usr/bin/rpm-ostree install --allow-inactive vim-minimal podman-compose
+        ExecStart=/bin/touch /var/lib/%N.stamp
+        ExecStart=/bin/systemctl --no-block reboot
+
+        [Install]
+        WantedBy=multi-user.target
+storage:
+  files:
+    - path: /etc/hostname
+      mode: 0644
+      contents:
+        inline: spifco.lan

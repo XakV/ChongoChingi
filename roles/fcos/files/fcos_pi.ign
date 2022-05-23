@@ -1,0 +1,38 @@
+{
+  "ignition": {
+    "version": "3.3.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "wheel"
+        ],
+        "name": "core",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKO0vAMjed4HZhpczqMiexMmEDi9ElIHQkaEEbo7m1mC zach@fedora32"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "files": [
+      {
+        "path": "/etc/hostname",
+        "contents": {
+          "source": "data:,spifco.lan"
+        },
+        "mode": 420
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=Layer packages\n# We run after `systemd-machine-id-commit.service` to ensure that\n# `ConditionFirstBoot=true` services won't rerun on the next boot.\nAfter=systemd-machine-id-commit.service\nAfter=network-online.target\nBefore=zincati.service\nConditionPathExists=!/var/lib/%N.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/rpm-ostree install --allow-inactive vim-minimal podman-compose\nExecStart=/bin/touch /var/lib/%N.stamp\nExecStart=/bin/systemctl --no-block reboot\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "rpm-ostree-install-pkgs.service"
+      }
+    ]
+  }
+}

@@ -1,14 +1,35 @@
 ---
 home_dotfiles:
-  - '.wezterm.lua'
-  - '.vimrc'
-  - '.bashrc'
-  - '.bash_profile'
-  - '.profile'
+  - 'vimrc'
+  - 'bashrc'
+  - 'bash_profile'
+  - 'ansible_vp'
+  - 'bash_profile'
+  - 'bashrc'
+  - 'profile'
+  - 'repo_sekret'
+  # 'wezterm.lua'
+
+home_dotdirs:
+  - 'config/calibre'
+  - 'config/Bitwarden CLI'
+  - 'config/syncthing'
+  - 'config/VIA'
 
 ssh_keys:
   - 'id_ed25519'
   - 'id_rsa'
+
+zachs_rpms: 
+  - 'vim'
+  - 'buildah'
+  - 'syncthing'
+  - 'vim-default-editor'
+  - 'java-latest-openjdk'
+  - 'java-latest-openjdk-headless'
+  - 'mesa-vulkan-drivers'
+  - 'mesa-vdpau-drivers'
+  - 'intel-media-driver'
 
 flatpaks:
   - com.github.babluboy.bookworm
@@ -23,7 +44,6 @@ flatpaks:
   - com.github.wwmm.easyeffects
   - org.gnome.Connections
   - com.github.fabiocolacio.marker
-  - com.visualstudio.code
   - com.mattjakeman.ExtensionManager
   - com.github.childishgiant.mixer
   - org.signal.Signal

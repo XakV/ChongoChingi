@@ -1,0 +1,13 @@
+{
+  "authorMatch": "similar",
+  "authorSoundexLength": 8,
+  "autoDeleteBinaryDups": false,
+  "identifierType": "isbn",
+  "includeLanguages": false,
+  "searchType": "titleauthor",
+  "showAllGroups": true,
+  "showTagAuthor": true,
+  "sortGroupsByTitle": true,
+  "titleMatch": "similar",
+  "titleSoundexLength": 6
+}

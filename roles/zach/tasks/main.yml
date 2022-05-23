@@ -1,7 +1,12 @@
 ---
+- name: remove the nano default
+  ansible.builtin.dnf:
+    name: nano-default-editor
+    state: absent
+
 - name: install a few normal things
   ansible.builtin.dnf:
-    name: ['tilix', 'vim', 'buildah', 'syncthing']
+    name: "{{ zachs_rpms }}"
     state: present
 
 - name: install wezterm nightly
@@ -47,39 +52,49 @@
   become_user: zach
   loop: "{{ flatpaks }}"
 
-- name: set up directories
-  ansible.builtin.file:
-    path: "/home/zach/{{ item.dir }}"
-    state: directory
-    owner: zach
-    group: zach
-    mode: "{{ item.mode }}"
-  loop: dotdirs
-
 - name: copy dotfiles
   ansible.builtin.copy:
-    src: "{{ item.source }}"
-    dest: "{{ item.dest }}"
+    src: "{{ item }}"
+    dest: "/home/zach/.{{ item }}"
     owner: zach
     group: zach
-    mode: "{{ item.mode }}"
-  loop: dotfiles
+    mode: 0640
+  loop: "{{ home_dotfiles }}"
+
+- name: copy ssh dir
+  ansible.builtin.copy:
+    src: ssh
+    dest: /home/zach/.ssh
+    owner: zach
+    group: zach
+    mode: 0640
+
+- name: copy home dot_dirs
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/home/zach/.{{ item }}"
+    owner: zach
+    group: zach
+    mode: 0640
+  loop: "{{ home_dotdirs }}"
 
 - name: set up poetry
   ansible.builtin.shell: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
   args:
     creates: "{{ ansible_user_dir }}/.poetry/bin/poetry"
+  become: yes
+  become_user: zach
 
 - name: install pipx
   ansible.builtin.pip:
     name: pipx
     state: present
     extra_args: --user
+    executable: "/home/zach/.local/bin/pip"
+  become: yes
+  become_user: zach
 
 - name: pipx do the path thing
   ansible.builtin.command: python3 -m pipx ensurepath
-
-- name: must have wezterm
-  ansible.builtin.dnf:
-    name: https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly-fedora36.rpm
-    state: installed
+  become: yes
+  become_user: zach
