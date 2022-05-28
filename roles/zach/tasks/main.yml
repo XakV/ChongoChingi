@@ -4,6 +4,14 @@
     name: nano-default-editor
     state: absent
 
+- name: set up modular rpms
+  command: "dnf module enable {{ modular_rpms | quote }} -y"
+
+- name: install modular rpms
+  ansible.builtin.dnf:
+    name: "{{ modular_rpms.split(':')[0] }}"
+    state: present
+
 - name: install a few normal things
   ansible.builtin.dnf:
     name: "{{ zachs_rpms }}"
@@ -52,6 +60,15 @@
   become_user: zach
   loop: "{{ flatpaks }}"
 
+- name: install the gamery flattened paks
+  flatpak:
+    name: "{{ item }}"
+    state: present
+    method: user
+  become_user: zach
+  loop: "{{ gaming_flpks }}"
+  when: ansible_nodename is search('megalonyx')
+
 - name: copy dotfiles
   ansible.builtin.copy:
     src: "{{ item }}"
@@ -90,11 +107,10 @@
     name: pipx
     state: present
     extra_args: --user
-    executable: "/home/zach/.local/bin/pip"
   become: yes
   become_user: zach
 
 - name: pipx do the path thing
-  ansible.builtin.command: python3 -m pipx ensurepath
+  ansible.builtin.command: pipx ensurepath
   become: yes
   become_user: zach

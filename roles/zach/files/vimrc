@@ -12,8 +12,8 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'wdhg/dragon-energy'
-Plug 'tpope/vim-fugitive'
-Plug 'psf/black', { 'branch': 'stable' }
+"Plug 'tpope/vim-fugitive'
+Plug 'psf/black'
 Plug 'https://github.com/glench/vim-jinja2-syntax'
 Plug 'plasticboy/vim-markdown'
 Plug 'https://github.com/vimwiki/vimwiki.git', { 'branch': 'dev' }

@@ -31,6 +31,8 @@ zachs_rpms:
   - 'mesa-vdpau-drivers'
   - 'intel-media-driver'
 
+modular_rpms: 'nodejs:18'
+
 flatpaks:
   - com.github.babluboy.bookworm
   - im.riot.Riot
@@ -51,3 +53,12 @@ flatpaks:
   - social.whalebird.WhalebirdDesktop
   - org.pipewire.Helvum
   - io.github.realmazharhussain.GdmSettings
+  - io.posidon.Paper
+  - dev.lapce.lapce
+  - org.gnome.Chess
+  - com.valvesoftware.SteamLink
+
+gaming_flpks:
+  - com.valvesoftware.Steam
+  - io.gdevs.GDLauncher
+  - com.mojang.Minecraft
