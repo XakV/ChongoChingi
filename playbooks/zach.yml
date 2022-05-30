@@ -9,3 +9,5 @@
     - devel
     - ssl
     - zach
+    - bitwarden
+    - restic_b2

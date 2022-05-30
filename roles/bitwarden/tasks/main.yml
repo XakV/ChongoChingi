@@ -1,5 +1,20 @@
 ---
 # This role installs bw the bitwarden cli
+- name: set up a directory in .config
+  file:
+    path: '/home/zach/.config/Bitwarden CLI' 
+    state: directory
+    owner: zach
+    group: zach
+    mode: 0754
+
+- name: copy data.jason to .config/bw cli
+  copy:
+    src: data.json
+    dest: '/home/zach/.config/Bitwarden CLI/data.json' 
+    owner: zach
+    group: zach
+    mode: 0640
 
 - name: get the bundle from github
   get_url:

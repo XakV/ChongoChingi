@@ -1,4 +1,19 @@
 ---
+- name: set up vscode ms keys
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://packages.microsoft.com/keys/microsoft.asc
+
+- name: set up vscode repo
+  ansible.builtin.yum_repository:
+    name: vscode
+    description: ms vscode
+    file: vscode.repo
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+
 - name: remove the nano default
   ansible.builtin.dnf:
     name: nano-default-editor
@@ -107,10 +122,5 @@
     name: pipx
     state: present
     extra_args: --user
-  become: yes
-  become_user: zach
-
-- name: pipx do the path thing
-  ansible.builtin.command: pipx ensurepath
   become: yes
   become_user: zach

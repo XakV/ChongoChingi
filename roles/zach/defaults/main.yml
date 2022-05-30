@@ -30,6 +30,8 @@ zachs_rpms:
   - 'mesa-vulkan-drivers'
   - 'mesa-vdpau-drivers'
   - 'intel-media-driver'
+  - 'code'
+  - 'cronie'
 
 modular_rpms: 'nodejs:18'
 
@@ -62,3 +64,5 @@ gaming_flpks:
   - com.valvesoftware.Steam
   - io.gdevs.GDLauncher
   - com.mojang.Minecraft
+  - org.freedesktop.Platform.GL.nvidia-470-129-06
+  - org.freedesktop.Platform.openh264/x86_64/2.0
