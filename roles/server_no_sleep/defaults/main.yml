@@ -1,0 +1,5 @@
+---
+cockpit_pkgs: ['cockpit-389-ds.noarch', 'cockpit-bridge', 'cockpit-composer', 'cockpit-doc', 
+  'cockpit-file-sharing', 'cockpit-kdump', 'cockpit-machines', 'cockpit-navigator', 
+  'cockpit-networkmanager', 'cockpit-packagekit', 'cockpit-pcp', 'cockpit-podman', 
+  'cockpit-selinux', 'cockpit-storaged', 'cockpit-system', 'cockpit-ws']

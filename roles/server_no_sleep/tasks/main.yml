@@ -1,0 +1,27 @@
+---
+- name: no sleepy servers
+  systemd:
+    name: "{{ item }}"
+    masked: yes
+  when: ansible_hostname != 'megalonyx'
+  loop:
+    - sleep.target
+    - suspend.target
+    - hibernate.target
+    - hybrid-sleep.target
+
+- name: servers | install all the cockpit
+  dnf:
+    name: "{{ cockpit_pkgs }}"
+    state: latest
+    
+- name: servers | enable cockpit
+  ansible.builtin.systemd:
+    name: cockpit.socket
+    state: started
+    enabled: True
+
+
+
+
+

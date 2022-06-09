@@ -13,15 +13,15 @@
   register: vol_path
 
 - name: copy zone file
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: "{{ item }}"
     dest: "{{ vol_path.volume['Mountpoint'] }}/{{ item }}"
     owner: root
     group: root
     mode: 0644 
   loop:
-    - "db.verboxen.org"
-    - "Corefile"
+    - "db.verboxen.org.j2"
+    - "Corefile.j2"
 
 - name: create the coredns container
   containers.podman.podman_container:

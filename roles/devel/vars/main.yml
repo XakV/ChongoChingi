@@ -1,0 +1,8 @@
+---
+languages: ['git', 'go-compilers-golang-compiler', 'golang-bin', 'love', 'lua',  'lua-devel',
+           'openssl-devel', 'python3-pip', ]
+
+packaging: ['@Fedora Packager', '@RPM Development Tools', '@C Development Tools and Libraries'] 
+
+nice_mono_fonts: ['cascadia-mono-pl-fonts', 'jetbrains-mono-fonts', 'mozilla-fira-mono-fonts',
+  'overpass-mono-fonts.noarch', 'redhat-mono-fonts.noarch', 'pcaro-hermit-fonts', 'powerline-fonts']

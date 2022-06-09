@@ -2,15 +2,16 @@
 - name: devel | Install devel packages
   ansible.builtin.dnf:
     state: latest
-    name: ['git', 'go-compilers-golang-compiler', 'golang-bin', 'love', 'lua',  'lua-devel',
-           'openssl-devel', 'python3-pip', 'git', 'levien-inconsolata-fonts', 
-           'mozilla-fira-mono-fonts', 'overpass-mono-fonts',  'pandoc', 'cockpit', 
-           'cockpit-ws', 'cockpit-storaged', '@Fedora Packager', '@RPM Development Tools', 
-           '@C Development Tools and Libraries'] 
+    name: "{{ languages }}"
 
-- name: devel | enable cockpit
-  ansible.builtin.systemd:
-    name: cockpit.socket
-    state: started
-    enabled: True
+- name: devel | Install packager packages
+  ansible.builtin.dnf:
+    state: latest
+    name: "{{ packaging }}"
+  when: inventory_hostname in groups.zach
 
+- name: devel | Install the pretty fonts
+  ansible.builtin.dnf:
+    name: "{{ nice_mono_fonts }}"
+    state: latest
+  when: inventory_hostname in groups.zach
