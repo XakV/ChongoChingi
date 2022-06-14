@@ -15,6 +15,16 @@
   ansible.builtin.shell: nmcli -t -f NAME c show --active
   register: conxns
 
+- name: remove bridge members from conxns
+  set_fact:
+    main_ifaces: "{{ conxns.stdout_lines | difference(ansible_bridge0['interfaces']) }}"
+  when: ansible_bridge0 is defined
+
+- name: set a default if there is no bridge0
+  set_fact:
+    main_ifaces: "{{ conxns.stdout_lines }}"
+  when: ansible_bridge0 is not defined
+
 - name: clear nameservers on active connections
   community.general.nmcli:
     conn_name: "{{ item }}"
@@ -22,7 +32,7 @@
     dns4: ['']
     dns4_search: ''
     state: present
-  loop: "{{ conxns.stdout_lines | difference(['br0enp3s0', 'podman0', 'cni-podman0', 'tailscale0']) }}"
+  loop: "{{ main_ifaces | difference(['podman0', 'cni-podman0', 'tailscale0']) }}"
 
 - name: set nameservers on active connections
   community.general.nmcli:
@@ -30,7 +40,7 @@
     dns4: '1.1.1.1'
     dns4_search: 'verboxen.org'
     state: present
-  loop: "{{ conxns.stdout_lines | difference(['cni-podman0', 'podman-0', 'tailscale0']) }}"
+  loop: "{{ main_ifaces | difference(['cni-podman0', 'podman0', 'tailscale0']) }}"
 
 - name: send the resolved config
   template:
@@ -50,7 +60,7 @@
 
 - name: reload nm conxns
   shell: "nmcli c reload {{ item }}"
-  loop: "{{ conxns.stdout_lines | difference(['podman0', 'cni-podman0']) }}"
+  loop: "{{ main_ifaces | difference(['podman0', 'cni-podman0']) }}"
 
 - name: start systemd-resolved
   systemd:

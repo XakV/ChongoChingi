@@ -1,0 +1,40 @@
+---
+- name: Install apt plugin
+  ansible.builtin.apt:
+    name: apt-transport-https
+    state: latest
+
+- name: apt pkg key
+  ansible.builtin.get_url:
+    url: https://pkgs.tailscale.com/stable/raspbian/bullseye.noarmor.gpg
+    dest: /usr/share/keyrings/tailscale-archive-keyring.gpg
+    owner: root
+    group: root
+    mode: 0644
+
+- name: apt repo
+  ansible.builtin.get_url:
+    url: https://pkgs.tailscale.com/stable/raspbian/bullseye.tailscale-keyring.list
+    dest: /etc/apt/sources.list.d/tailscale.list
+    owner: root
+    group: root
+    mode: 0644
+
+- name: apt update
+  command: apt-get update -y
+
+- name: apt Install
+  ansible.builtin.apt:
+    name: tailscale
+    state: latest
+
+- name: start and enable ts service
+  ansible.builtin.systemd:
+    name: tailscaled
+    state: started
+    enabled: yes
+
+- name: run the ts up
+  ansible.builtin.shell: "tailscale up --auth-key {{ tailscale_key }}"
+  async: 240
+  poll: 0

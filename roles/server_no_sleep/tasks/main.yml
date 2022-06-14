@@ -14,12 +14,14 @@
   dnf:
     name: "{{ cockpit_pkgs }}"
     state: latest
+  when: ansible_hostname != 'drachen'
     
 - name: servers | enable cockpit
   ansible.builtin.systemd:
     name: cockpit.socket
     state: started
     enabled: True
+  when: ansible_hostname != 'drachen'
 
 
 

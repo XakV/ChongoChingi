@@ -1,0 +1,5 @@
+- hosts: nautiloid
+  become: yes
+  become_user: root
+  roles:
+    - homeassistant

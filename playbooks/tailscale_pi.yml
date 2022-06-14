@@ -1,0 +1,9 @@
+---
+- hosts: adblock
+  become: yes
+  become_user: root
+  tasks:
+    - name: do the pi tailscale thing
+      include_role:
+        name: tailscale
+        tasks_from: pi_debian.yml

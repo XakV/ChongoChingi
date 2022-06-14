@@ -17,14 +17,9 @@ $ORIGIN verboxen.org.
 @ 		        IN	A 	23.160.192.216
 drachen         	IN	A 	23.160.192.216
 www 	        	IN 	CNAME 	drachen.verboxen.org.
-sabretooth	        IN	A	192.168.0.93 
-leviathan	        IN	A	192.168.0.94 
-mastodon	        IN	A	192.168.0.99 
-megalonyx	        IN	A	192.168.0.219 
-samarkand	        IN	A	192.168.0.161 
-nautiloid               IN	A	192.168.0.48 
-ikapode0                IN      A       192.168.0.154
-ikapode1                IN      A       192.168.0.172
+{% for hostn in ansible_play_hosts %}
+{{ hostn }}                IN      A       {{ hostvars[hostn]['ansible_default_ipv4']['address'] }}
+{% endfor %}
 {% for ts_host in ansible_play_hosts %}
 {{ ts_host }}-ts              IN      A       {{ hostvars[ts_host]['ansible_tailscale0']['ipv4'] }}
 {% endfor %}

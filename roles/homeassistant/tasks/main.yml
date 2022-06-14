@@ -1,0 +1,32 @@
+---
+- name: open port with firewalld
+  ansible.posix.firewalld:
+    port: 8123/tcp
+    state: enabled
+    permanent: yes
+
+- name: make the container
+  containers.podman.podman_container:
+    name: hassio
+    image: 'ghcr.io/home-assistant/home-assistant:stable'
+    state: started
+    recreate: yes
+    privileged: yes
+    device: ['/dev/ttyUSB0:/dev/ttyUSB0']
+    publish:
+      - '192.168.0.11:8123:8123/tcp'
+    volume:
+      - '/opt/hass_config:/config'
+      - '/etc/localtime:/etc/localtime:ro'
+    generate_systemd:
+      path: /usr/lib/systemd/system
+      restart_policy: always
+      time: 120
+      names: true
+      container_prefix: ctr
+
+- name: enable and start the container
+  ansible.builtin.systemd:
+    name: ctr-hassio
+    state: started
+    enabled: yes
