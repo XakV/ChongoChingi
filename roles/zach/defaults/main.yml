@@ -59,6 +59,11 @@ flatpaks:
   - dev.lapce.lapce
   - org.gnome.Chess
   - com.valvesoftware.SteamLink
+  - com.github.neithern.g4music
+  - io.posidon.Paper
+  - io.github.davidoc26.wallpaper_selector
+  - com.raggesilver.BlackBox
+  - com.github.neithern.g4music
 
 gaming_flpks:
   - com.valvesoftware.Steam

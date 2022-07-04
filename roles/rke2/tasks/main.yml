@@ -1,4 +1,8 @@
 ---
+- name: sorry SELinux
+  ansible.posix.selinux:
+    state: disabled
+
 - name: NetworkManager shouldnt manage k8s ifaces
   ansible.builtin.copy:
     src: rke2-cni.conf
@@ -33,21 +37,19 @@
     daemon-reload: yes
     enabled: yes
 
-- name: firewalld open ports for agent nodes
+- name: firewalld open tcp ports
   ansible.posix.firewalld:
-    port: "{{ item | string }}"
+    port: "{{ item | string }}/tcp"
     state: enabled
     permanent: yes
-  loop: "{{ rke2_agent_ports }}"
-  when: rke2_agent
+  loop: "{{ tcp_ports }}"
 
-- name: firewalld open ports for server
+- name: firewalld open udp ports
   ansible.posix.firewalld:
-    port: "{{ item }}"
+    port: "{{ item | string }}/udp"
     state: enabled
     permanent: yes
-  loop: "{{ rke2_server_ports }}"
-  when: rke2_server
+  loop: "{{ udp_ports }}"
 
 - name: reload and restart firewalld
   ansible.builtin.systemd:
@@ -55,7 +57,10 @@
     daemon-reload: yes
     state: restarted
     enabled: yes
-      
+
+- name: run cilium cni steps
+  import_tasks: cilium.yml      
+
 - name: make rancher config dir
   ansible.builtin.file:
     path: /etc/rancher/rke2
@@ -67,11 +72,11 @@
   ansible.builtin.copy:
     src: server_config.yaml
     dest: /etc/rancher/rke2/config.yaml
-  when: rke2_server
+  when: "'rke2_server' in group_names"
 
 - name: run server install command
   shell: 'curl -sfL https://get.rke2.io | sh -'
-  when: rke2_server
+  when: "'rke2_server' in group_names"
 
 - name: start enable rke2
   ansible.builtin.systemd:
@@ -79,3 +84,4 @@
     state: started
     enabled: yes
     daemon-reload: yes
+  when: "'rke2_server' in group_names"

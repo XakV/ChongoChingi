@@ -21,5 +21,6 @@ www 	        	IN 	CNAME 	drachen.verboxen.org.
 {{ hostn }}                IN      A       {{ hostvars[hostn]['ansible_default_ipv4']['address'] }}
 {% endfor %}
 {% for ts_host in ansible_play_hosts %}
-{{ ts_host }}-ts              IN      A       {{ hostvars[ts_host]['ansible_tailscale0']['ipv4'] }}
+{{ ts_host }}-ts              IN      A       {{ hostvars[ts_host]['ansible_tailscale0']['ipv4']['address'] }}
 {% endfor %}
+tentacles.verboxen.org IN CNAME ikapode0.verboxen.org

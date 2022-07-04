@@ -1,0 +1,13 @@
+---
+- name: get cilium with checksum
+  get_url:
+    url: "{{ cilium_dl }}"
+    checksum:  "sha256:{{ cilium_dl_cksum }}"
+    dest: /tmp
+  register: cilium_archive
+    
+- name: unarchive cilium tar.gz fire
+  unarchive:
+    remote_src: yes
+    src: "{{ cilium_archive.dest }}"
+    dest: /usr/local/bin

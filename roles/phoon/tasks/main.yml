@@ -1,0 +1,83 @@
+---
+# Containers for Typhoon K8S
+# and/or proxy dhcp pxe
+
+- name: install tftp for testing
+  ansible.builtin.dnf:
+    name: tftp
+    state: installed
+
+- name: pull proxydhcp pxe container
+  containers.podman.podman_image:
+    name: quay.io/poseidon/dnsmasq
+
+- name: configure a tftp volume
+  containers.podman.podman_volume:
+    state: present
+    name: tftpboot_vol
+  register: tftp_vol
+
+- name: firewall ports
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  loop:
+    - '67/udp'
+    - '69/udp'
+    - '8080/tcp'
+
+- name: create the dnsmasq proxydhcp container
+  containers.podman.podman_container:
+    name: proxydhcp
+    image: quay.io/poseidon/dnsmasq
+    command: "{{ dnsmasq_cli }}"
+#     -d -q
+#     --dhcp-range=192.168.1.1,proxy,255.255.255.0
+#     --enable-tftp 
+#     --tftp-root=/var/lib/tftpboot
+#     --dhcp-userclass=set:ipxe,iPXE
+#     --pxe-service=tag:#ipxe,x86PC,"PXE chainload to iPXE",undionly.kpxe
+#     --pxe-service=tag:ipxe,x86PC,"iPXE",http://matchbox.verboxen.org:8080/boot.ipxe
+#     --pxe-service=tag:#ipxe,X86-64_EFI,"PXE chainload to iPXE UEFI",ipxe.efi
+#     --pxe-service=tag:ipxe,X86-64_EFI,"iPXE UEFI",http://matchbox.verboxen.org.com:8080/boot.ipxe
+#     --log-queries
+#     --log-dhcp
+    state: present
+    recreate: yes
+    cap_add:
+      - 'NET_ADMIN'
+      - 'NET_RAW'
+    expose:
+      - '8080/tcp'
+      - '67/udp'
+      - '69/udp'
+    publish:
+      - '67:67/udp'
+      - '69:69/udp'
+      - '8080:8080/tcp'
+    volume:
+      - "{{ tftp_vol['volume']['Mountpoint'] }}:/var/lib/tftpboot"
+    generate_systemd:
+      path: /etc/systemd/system
+      restart_policy: always
+      time: 120
+      names: true
+      container_prefix: syscon
+# what does this do?     
+#     - '--dhcp-userclass=set:ipxe,iPXE'
+
+- name: start the service
+  systemd:
+    name: syscon-proxydhcp
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
+- name: just a sleep
+  wait_for:
+    timeout: 30
+
+- name: get logs
+  shell: podman logs proxydhcp
+  

@@ -1,0 +1,8 @@
+---
+tcp_ports: ['9345', '6443', '10250', '2379', '2380', '30000-32767', '4240']
+udp_ports: ['8472']
+icmp_ports: ['8']
+cilium_dl: 'https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-amd64.tar.gz'
+cilium_dl_cksum: 'https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-amd64.tar.gz.sha256sum'
+cilium_unpack: 'tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin'
+cilium_cleanup: 'rm cilium-linux-amd64.tar.gz{,.sha256sum}'
