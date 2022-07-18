@@ -1,0 +1,37 @@
+---
+- name: create a volume for monitoring data
+  containers.podman.podman_volume:
+    state: present
+    name: uptime_kuma
+    label:
+      purpose: monitoring
+
+- name: expose the port for uptime_kuma
+  ansible.posix.firewalld:
+    port: 3001/tcp
+    state: enabled
+    permanent: True
+
+- name: create the uptime_kuma container
+  containers.podman.podman_container:
+    name: uptime_kuma
+    image: docker.io/louislam/uptime-kuma
+    state: started
+    recreate: yes
+    publish:
+      - 3001:3001/tcp
+    volumes:
+      - uptime_kuma:/app/data
+    generate_systemd:
+      path: /usr/lib/systemd/system
+      restart_policy: always
+      time: 120
+      names: true
+      container_prefix: pdmn 
+
+- name: start and enable uptime_kuma
+  ansible.builtin.systemd:
+    name: pdmn-uptime_kuma.service
+    state: started
+    enabled: yes
+    daemon_reload: yes

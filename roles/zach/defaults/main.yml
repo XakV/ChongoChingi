@@ -64,6 +64,7 @@ flatpaks:
   - io.github.davidoc26.wallpaper_selector
   - com.raggesilver.BlackBox
   - com.github.neithern.g4music
+  - flathub dev.boxi.Boxi
 
 gaming_flpks:
   - com.valvesoftware.Steam

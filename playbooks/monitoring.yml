@@ -1,5 +1,5 @@
-- hosts: rke2
+- hosts: monitoring
   become: True
   become_user: root
   roles:
-    - rke2
+    - monitoring 
