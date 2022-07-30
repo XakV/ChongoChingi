@@ -1,0 +1,56 @@
+---
+# Runs Uptime Kuma in a container
+
+- name: pull uptime-kuma image
+  containers.podman.podman_image:
+    name: docker.io/louislam/uptime-kuma:1
+
+- name: configure a data volume
+  containers.podman.podman_volume:
+    state: present
+    name: uptime_kuma
+  register: kuma_vol
+
+- name: firewall ports
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  loop:
+    - '3001/tcp'
+
+- name: create the uptime kuma container
+  containers.podman.podman_container:
+    name: uptime_kuma
+    image: docker.io/louislam/uptime-kuma:1
+    state: present
+    recreate: yes
+    cap_add:
+      - 'NET_ADMIN'
+      - 'NET_RAW'
+    expose:
+      - '3001/tcp'
+    publish:
+      - '3001:3001/tcp'
+    volume:
+      - "{{ kuma_vol['volume']['Mountpoint'] }}:/app/data"
+    generate_systemd:
+      path: /etc/systemd/system
+      restart_policy: always
+      time: 120
+      names: true
+      container_prefix: pdmn
+
+- name: start the service
+  systemd:
+    name: pdmn-uptime_kuma
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
+- name: just a sleep
+  wait_for:
+    timeout: 30
+
+- name: get logs
+  shell: podman logs uptime_kuma

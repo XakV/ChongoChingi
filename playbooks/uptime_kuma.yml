@@ -1,0 +1,5 @@
+- hosts: megalonyx
+  become: yes
+  become_user: root
+  roles:
+    - uptime_kuma
