@@ -14,6 +14,16 @@
     gpgcheck: yes
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
 
+- name: set up the copr repos
+  command: "dnf copr enable {{ item }} -y"
+  loop: "{{ copr_repos }}"
+
+- name: install copr rpms
+  dnf:
+    name: "{{ item | split('/') | last }}"
+    state: installed
+  loop: "{{ copr_repos }}"
+
 - name: remove the nano default
   ansible.builtin.dnf:
     name: nano-default-editor
@@ -58,6 +68,17 @@
     - syncthing
     - podman.socket
     - podman-auto-update.timer
+
+- name: start up system services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: yes
+    daemon-reload: yes
+    state: restarted
+  loop:
+    - podman.socket
+    - podman-auto-update.timer
+    - ofono.service
 
 - name: Add the flathub flatpak repository remote to the user installation
   flatpak_remote:

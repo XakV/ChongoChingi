@@ -32,8 +32,22 @@ zachs_rpms:
   - 'intel-media-driver'
   - 'code'
   - 'cronie'
+  - 'sbc'
+  - 'pipewire-codec-aptx'
+  - 'hidapi'
+  - 'bluez-tools'
+  - 'blueberry'
+  - 'blueman'
+  - 'gnome-bluetooth'
+  - 'NetworkManager-bluetooth'
+  - 'ofono'
+  - 'opal'
+  - 'gnome-phone-manager'
 
 modular_rpms: 'nodejs:18'
+
+copr_repos:
+  - 'varlad/helix'
 
 flatpaks:
   - com.github.babluboy.bookworm
@@ -64,7 +78,10 @@ flatpaks:
   - io.github.davidoc26.wallpaper_selector
   - com.raggesilver.BlackBox
   - com.github.neithern.g4music
-  - flathub dev.boxi.Boxi
+  - dev.boxi.Boxi
+  - com.github.dynobo.normcap
+  - org.wezfurlong.wezterm
+  - com.github.cubitect.cubiomes-viewer
 
 gaming_flpks:
   - com.valvesoftware.Steam
