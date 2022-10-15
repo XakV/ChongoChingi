@@ -1,4 +1,6 @@
-- hosts: rke2
+---
+- hosts: k8s
   become: yes
+  become_user: root
   roles:
     - k3s

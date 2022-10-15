@@ -1,7 +1,7 @@
 ---
 - name: NetworkManager shouldnt manage k8s ifaces
   ansible.builtin.copy:
-    src: rke2-cni.conf
+    src: cni.conf
     dest: /etc/NetworkManager/conf.d/rke2-cni.conf
     owner: root
     group: root
@@ -44,14 +44,28 @@
     name: ['container-selinux', 'selinux-policy-base']
     state: latest
 
-- name: install k3s selinux stuff
-  ansible.builtin.dnf:
-    name: https://rpm.rancher.io/k3s/latest/common/centos/7/noarch/k3s-selinux-0.2-1.el7_8.noarch.rpm
-    state: present
-    disable_gpg_check: yes
+- name: generate a node token locally
+  shell: bw generate --ulnp --words 4 --separator _
+  register: token
+  delegate_to: localhost
+  become: true
+  become_user: zach
 
-- name: run install script
-  ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -
+- name: create the directory for kubeconfig on the initial cp node
+  file:
+    path: "/home/zach/.kube"
+    state: directory
+    owner: zach
+    group: zach
+    mode: 0744
+
+- name: run install script on first server
+  ansible.builtin.shell: "curl -sfL https://get.k3s.io | K3S_TOKEN={{ token.stdout | strip }} sh -s - server --cluster-init"
+  register: initial_cp_up
   environment: 
-    INSTALL_K3S_CHANNEL: latest
-  when: k3s_first
+    INSTALL_K3S_CHANNEL: "latest"
+    K3S_KUBECONFIG_MODE: "644"
+    K3S_KUBECONFIG_OUTPUT: "/home/zach/.kube/kubeconfig.yml"
+  when: 
+    - controlplane
+    - initial_cp

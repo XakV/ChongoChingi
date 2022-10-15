@@ -1,0 +1,11 @@
+- name: install the packages
+  dnf:
+    name: ['gcc', 'rpm-build', 'rpm-devel', 'rpmlint', 'make', 'python', 'bash',
+           'coreutils', 'diffutils', 'patch', 'rpmdevtools']
+    state: installed
+
+- name: zach is in mock
+  user:
+    name: zach
+    groups: 'mock'
+    append: true

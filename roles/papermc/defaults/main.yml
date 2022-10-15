@@ -1,0 +1,5 @@
+---
+mc_major: '1.19'
+worlds:
+  - { 'name': 'flannel_nunchuks', 'port': '25568' }
+  - { 'name': 'new_quirk_city', 'port': '25567' }

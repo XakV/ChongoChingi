@@ -1,4 +1,4 @@
-@       IN      SOA     ns1.gandi.net.      verboxen.org. (
+@       IN      SOA     ns1.gandi.net.      fsck-it.org. (
                         2022012101	; serial number YYMMDDNN
                         28800           ; Refresh
                         7200            ; Retry
@@ -9,18 +9,18 @@
                 NS      ns1.gandi.net. 
                 NS      hostmaster.gandi.net. 
 
-                MX      10 mail.verboxen.org.
+                MX      10 mail.fsck-it.org.
 
 
 $ORIGIN verboxen.org.
 
 @ 		        IN	A 	23.160.192.216
 drachen         	IN	A 	23.160.192.216
-www 	        	IN 	CNAME 	drachen.verboxen.org.
+www 	        	IN 	CNAME 	drachen.fsck-it.org.
 {% for hostn in ansible_play_hosts %}
 {{ hostn }}                IN      A       {{ hostvars[hostn]['ansible_default_ipv4']['address'] }}
 {% endfor %}
 {% for ts_host in ansible_play_hosts %}
 {{ ts_host }}-ts              IN      A       {{ hostvars[ts_host]['ansible_tailscale0']['ipv4']['address'] }}
 {% endfor %}
-tentacles.verboxen.org IN CNAME ikapode0.verboxen.org
+tentacles.fsck-it.org IN CNAME ikapode0.fsck-it.org

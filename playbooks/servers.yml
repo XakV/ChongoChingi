@@ -2,22 +2,16 @@
   become: yes
   become_user: root
   roles:
+    - network
     - common
+    - tailscale
     - podman
     - devel
-    - ssl
     - server_no_sleep
+  # - ssl
 
-  post_tasks:
-    - name: tailscale for all
-      import_role:
-        name: tailscale
-      
-    - name: coredns for the nameservers
-      import_role:
-        name: coredns
-      when: inventory_hostname in groups.nameservers
-
-    - name: network for all
-      import_role:
-        name: network
+- hosts: nameservers
+  become: yes
+  become_user: root
+  roles:
+    - coredns

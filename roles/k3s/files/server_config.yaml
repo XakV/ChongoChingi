@@ -1,5 +1,0 @@
-write-kubeconfig-mode: "0644"
-container-runtime-endpoint: "cri-o"
-cni: "cilium"
-tls-san:
-  - "lower.badkuub.club"

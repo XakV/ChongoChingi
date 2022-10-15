@@ -31,9 +31,6 @@
 
 - name: activate podman system service
   systemd:
-    name: "{{ item }}"
+    name: "podman"
     state: restarted
     daemon-reload: yes
-  loop:
-    - 'crio'
-    - 'podman'

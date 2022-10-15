@@ -21,7 +21,7 @@
     group: root
     mode: 0644 
   loop:
-    - "db.verboxen.org"
+    - "db.fsck-it.org"
     - "Corefile"
 
 - name: create the coredns container

@@ -1,3 +1,2 @@
 ---
-podman_pkgs: ['podman', 'buildah', 'cri-o']
-container_modules: ['cri-o:1.22']
+podman_pkgs: ['podman', 'buildah', 'podman-compose']

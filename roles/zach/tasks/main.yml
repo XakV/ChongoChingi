@@ -132,7 +132,7 @@
   loop: "{{ home_dotdirs }}"
 
 - name: set up poetry
-  ansible.builtin.shell: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+  ansible.builtin.shell: curl -sSL https://install.python-poetry.org | python3 -
   args:
     creates: "{{ ansible_user_dir }}/.poetry/bin/poetry"
   become: yes
