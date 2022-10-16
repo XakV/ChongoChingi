@@ -1,0 +1,19 @@
+---
+- hosts: k8s
+  become: yes
+  become_user: root
+  tasks:
+
+    - name: uninstall servers
+      command: /usr/local/bin/k3s-uninstall.sh
+      when: '"controlplane" in group_names'
+
+    - name: remove old kubeconfig
+      file:
+        path: /home/zach/.kube/kubeconfig.yml
+        state: absent
+      failed_when: false
+
+    - name: uninstall workers
+      command: /usr/local/bin/k3s-agent-uninstall.sh
+      when: '"worker" in group_names'

@@ -2,7 +2,7 @@
 - name: NetworkManager shouldnt manage k8s ifaces
   ansible.builtin.copy:
     src: cni.conf
-    dest: /etc/NetworkManager/conf.d/rke2-cni.conf
+    dest: /etc/NetworkManager/conf.d/cni.conf
     owner: root
     group: root
 
@@ -45,27 +45,45 @@
     state: latest
 
 - name: generate a node token locally
-  shell: bw generate --ulnp --words 4 --separator _
+  shell: bw generate -ulnp --words 4 --separator _
   register: token
   delegate_to: localhost
+  run_once: true
   become: true
   become_user: zach
 
 - name: create the directory for kubeconfig on the initial cp node
   file:
-    path: "/home/zach/.kube"
+    path: "/home/{{ k3s_user }}/.kube"
     state: directory
-    owner: zach
-    group: zach
+    owner: "{{ k3s_user }}"
+    group: "{{ k3s_user }}"
     mode: 0744
 
 - name: run install script on first server
-  ansible.builtin.shell: "curl -sfL https://get.k3s.io | K3S_TOKEN={{ token.stdout | strip }} sh -s - server --cluster-init"
-  register: initial_cp_up
+  ansible.builtin.shell: >
+    curl -sfL https://get.k3s.io | K3S_TOKEN={{ token.stdout | trim }} sh -s - server --cluster-init 
+    --advertise-address {{ cluster_ip }} --tls-san {{ initial_cp }}.local 
+    --tls-san {{ initial_cp }}.{{ cluster_domain }} --tls-san {{ cluster_ip }}
   environment: 
-    INSTALL_K3S_CHANNEL: "latest"
+    INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
     K3S_KUBECONFIG_MODE: "644"
-    K3S_KUBECONFIG_OUTPUT: "/home/zach/.kube/kubeconfig.yml"
-  when: 
-    - controlplane
-    - initial_cp
+    K3S_KUBECONFIG_OUTPUT: "/home/{{ k3s_user }}/.kube/kubeconfig.yml"
+  when: ansible_hostname == initial_cp
+
+- name: run install scripts on additional server nodes
+  ansible.builtin.shell: >
+    curl -sfL https://get.k3s.io | K3S_TOKEN={{ token.stdout | trim }} sh -s - server
+    --server https://{{ cluster_ip }}:6443
+  environment: 
+    INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
+  when:
+    - ansible_hostname != initial_cp
+    - '"controlplane" in group_names'
+
+- name: run install scripts on worker nodes
+  ansible.builtin.shell: >
+    curl -sfL https://get.k3s.io | K3S_URL=https://{{ cluster_ip }}:6443 K3S_TOKEN={{ token.stdout | trim }} sh -
+  environment: 
+    INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
+  when: '"worker" in group_names'
