@@ -50,7 +50,36 @@
   delegate_to: localhost
   run_once: true
   become: true
-  become_user: zach
+  become_user: "{{ k3s_user }}"
+
+- name: remove old token var
+  file:
+    path: "{{ role_path }}/vars/token.yml"
+    state: absent
+  delegate_to: localhost
+  run_once: true
+
+- name: encrypt the token string
+  ansible.builtin.shell:
+    chdir: "/home/{{ k3s_user }}/Ansible"
+    cmd: "poetry shell && ansible-vault encrypt_string {{ token.stdout }}"
+  register: encrypted_token
+  delegate_to: localhost
+  run_once: true
+  become: true
+  become_user: "{{ k3s_user }}"
+
+- name: template token var file
+  template:
+    src: token.yml.j2
+    dest: "{{ role_path }}/vars/token.yml"
+    mode: 0640
+    owner: "{{ k3s_user }}"
+    group: "{{ k3s_user }}"
+  delegate_to: localhost
+  run_once: true
+  become: true
+  become_user: "{{ k3s_user }}"
 
 - name: create the directory for kubeconfig on the initial cp node
   file:
@@ -70,6 +99,7 @@
     K3S_KUBECONFIG_MODE: "644"
     K3S_KUBECONFIG_OUTPUT: "/home/{{ k3s_user }}/.kube/kubeconfig.yml"
   when: ansible_hostname == initial_cp
+  tags: first_cp
 
 - name: run install scripts on additional server nodes
   ansible.builtin.shell: >
@@ -80,6 +110,7 @@
   when:
     - ansible_hostname != initial_cp
     - '"controlplane" in group_names'
+  tags: next_cp 
 
 - name: run install scripts on worker nodes
   ansible.builtin.shell: >
@@ -87,3 +118,4 @@
   environment: 
     INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
   when: '"worker" in group_names'
+  tags: workers

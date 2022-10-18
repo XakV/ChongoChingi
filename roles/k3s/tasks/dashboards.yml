@@ -1,0 +1,65 @@
+---
+- name: install longhorn
+  command: kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml
+  environment: 
+    KUBECONFIG: "/home/{{ k3s_user }}/.kube/kubeconfig.yml"
+
+- name: set up directory for k3s on workstations
+  file:
+    path: "/home/{{ k3s_user }}/K3S"
+    state: directory
+    owner: "{{ k3s_user }}"
+    group: "{{ k3s_user }}"
+    mode: 0750
+
+- name: if git repo is not initialized then clone it
+  git:
+    repo: 'git@github.com:XakV/k3s_files.git'
+    dest: "/home/{{ k3s_user }}/K3S"
+
+- name: get dash release 
+  shell: |
+    curl -w '%{url_effective}' -I -L -s -S ${GITHUB_URL}/latest -o /dev/null | sed -e 's|.*/||'
+  environment:
+    GITHUB_URL: https://github.com/kubernetes/dashboard/releases
+  register: dash_release
+
+- name: create the dashboard 
+  shell: |
+    kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/{{ dash_release.stdout }}/aio/deploy/recommended.yaml
+  
+- name: create the dashboard admin user file
+  blockinfile:
+    path: "/home/{{ k3s_user }}/K3S/dashboard.admin-user.yml" 
+    block: |
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: admin-{{ k3s_user }}
+        namespace: kubernetes-dashboard
+
+- name: create the dashboard admin user rbac role 
+  template:
+    src: dashboard.admin-user-role.yml.j2
+    dest: "/home/{{ k3s_user }}/K3S/dashboard.admin-user-role.yml"
+    owner: "{{ k3s_user }}"
+    group: "{{ k3s_user }}"
+    mode: 0644
+
+- name: apply the dashboard admin user and rbac role config
+  shell: 
+    cmd: kubectl create -f dashboard.admin-user.yml -f dashboard.admin-user-role.yml
+    chdir: "/home/{{ k3s_user }}/K3S"
+
+- name: get the token for your admin-user 
+  shell: "kubectl -n kubernetes-dashboard create token admin-{{ k3s_user }}"
+  register: dash_token
+
+- name: output the info
+  debug:
+    msg: |
+      K3S dashboard now available
+          kubectl proxy
+      creates a proxy to login to the dashboard
+      use token in the output below
+      {{ dash_token.stdout }}

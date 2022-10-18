@@ -1,0 +1,9 @@
+---
+- hosts: zach
+  tasks:
+    - name: configure dashboards
+      import_role:
+        name: k3s
+        tasks_from: dashboards.yml
+      environment:
+        KUBECONFIG: "/home/{{ k3s_user }}/.kube/kubeconfig.yml"
