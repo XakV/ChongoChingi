@@ -119,3 +119,35 @@
     INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
   when: '"worker" in group_names'
   tags: workers
+
+- name: fix the ip in the kubeconfig file
+  replace:
+    path: "/home/{{ k3s_user }}/.kube/kubeconfig.yml"
+    regexp: '127.0.0.1'
+    replace: "{{ cluster_ip }}"
+    owner: "{{ k3s_user }}"
+    group: "{{ k3s_user }}"
+    mode: 0644
+  when: ansible_hostname == initial_cp
+
+- name: get the kubeconfig file
+  fetch:
+    src: "/home/{{ k3s_user }}/.kube/kubeconfig.yml"
+    dest: "/home/{{ k3s_user }}/Ansible/roles/k3s/files/"
+    flat: yes
+    owner: "{{ k3s_user }}"
+    group: "{{ k3s_user }}"
+    mode: 0644
+  when: ansible_hostname == initial_cp
+
+- name: encrypt the kubeconfig file on the control host
+  shell:
+    cmd: poetry shell && ansible-vault encrypt roles/k3s/files/kubeconfig.yml
+    chdir: "/home/{{ k3s_user }}/Ansible"
+  environment:
+    VAULT_PASSWORD_FILE: "/home/{{ k3s_user }}/.ansible_vp"
+  become: yes
+  become_user: "{{ k3s_user }}"
+  delegate_to: localhost
+  run_once: true
+

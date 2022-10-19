@@ -1,0 +1,6 @@
+- hosts: k8s_wrkstn
+  tasks:
+    - name: run the setup tasks
+      import_role:
+        name: k3s
+        tasks_from: setup_kubeconfig.yml

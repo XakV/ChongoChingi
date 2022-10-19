@@ -1,10 +1,10 @@
 ---
-- name: install longhorn
-  command: kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml
-  environment: 
-    KUBECONFIG: "/home/{{ k3s_user }}/.kube/kubeconfig.yml"
+# name: install longhorn
+# command: kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml
+# environment: 
+#   KUBECONFIG: "/home/{{ k3s_user }}/.kube/kubeconfig.yml"
 
-- name: set up directory for k3s on workstations
+- name: set up directory for k3s
   file:
     path: "/home/{{ k3s_user }}/K3S"
     state: directory
@@ -12,16 +12,18 @@
     group: "{{ k3s_user }}"
     mode: 0750
 
-- name: if git repo is not initialized then clone it
-  git:
-    repo: 'git@github.com:XakV/k3s_files.git'
-    dest: "/home/{{ k3s_user }}/K3S"
+      # name: if git repo is not initialized then clone it
+      # git:
+      #   repo: 'git@github.com:XakV/k3s_files.git'
+      #   dest: "/home/{{ k3s_user }}/K3S"
 
 - name: get dash release 
   shell: |
     curl -w '%{url_effective}' -I -L -s -S ${GITHUB_URL}/latest -o /dev/null | sed -e 's|.*/||'
   environment:
     GITHUB_URL: https://github.com/kubernetes/dashboard/releases
+  delegate_to: localhost
+  run_once: true
   register: dash_release
 
 - name: create the dashboard 
@@ -37,6 +39,9 @@
       metadata:
         name: admin-{{ k3s_user }}
         namespace: kubernetes-dashboard
+    owner: "{{ k3s_user }}"
+    group: "{{ k3s_user }}"
+    mode: 0644
 
 - name: create the dashboard admin user rbac role 
   template:

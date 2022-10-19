@@ -17,3 +17,11 @@
     - name: uninstall workers
       command: /usr/local/bin/k3s-agent-uninstall.sh
       when: '"worker" in group_names'
+
+    - name: clear any previous erros
+      meta: clear_host_errors
+
+    - name: run the clean up script
+      shell: |
+        curl -k https://raw.githubusercontent.com/rancherlabs/support-tools/master/extended-rancher-2-cleanup/extended-cleanup-rancher2.sh | bash
+      when: '"k8s_wrkstn" not in group_names'

@@ -1,5 +1,5 @@
 ---
-- hosts: zach
+- hosts: initial_cp
   tasks:
     - name: configure dashboards
       import_role:
