@@ -55,9 +55,9 @@
 - name: Firewall ports
   ansible.posix.firewalld:
     port: "{{ server_port }}/tcp"
-    permanent: yes
+    permanent: true
     state: enabled
-  become: yes
+  become: true
   become_user: root
 
 - name: Create the world containers
