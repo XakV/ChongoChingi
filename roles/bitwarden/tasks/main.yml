@@ -26,6 +26,7 @@
 
 - name: unzip bw bundle to usr local
   unarchive:
+    copy: no
     src: "{{ bw_file.dest }}"
     dest: /usr/local/bin/
     owner: root

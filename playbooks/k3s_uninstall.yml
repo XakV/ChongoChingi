@@ -1,27 +1,27 @@
 ---
-- hosts: k8s
-  become: yes
+- name: K3s_uninstall
+  hosts: k8s
+  become: true
   become_user: root
   tasks:
-
-    - name: uninstall servers
-      command: /usr/local/bin/k3s-uninstall.sh
+    - name: Uninstall servers
+      ansible.builtin.command: /usr/local/bin/k3s-uninstall.sh
       when: '"controlplane" in group_names'
 
-    - name: remove old kubeconfig
-      file:
+    - name: Remove old kubeconfig
+      ansible.builtin.file:
         path: /home/zach/.kube/kubeconfig.yml
         state: absent
       failed_when: false
 
-    - name: uninstall workers
-      command: /usr/local/bin/k3s-agent-uninstall.sh
+    - name: Uninstall workers
+      ansible.builtin.command: /usr/local/bin/k3s-agent-uninstall.sh
       when: '"worker" in group_names'
 
-    - name: clear any previous erros
-      meta: clear_host_errors
+    - name: Clear any previous erros
+      ansible.builtin.meta: clear_host_errors
 
-    - name: run the clean up script
-      shell: |
+    - name: Run the clean up script
+      ansible.builtin.shell: |
         curl -k https://raw.githubusercontent.com/rancherlabs/support-tools/master/extended-rancher-2-cleanup/extended-cleanup-rancher2.sh | bash
       when: '"k8s_wrkstn" not in group_names'

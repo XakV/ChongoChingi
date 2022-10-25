@@ -1,0 +1,13 @@
+---
+- name: Paper_MC_oliver_creative
+  hosts: drachen
+  become: true
+  become_user: root
+  tasks:
+    - name: Use these vars
+      ansible.builtin.include_vars:
+        file: ../roles/papermc/vars/oliver_creative.yml
+
+    - name: Run the role
+      ansible.builtin.import_role:
+        name: papermc

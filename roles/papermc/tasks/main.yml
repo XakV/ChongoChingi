@@ -1,25 +1,24 @@
 ---
 # Pulls PaperMC and runs it in a container
-
-- name: query the paper build family api
+- name: Query the paper build family api
   ansible.builtin.uri:
     url: "https://api.papermc.io/v2/projects/paper/version_group/{{ mc_major }}/builds"
     return_content: yes
   register: build_fams
 
-- name: find latest build of latest version of mc_rel
+- name: Find latest build of latest version of mc_rel
   ansible.builtin.set_fact:
     paper_info: "{{ build_fams['content'] | from_json | to_json | from_json }}"
 
-- name: get builds into a list
+- name: Get builds into a list
   set_fact:
     paper_build_list: "{{ paper_info['builds'] }}"
 
-- name: get the last build
+- name: Get the last build
   set_fact:
     paper_dl: "{{ paper_build_list | last }}"
 
-- name: download the lastest build 
+- name: Download the lastest build 
   ansible.builtin.get_url:
     url: >
       https://api.papermc.io/v2/projects/paper/versions/{{ paper_dl.version }}/builds/{{ paper_dl.build }}/downloads/{{ paper_dl.downloads.application.name.rstrip('\n') }}
@@ -27,80 +26,85 @@
     owner: zach
     group: zach
     mode: 0750
-  become: yes
+  become: true
   become_user: root
 
-- name: mk the server dirs
+- name: Mk the server dirs
   file:
-    path: "/srv/{{ item.name }}"
+    path: "/srv/{{ server_name }}"
     state: directory
     owner: zach
     group: zach
     mode: 0775
-  loop: "{{ worlds }}"
-  become: yes
+  become: true
   become_user: root
 
-- name: copy the build to the server data dirs
+- name: Copy the build to the server data dirs
   ansible.builtin.copy:
     remote_src: true
     src: "/srv/{{ paper_dl.downloads.application.name }}"
-    dest: "/srv/{{ item.name }}/{{ paper_dl.downloads.application.name }}"
+    dest: "/srv/{{ server_name }}/{{ paper_dl.downloads.application.name }}"
     owner: zach
     group: zach
     mode: 0750
-  loop: "{{ worlds }}"
 
-- name: pull the openjdk image
+- name: Pull the openjdk image
   containers.podman.podman_image:
     name: registry.access.redhat.com/ubi8/openjdk-17-runtime
 
-- name: firewall ports
+- name: Firewall ports
   ansible.posix.firewalld:
-    port: "{{ item }}/tcp"
+    port: "{{ server_port }}/tcp"
     permanent: yes
     state: enabled
-  loop: 
-    - '25568'
-    - '25567'
   become: yes
   become_user: root
 
-- name: create the world containers
+- name: Create the world containers
   containers.podman.podman_container:
-    name: "{{ item.name }}"
+    name: "{{ server_name }}"
     image: registry.access.redhat.com/ubi8/openjdk-17-runtime
     state: present
-    recreate: yes
+    recreate: true
     cap_add:
       - 'NET_ADMIN'
       - 'NET_RAW'
     expose:
-      - "{{ item.port }}/tcp"
+      - "{{ server_port }}/tcp"
     publish:
-      - "{{ item.port }}:{{ item.port }}"
+      - "{{ server_port }}:{{ server_port }}"
     mount:
-      - "type=bind,source=/srv/{{ item.name }},destination=/srv/{{ item.name }}"
-    interactive: yes
-    tty: yes
-    cmd_args: "{{ item.options | quote }} /srv/{{ item.name }}/paper-1.19.2-134.jar nogui"
+      - "type=bind,source=/srv/{{ server_name }},destination=/srv/{{ server_name }}"
+    interactive: true
+    tty: true
+    command: |
+      java -jar -Xms2G -Xmx4G /srv/{{ server_name }}/paper-1.19.2-134.jar nogui
     generate_systemd:
       restart_policy: always
       time: 120
       names: true
       container_prefix: pdmn
-  loop:
-    - { 'name': 'flannel_nunchuks', 'port': '25568' , 'options': '-Xms2G -Xmx4G' }
-    - { 'name': 'new_quirk_city', 'port': '25567' , 'options': '-Xms2G -Xmx4G' }
+      separator: "_"
+  register: server_container
 
-# name: start the service
-# systemd:
-#   name: "pdmn-{{ item.name }}"
-#   state: restarted
-#   enabled: yes
-#   daemon_reload: yes
-# loop: worlds
+- name: Create the container service
+  ansible.builtin.copy:
+    content: "{{ server_container.podman_systemd.pdmn_oliver_creative }}"
+    dest: "/usr/lib/systemd/system/pdmn_{{ server_name }}.service"
+    owner: root
+    group: root
+    mode: 0644
 
-# name: just a sleep
+- name: Reload configs
+  command: systemctl daemon-reload
+
+- name: Start the service
+  systemd:
+    name: "pdmn_{{ server_name }}"
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
+# name: Just a sleep
 # wait_for:
 #   timeout: 30

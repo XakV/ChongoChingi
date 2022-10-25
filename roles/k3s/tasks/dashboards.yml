@@ -1,8 +1,9 @@
 ---
-# name: install longhorn
-# command: kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml
-# environment: 
-#   KUBECONFIG: "/home/{{ k3s_user }}/.kube/kubeconfig.yml"
+- name: install longhorn
+  command: kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml
+  environment: 
+    KUBECONFIG: "/home/{{ k3s_user }}/.kube/kubeconfig.yml"
+  tags: longhorn
 
 - name: set up directory for k3s
   file:
@@ -12,11 +13,6 @@
     group: "{{ k3s_user }}"
     mode: 0750
 
-      # name: if git repo is not initialized then clone it
-      # git:
-      #   repo: 'git@github.com:XakV/k3s_files.git'
-      #   dest: "/home/{{ k3s_user }}/K3S"
-
 - name: get dash release 
   shell: |
     curl -w '%{url_effective}' -I -L -s -S ${GITHUB_URL}/latest -o /dev/null | sed -e 's|.*/||'
@@ -25,7 +21,7 @@
   delegate_to: localhost
   run_once: true
   register: dash_release
-
+      
 - name: create the dashboard 
   shell: |
     kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/{{ dash_release.stdout }}/aio/deploy/recommended.yaml
@@ -33,6 +29,7 @@
 - name: create the dashboard admin user file
   blockinfile:
     path: "/home/{{ k3s_user }}/K3S/dashboard.admin-user.yml" 
+    create: yes
     block: |
       apiVersion: v1
       kind: ServiceAccount
@@ -62,7 +59,7 @@
 
 - name: output the info
   debug:
-    msg: |
+    msg: >
       K3S dashboard now available
           kubectl proxy
       creates a proxy to login to the dashboard

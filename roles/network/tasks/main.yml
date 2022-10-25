@@ -37,8 +37,8 @@
 - name: set nameservers on active connections
   community.general.nmcli:
     conn_name: "{{ item }}"
-    dns4: ['192.168.0.11', '192.168.0.99', '1.1.1.1']
-    dns4_search: 'verboxen.org'
+    dns4: ['192.168.0.11', '1.1.1.1']
+    dns4_search: 'fsck-it.org'
     state: present
   loop: "{{ main_ifaces | difference(['cni-podman0', 'podman0', 'tailscale0']) }}"
 

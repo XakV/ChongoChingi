@@ -1,5 +1,5 @@
-127.0.0.1      {{ inventory_hostname }}   {{ inventory_hostname }}.verboxen.org
-23.160.192.216 drachen      drachen.verboxen.org
+127.0.0.1      {{ inventory_hostname }}   {{ inventory_hostname }}.{{ cluster_domain }}
+23.160.192.216 drachen      drachen.{{ cluster_domain }}
 {% for hostn in ansible_play_hosts %}
 {{ hostvars[hostn]['ansible_default_ipv4']['address'] }}    {{ hostvars[hostn]['ansible_fqdn']}}    {{ hostvars[hostn]['ansible_hostname']}}
 {% endfor %}

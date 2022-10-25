@@ -1,3 +1,10 @@
+- hosts: nameservers
+  become: yes
+  become_user: root
+  roles:
+    - coredns
+    - ssl
+
 - hosts: servers
   become: yes
   become_user: root
@@ -8,10 +15,4 @@
     - podman
     - devel
     - server_no_sleep
-  # - ssl
-
-- hosts: nameservers
-  become: yes
-  become_user: root
-  roles:
-    - coredns
+    - ssl

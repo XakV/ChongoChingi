@@ -146,7 +146,7 @@
     chdir: "/home/{{ k3s_user }}/Ansible"
   environment:
     VAULT_PASSWORD_FILE: "/home/{{ k3s_user }}/.ansible_vp"
-  become: yes
+  become: true
   become_user: "{{ k3s_user }}"
   delegate_to: localhost
   run_once: true

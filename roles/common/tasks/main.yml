@@ -32,7 +32,7 @@
     enabled: true
 
 - name: Common | set the fqdn
-  ansible.builtin.command: "hostnamectl set-hostname {{ inventory_hostname }}.verboxen.org"
+  ansible.builtin.command: "hostnamectl set-hostname {{ inventory_hostname }}.{{ cluster_domain }}"
 
 - name: Common | template the hosts file
   ansible.builtin.template:

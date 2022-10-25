@@ -1,0 +1,4 @@
+---
+server_name: 'oliver_creative'
+server_port: '25919'
+server_options: '-Xms2G -Xmx4G'
