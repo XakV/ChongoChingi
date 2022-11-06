@@ -1,4 +1,10 @@
 ---
+- name: Set the hostname with domain
+  ansible.builtin.command: "hostnamectl set-hostname {{ ansible_hostname }}.{{ cluster_domain }}"
+
+- name: Echo the hostname to the kernel
+  ansible.builtin.command: "echo {{ ansible_hostname }}.{{ cluster_domain }}"
+
 - name: start systemd-resolved
   systemd:
     name: systemd-resolved

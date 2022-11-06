@@ -23,9 +23,9 @@
     url: >
       https://api.papermc.io/v2/projects/paper/versions/{{ paper_dl.version }}/builds/{{ paper_dl.build }}/downloads/{{ paper_dl.downloads.application.name.rstrip('\n') }}
     dest: "/srv/{{ paper_dl.downloads.application.name }}"
-    owner: zach
-    group: zach
-    mode: 0750
+    owner: root
+    group: root
+    mode: 0755
   become: true
   become_user: root
 
@@ -46,7 +46,7 @@
     dest: "/srv/{{ server_name }}/{{ paper_dl.downloads.application.name }}"
     owner: zach
     group: zach
-    mode: 0750
+    mode: 0755
 
 - name: Pull the openjdk image
   containers.podman.podman_image:
@@ -73,12 +73,12 @@
       - "{{ server_port }}/tcp"
     publish:
       - "{{ server_port }}:{{ server_port }}"
-    mount:
-      - "type=bind,source=/srv/{{ server_name }},destination=/srv/{{ server_name }}"
+    volume:
+      - "/srv/{{ server_name }}:/srv/{{ server_name }}"
     interactive: true
     tty: true
     command: |
-      java -jar -Xms2G -Xmx4G /srv/{{ server_name }}/paper-1.19.2-134.jar nogui
+      java -jar -Xms2G -Xmx4G /srv/{{ server_name }}/{{ paper_dl.downloads.application.name }} nogui
     generate_systemd:
       restart_policy: always
       time: 120
