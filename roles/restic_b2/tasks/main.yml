@@ -5,6 +5,14 @@
     state: latest
   become: yes
 
+- name: copy the includes file for the host
+  copy:
+    src: "{{ ansible_hostname }}_restic_includes"
+    dest: /home/zach/.restic_includes
+    owner: zach
+    group: zach
+    mode: 0644
+
 - name: unlock the vault
   expect:
     command: /usr/local/bin/bw unlock --raw
@@ -27,7 +35,7 @@
 
 - name: create the sekret password file
   copy:
-    content: restic_sekret.stdout
+    content: "{{ restic_sekret.stdout }}"
     dest: /home/zach/.repo_sekret
     owner: zach
     group: zach
@@ -44,31 +52,34 @@
     mode: 0644    
   become: True
 
+- name: restic environment vars
+  blockinfile:
+    path: /home/zach/.bash_profile
+    block: |
+      export RESTIC_REPOSITORY={{ restic_env[ansible_hostname]['repo'] }}
+      export B2_ACCOUNT_ID={{ restic_env[ansible_hostname]['b2_account'] }}
+      export B2_ACCOUNT_KEY={{ restic_env[ansible_hostname]['b2_key'] }}
+    owner: zach
+    group: zach
+    mode: 0640
+
 - name: schedule backups
   cron: 
-    name: "backup_{{ item.folder }}"
+    name: "backup_{{ ansible_hostname }}"
     hour: 01
     minute: 15
-    weekday: "{{ item.dOw }}"
-    job: /usr/bin/restic -r b2:shoryuji-badkuub-club:/{{ item.folder }} backup /home/zach/Vault/{{ item.folder }} --password-file=/home/zach/.repo_sekret
-  loop:
-  - { 'dOw': '1', 'folder': 'Documents' }
-  - { 'dOw': '3', 'folder': 'Music' }
-  - { 'dOw': '5', 'folder': 'Pictures' }
-  - { 'dOw': '6', 'folder': 'Videos' }
+    weekday: 1
+    job: |
+      "/usr/bin/restic -r b2:{{ restic_env[ansible_hostname]['repo'] }} backup --files-from /home/zach/.restic_includes --password-file=/home/zach/.repo_sekret"
 
 - name: prune daily backups
   cron:
-    name: "prune {{ item.folder }}"
+    name: "prune_{{ ansible_hostname }}"
     weekday: 0
     hour: 1
-    minute: "{{ item.minute }}"
-    job: restic -r b2:shoryuji-badkuub-club:/{{ item.folder }} forget --keep-last 10 keep-weekly 4 --keep-monthly 3 --keep-yearly 1 --prune --password-file=/home/zach/.repo.sekret
-  loop:
-    - { 'folder': 'Documents', 'minute': '15' }
-    - { 'folder': 'Music', 'minute': '30' }
-    - { 'folder': 'Pictures', 'minute': '45' }
-    - { 'folder': 'Videos', 'minute': '00' }
+    minute: 30
+    job: |
+      "restic -r b2:{{ restic_env[ansible_hostname]['repo'] }} forget --keep-last 10 keep-weekly 4 --keep-monthly 3 --keep-yearly 1 --prune --password-file=/home/zach/.repo.sekret"
 
 - name: enable start cron
   systemd:
