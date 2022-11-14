@@ -1,4 +1,7 @@
 ---
+- name: get installed pagackes
+  package_facts:
+
 - name: set up vscode ms keys
   ansible.builtin.rpm_key:
     state: present
@@ -24,10 +27,22 @@
     state: installed
   loop: "{{ copr_repos }}"
 
+- name: add rpmfusion repos
+  dnf:
+    name: "{{ rpmfusion_urls }}"
+    state: installed
+    
 - name: remove the nano default
   ansible.builtin.dnf:
     name: nano-default-editor
     state: absent
+
+- name: run the additional rpmfusion dnf commands
+  shell: "{{ item }} -y"
+  loop:
+    - 'dnf groupupdate core'
+    - 'dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin'
+    - 'dnf groupupdate sound-and-video'
 
 - name: set up modular rpms
   command: "dnf module enable {{ modular_rpms | quote }} -y"
@@ -78,7 +93,6 @@
   loop:
     - podman.socket
     - podman-auto-update.timer
-    - ofono.service
 
 - name: Add the flathub flatpak repository remote to the user installation
   flatpak_remote:
@@ -105,6 +119,24 @@
   loop: "{{ gaming_flpks }}"
   when: ansible_nodename is search('megalonyx')
 
+- name: swap mesa packages to freeworld 
+  command: "dnf swap {{ item.from }} {{ item.to }} -y"
+  register: swapped
+  changed_when: swapped.rc == 0
+  loop: "{{ rpm_swaps }}"
+  when: 
+    - ansible_package.facts['mesa-va-drivers'] is defined
+    - ansible_package.facts['mesa-vdpau-drivers'] is defined
+
+- name: aliases set up in bash_profile
+  blockinfile:
+    path: /home/zach/.bash_profile
+    owner: zach
+    group: zach 
+    mode: 0640
+    block: |
+      {{ alias_block }}
+
 - name: copy dotfiles
   ansible.builtin.copy:
     src: "{{ item }}"
@@ -130,13 +162,6 @@
     group: zach
     mode: 0640
   loop: "{{ home_dotdirs }}"
-
-- name: set up poetry
-  ansible.builtin.shell: curl -sSL https://install.python-poetry.org | python3 -
-  args:
-    creates: "{{ ansible_user_dir }}/.poetry/bin/poetry"
-  become: yes
-  become_user: zach
 
 - name: install pipx
   ansible.builtin.pip:

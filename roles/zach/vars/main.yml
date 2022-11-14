@@ -1,0 +1,4 @@
+---
+alias_block: |
+  alias wezterm='flatpak run org.wezfurlong.wezterm'
+

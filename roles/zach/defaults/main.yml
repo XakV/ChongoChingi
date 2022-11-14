@@ -27,22 +27,31 @@ zachs_rpms:
   - 'vim-default-editor'
   - 'java-latest-openjdk'
   - 'java-latest-openjdk-headless'
-  - 'mesa-vulkan-drivers'
-  - 'mesa-vdpau-drivers'
-  - 'intel-media-driver'
-  - 'code'
   - 'cronie'
   - 'sbc'
   - 'pipewire-codec-aptx'
   - 'hidapi'
   - 'bluez-tools'
-  - 'blueberry'
-  - 'blueman'
   - 'gnome-bluetooth'
   - 'NetworkManager-bluetooth'
-  - 'ofono'
-  - 'opal'
-  - 'gnome-phone-manager'
+  - 'mesa-dri-drivers.x86_64'
+  - 'mesa-libEGL.x86_64'
+  - 'mesa-libGL.x86_64'
+  - 'mesa-libGLU.x86_64'
+  - 'mesa-libOSMesa.x86_64'
+  - 'mesa-libOpenCL.x86_64'
+  - 'mesa-libd3d.x86_64'
+  - 'mesa-libglapi.x86_64'
+  - 'mesa-libxatracker.x86_64'
+  - 'mesa-vulkan-drivers.x86_64'
+
+rpm_swaps:
+  - { 'from': 'mesa-va-drivers.x86_64', 'to': 'mesa-va-drivers-freeworld.x86_64' }
+  - { 'from': 'mesa-vdpau-drivers.x86_64', 'to': 'mesa-vdpau-drivers-freeworld.x86_64' }
+
+rpmfusion_urls:
+  - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+  - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm"
 
 modular_rpms: 'nodejs:18'
 
@@ -64,7 +73,6 @@ flatpaks:
   - com.github.fabiocolacio.marker
   - com.mattjakeman.ExtensionManager
   - com.github.childishgiant.mixer
-  - org.signal.Signal
   - de.haeckerfelix.AudioSharing
   - social.whalebird.WhalebirdDesktop
   - org.pipewire.Helvum
@@ -82,10 +90,10 @@ flatpaks:
   - com.github.dynobo.normcap
   - org.wezfurlong.wezterm
   - com.github.cubitect.cubiomes-viewer
+  - org.videolan.VLC
 
 gaming_flpks:
   - com.valvesoftware.Steam
   - io.gdevs.GDLauncher
   - com.mojang.Minecraft
-  - org.freedesktop.Platform.GL.nvidia-470-129-06
   - org.freedesktop.Platform.openh264/x86_64/2.0
