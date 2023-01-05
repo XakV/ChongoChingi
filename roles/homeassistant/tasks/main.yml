@@ -14,7 +14,7 @@
     privileged: yes
     device: ['/dev/ttyUSB0:/dev/ttyUSB0']
     publish:
-      - '192.168.0.11:8123:8123/tcp'
+      - '{{ ansible_all_ipv4_addresses[0] }}:8123:8123/tcp'
     volume:
       - '/opt/hass_config:/config'
       - '/etc/localtime:/etc/localtime:ro'

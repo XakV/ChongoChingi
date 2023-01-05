@@ -10,10 +10,11 @@
     dest: "{{ item.dest }}{{ item.src }}"
     owner: root
     group: root 
-    mode: 0644
+    mode: "{{ item.mode }}"
   loop:
-    - { 'src': 'GandiStandardSSLCA2.pem', 'dest': '/etc/pki/ca-trust/source/anchors/' }
-    - { 'src': 'fsck-it.org.crt', 'dest': '/etc/pki/ca-trust/source/' }
+    - { 'src': 'GandiStandardSSLCA2.pem', 'dest': '/etc/pki/tls/certs/', 'mode': '0644' }
+    - { 'src': 'fsck-it.org.crt', 'dest': '/etc/pki/tls/certs/', 'mode': '0644' }
+    - { 'src': 'fsck-it.org.key', 'dest': '/etc/pki/tls/private/', 'mode': '0600' }
 
 - name: install certificate to trust
   ansible.builtin.command: update-ca-trust

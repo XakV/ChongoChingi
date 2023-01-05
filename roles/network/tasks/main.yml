@@ -17,36 +17,16 @@
     state: link
     force: yes
 
-- name: determine conn names
-  ansible.builtin.shell: nmcli -t -f NAME c show --active
-  register: conxns
-
-- name: remove bridge members from conxns
-  set_fact:
-    main_ifaces: "{{ conxns.stdout_lines | difference(ansible_bridge0['interfaces']) }}"
-  when: ansible_bridge0 is defined
-
-- name: set a default if there is no bridge0
-  set_fact:
-    main_ifaces: "{{ conxns.stdout_lines }}"
-  when: ansible_bridge0 is not defined
-
-- name: clear nameservers on active connections
-  community.general.nmcli:
-    conn_name: "{{ item }}"
-    method6: disabled
-    dns4: ['']
-    dns4_search: ''
-    state: present
-  loop: "{{ main_ifaces | difference(['podman0', 'cni-podman0', 'tailscale0']) }}"
-
 - name: set nameservers on active connections
   community.general.nmcli:
-    conn_name: "{{ item }}"
-    dns4: ['192.168.0.11', '1.1.1.1']
-    dns4_search: 'fsck-it.org'
+    conn_name: "{{ ansible_default_ipv4['interface'] }}"
+    type: "{{ host_conn_type | default('ethernet') }}"
+    method6: disabled
+    dns4: "{{ dns_ips }}"
+    dns4_search: "{{ cluster_domain }}"
     state: present
-  loop: "{{ main_ifaces | difference(['cni-podman0', 'podman0', 'tailscale0']) }}"
+  vars:
+    dns_ips: "{{ lan_dns | intersect(external_dns) }}"
 
 - name: send the resolved config
   template:
@@ -56,17 +36,8 @@
     group: root
     mode: 0644
 
-- name: get devices from active connections
-  shell: nmcli -t -f DEVICE c show --active
-  register: nm_devs
-
-- name: reapply profiles to devices
-  ansible.builtin.shell: "nmcli d reapply {{ item }}"
-  loop: "{{ nm_devs.stdout_lines }}"
-
 - name: reload nm conxns
-  shell: "nmcli c reload {{ item }}"
-  loop: "{{ main_ifaces | difference(['podman0', 'cni-podman0']) }}"
+  shell: "nmcli c reload ansible_default_ipv4['interface'] }}"
 
 - name: start systemd-resolved
   systemd:

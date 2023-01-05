@@ -170,3 +170,11 @@
     extra_args: --user
   become: yes
   become_user: zach
+
+- name: create vim tmp directory
+  file:
+    path: /home/zach/.vim/tmp
+    state: directory
+    owner: zach
+    group: zach
+    mode: 0750

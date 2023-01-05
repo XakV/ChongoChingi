@@ -18,6 +18,14 @@
     name: "{{ podman_pkgs }}"
     state: latest
 
+- name: Copy configuration files
+  copy:
+    src: "containers.conf"
+    dest: "/etc/containers/containers.conf"
+    owner: root
+    group: root
+    mode: 0644
+
 - name: do the handlers before the service starts
   meta: flush_handlers
 

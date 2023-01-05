@@ -23,4 +23,3 @@ www 	        	IN 	CNAME 	drachen.fsck-it.org.
 {% for ts_host in ansible_play_hosts %}
 {{ ts_host }}-ts              IN      A       {{ hostvars[ts_host]['ansible_tailscale0']['ipv4']['address'] }}
 {% endfor %}
-tentacles.fsck-it.org IN CNAME ikapode0.fsck-it.org
