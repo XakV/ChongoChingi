@@ -4,7 +4,7 @@ initial_cp: butcher-bend
 # domain name to use
 cluster_domain: "fsck-it.org"
 # ip of primary cp node
-cluster_ip: "192.168.0.94"
+cluster_ip: "10.0.10.33"
 # stable, latest, or testing
 k3s_channel: "latest"
 # user id that will use kubectl

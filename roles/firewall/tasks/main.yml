@@ -10,14 +10,14 @@
     state: started
     enabled: True
 
-- name: Firewall | assign interface to zones
+- name: Firewall | assign primary interface to FedoraServer Zone
   firewalld:
     zone: "FedoraServer"
     interface: "{{ ansible_default_ipv4.interface }}"
     permanent: yes
     state: enabled
 
-- name: Firewall | Create port rules for zones
+- name: Firewall | Create port rules for FedoraServer Zone
   firewalld:
     zone: "FedoraServer"
     port: "{{ ports_dict.port }}"
@@ -32,6 +32,37 @@
     source: "{{ standard_source }}"
     permanent: yes
     state: enabled
+
+- name: Firewall | Create tailscale zone
+  firewalld:
+    zone: "Tailscale"
+    permanent: yes
+    state: present
+
+- name: Firewall | assign tailscale interface to tailscale zone
+  firewalld:
+    zone: "Tailscale"
+    interface: "{{ ansible_tailscale0.device }}"
+    permanent: yes
+    immediate: yes
+    state: enabled
+
+- name: Firewall | Create port rules for tailscale Zone
+  firewalld:
+    zone: "Tailscale"
+    port: "{{ ts_ports_dict.port }}"
+    source: "{{ ts_ports_dict.source }}"
+    permanent: yes
+    immediate: yes
+    state: enabled
+
+# name: Firewall | Create service rules for tailscale zone
+# firewalld:
+#   zone: "FedoraServer"
+#   rich_rule: rule family="ipv4" source address="{{ standard_source }}" accept
+#   source: "{{ standard_source }}"
+#   permanent: yes
+#   state: enabled
 
 - name: Firewall | Reload it
   command: firewall-cmd --reload

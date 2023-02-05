@@ -1,0 +1,10 @@
+---
+ts_ports:
+  - '22'
+  - '53'
+  - '80'
+  - '443'
+  - '1313' 
+  - '9090'
+
+ts_source: "{{ ansible_tailscale0.ipv4.network }}/{{ ansible_tailscale0.ipv4.prefix }}"

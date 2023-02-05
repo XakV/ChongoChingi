@@ -4,3 +4,4 @@
   become_user: root
   roles:
     - tailscale
+    - tailscale_firewall

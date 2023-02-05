@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "Xaxansible"
-version = "0.2.0"
+version = "0.3.0"
 description = ""
 authors = ["XakV <zachvatwork@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-ansible = "^6.0.0"
+python = "^3.11"
+ansible = "^7.0"
 ansible-core = "^2.13.1"
 ansible-lint = "^6.3.0"
 bracex = "2.2.1"

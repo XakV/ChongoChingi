@@ -1,0 +1,54 @@
+---
+- name: Firewall | install
+  dnf: 
+    name: firewalld
+    state: latest
+
+- name: Firewall | start enable
+  systemd:
+    name: firewalld
+    state: started
+    enabled: True
+
+- name: Firewall | Create internal zone for tailscale
+  firewalld:
+    zone: "internal"
+    permanent: yes
+    state: present
+
+- name: Firewall | assign tailscale interface to internal zone
+  firewalld:
+    zone: "internal"
+    interface: "{{ ansible_tailscale0.device }}"
+    permanent: yes
+    immediate: yes
+    state: enabled
+
+- name: Firewall | Create sources for internal Zone
+  firewalld:
+    zone: "internal"
+    source: "{{ ts_source }}"
+    permanent: yes
+    immediate: yes
+    state: enabled
+
+- name: Firewall | Create port rules for internal Zone
+  firewalld:
+    zone: "internal"
+    port: "{{ item }}/tcp"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  loop: "{{ ts_ports }}"
+
+
+# name: Firewall | Create service rules for tailscale zone
+# firewalld:
+#   zone: "FedoraServer"
+#   rich_rule: rule family="ipv4" source address="{{ standard_source }}" accept
+#   source: "{{ standard_source }}"
+#   permanent: yes
+#   state: enabled
+
+- name: Firewall | Reload it
+  command: firewall-cmd --reload
