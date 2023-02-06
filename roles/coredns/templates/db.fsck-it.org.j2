@@ -16,6 +16,7 @@ $ORIGIN verboxen.org.
 
 @ 		        IN	A 	23.160.192.216
 drachen         	IN	A 	23.160.192.216
+k3s                     IN      A       {{ cluster_ip }}
 www 	        	IN 	CNAME 	drachen.fsck-it.org.
 {% for hostn in ansible_play_hosts %}
 {{ hostn }}                IN      A       {{ hostvars[hostn]['ansible_default_ipv4']['address'] }}

@@ -93,7 +93,7 @@
   ansible.builtin.shell: >
     curl -sfL https://get.k3s.io | K3S_TOKEN={{ token.stdout | trim }} sh -s - server --cluster-init 
     --advertise-address {{ cluster_ip }} --tls-san {{ initial_cp }}.local 
-    --tls-san {{ initial_cp }}.{{ cluster_domain }} --tls-san {{ cluster_ip }}
+    --tls-san {{ initial_cp }}.{{ cluster_domain }} --tls-san {{ cluster_ip }} --tls-san k3s.{{ cluster_domain }}
   environment: 
     INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
     K3S_KUBECONFIG_MODE: "644"
