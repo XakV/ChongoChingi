@@ -1,0 +1,48 @@
+---
+# Deploys prometheus and grafana from a helm chart
+
+- name: prometheus - Create prometheus namespace
+  kubernetes.core.k8s:
+    name: prometheus
+    api_version: v1
+    kind: Namespace
+    state: present
+
+- name: prometheus - add helm repo
+  kubernetes.core.helm_repository:
+    name: prometheus
+    repo_url: https://prometheus-community.github.io/helm-charts
+  notify: repo_update
+
+- name: its a block
+  block:
+    - name: prometheus - install helm chart
+      kubernetes.core.helm:
+        name: prometheus
+        chart_ref: prometheus/prometheus
+        update_repo_cache: true
+        release_namespace: prometheus
+        values: "{{ lookup('template', 'values-prometheus.yaml') | from_yaml }}"
+      register: prom_install
+  rescue:
+    - name: nice print the bad
+      debug:
+        msg: "{{ prom_install.msg | to_nice_json }}"
+
+
+
+- name: prometheus - wait for deployment
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: prometheus
+        namespace: prometheus
+      spec:
+        paused: True
+    wait: yes
+    wait_condition:
+      type: Progressing
+      status: Unknown
+      reason: DeploymentPaused  

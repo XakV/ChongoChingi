@@ -25,6 +25,18 @@
     dns4: "{{ dns_ips }}"
     dns4_search: "{{ cluster_domain }}"
     state: present
+  when: ansible_hostname != 'samarkand'
+  vars:
+    dns_ips: "{{ lan_dns | intersect(external_dns) }}"
+
+- name: set nameservers on active connections samarkand
+  community.general.nmcli:
+    conn_name: "wlp3s0"
+    type: "{{ host_conn_type | default('ethernet') }}"
+    method6: disabled
+    dns4: "{{ dns_ips }}"
+    dns4_search: "{{ cluster_domain }}"
+    state: present
   vars:
     dns_ips: "{{ lan_dns | intersect(external_dns) }}"
 

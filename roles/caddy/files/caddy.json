@@ -1,0 +1,55 @@
+{
+  "apps": {
+    "http": {
+      "servers": {
+        "fsck-it.org": {
+          "listen": [":443"],
+          "routes": [
+            {
+              "handle": [
+                {
+                  "handler": "reverse_proxy",
+                  "upstreams": [
+                    {
+                      "dial": "butcher-bend.fsck-it.org:8443"
+                    },
+                    {
+                      "dial": "stephens-fork.fsck-it.org:8443"
+                    },
+                    {
+                      "dial": "turkey-foot.fsck-it.org:8443"
+                    }
+                  ],
+                  "policy": {
+                    "load_balancing": {
+                      "least_conn": {}
+                    }
+                  },
+                  "transport": {
+                    "protocol": "http",
+                    "tls": {
+                      "certificates": [
+                        {
+                          "certificate_file": "/config/fsck-it.org.pem",
+                          "key_file": "/config/fsck-it.org.key.pem"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ],
+              "match": [
+                {
+                  "path": [
+                    "/kubernetes"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+

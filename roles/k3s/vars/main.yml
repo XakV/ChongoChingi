@@ -9,3 +9,6 @@ cluster_ip: "10.0.10.33"
 k3s_channel: "latest"
 # user id that will use kubectl
 k3s_user: "zach"
+# metallb runs on the cluster. Reserve these IPs in your router
+# usable range is .241 -> .246, gateway is at 240, bcast 247, mask 255.255.255.248
+metallb_ips: "10.0.11.240/30"

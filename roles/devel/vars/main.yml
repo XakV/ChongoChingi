@@ -1,5 +1,5 @@
 ---
-languages: ['git', 'go-compilers-golang-compiler', 'golang-bin', 'love', 'lua',  'lua-devel',
+languages: ['git', 'golang', 'love', 'lua',  'lua-devel', 'cargo',
            'openssl-devel', 'python3-pip', ]
 
 packaging: ['@Fedora Packager', '@RPM Development Tools', '@C Development Tools and Libraries'] 

@@ -94,6 +94,7 @@
     curl -sfL https://get.k3s.io | K3S_TOKEN={{ token.stdout | trim }} sh -s - server --cluster-init 
     --advertise-address {{ cluster_ip }} --tls-san {{ initial_cp }}.local 
     --tls-san {{ initial_cp }}.{{ cluster_domain }} --tls-san {{ cluster_ip }} --tls-san k3s.{{ cluster_domain }}
+    --flannel-backend=none --disable-network-policy
   environment: 
     INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
     K3S_KUBECONFIG_MODE: "644"
@@ -104,7 +105,7 @@
 - name: run install scripts on additional server nodes
   ansible.builtin.shell: >
     curl -sfL https://get.k3s.io | K3S_TOKEN={{ token.stdout | trim }} sh -s - server
-    --server https://{{ cluster_ip }}:6443
+    --server https://{{ cluster_ip }}:6443 --flannel-backend=none --disable-network-policy
   environment: 
     INSTALL_K3S_CHANNEL: "{{ k3s_channel }}"
   when:

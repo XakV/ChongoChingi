@@ -53,8 +53,6 @@ rpmfusion_urls:
   - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm"
   - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm"
 
-modular_rpms: 'nodejs:18'
-
 copr_repos:
   - 'varlad/helix'
 
@@ -72,10 +70,7 @@ flatpaks:
   - org.gnome.Connections
   - com.github.fabiocolacio.marker
   - com.mattjakeman.ExtensionManager
-  - com.github.childishgiant.mixer
   - de.haeckerfelix.AudioSharing
-  - social.whalebird.WhalebirdDesktop
-  - org.pipewire.Helvum
   - io.github.realmazharhussain.GdmSettings
   - io.posidon.Paper
   - dev.lapce.lapce
@@ -91,6 +86,11 @@ flatpaks:
   - org.wezfurlong.wezterm
   - com.github.cubitect.cubiomes-viewer
   - org.videolan.VLC
+  - com.jetpackduba.Gitnuro
+  - io.podman_desktop.PodmanDesktop
+  - dev.k8slens.OpenLens
+  - org.gnome.dspy
+  - io.github.nate_xyz.Resonance
 
 gaming_flpks:
   - com.valvesoftware.Steam

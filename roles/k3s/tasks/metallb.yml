@@ -1,0 +1,32 @@
+---
+# Deploys metallb from a helm chart
+# Pushes configuration after deploy
+
+- name: metallb - Create metallb namespace
+  kubernetes.core.k8s:
+    name: metallb-system
+    api_version: v1
+    kind: Namespace
+    state: present
+
+- name: metallb - add helm repo
+  kubernetes.core.helm_repository:
+    name: metallb
+    repo_url: https://metallb.github.io/metallb
+
+- name: metallb - install helm chart
+  kubernetes.core.helm:
+    name: metallb
+    chart_ref: metallb/metallb
+    release_namespace: metallb-system
+    update_repo_cache: true
+    values: "{{ lookup('template', 'values-metallb.yaml') | from_yaml }}"
+
+- name: metallb - Configure L2 load balancer
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template','mtllb_IPAddressPool_simple_l2.yml.j2') | from_yaml }}"
+
+# TODO: Replace Traefik with metallb and then this ingress stuff
+#https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#using-a-self-provisioned-edge
+  

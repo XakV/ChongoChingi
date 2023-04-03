@@ -44,25 +44,10 @@
     - 'dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin'
     - 'dnf groupupdate sound-and-video'
 
-- name: set up modular rpms
-  command: "dnf module enable {{ modular_rpms | quote }} -y"
-
-- name: install modular rpms
-  ansible.builtin.dnf:
-    name: "{{ modular_rpms.split(':')[0] }}"
-    state: present
-
 - name: install a few normal things
   ansible.builtin.dnf:
     name: "{{ zachs_rpms }}"
     state: present
-
-- name: install wezterm nightly
-  ansible.builtin.dnf:
-    name: https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly-fedora36.rpm
-    state: present
-    disable_gpg_check: yes
-  when: ansible_distribution_major_version == '36'
 
 - name: make vim right
   ansible.builtin.shell: |

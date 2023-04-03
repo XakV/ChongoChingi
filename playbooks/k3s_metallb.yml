@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: install metallb
+      import_role:
+        name: k3s
+        tasks_from: metallb.yml
+      environment:
+        K8S_AUTH_KUBECONFIG: '/home/zach/.kube/kubeconfig.yml'  
+        K8S_AUTH_HOST: 'https://10.0.10.33:6443'
