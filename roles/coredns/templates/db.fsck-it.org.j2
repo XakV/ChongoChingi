@@ -19,11 +19,11 @@ drachen         	IN	A 	23.160.192.216
 {% for i in metallb_seq %}
 metal{{ i }}.fsck-it.org IN      A      10.0.11.24{{ i }}
 {% endfor %}
-k3s                     IN      A       {{ cluster_ip }}
-www 	        	IN 	CNAME 	drachen.fsck-it.org.
-{% for hostn in ansible_play_hosts %}
-{{ hostn }}                IN      A       {{ hostvars[hostn]['ansible_default_ipv4']['address'] }}
-{% endfor %}
-{% for ts_host in ansible_play_hosts %}
-{{ ts_host }}.pangolin-vibes.ts.net      A       {{ hostvars[ts_host]['ansible_tailscale0']['ipv4']['address'] }}
-{% endfor %}
+megalonyx               IN      A       10.0.11.101
+turkey-foot                             10.0.10.34
+stephens-fork           IN      A       10.0.10.32
+butcher-bend            IN      A       10.0.10.33
+scarce-fat              IN      A       10.0.10.36
+syrinx                  IN      A       10.0.11.135
+samarkand               IN      A       10.0.11.15
+sams-creek              IN      A       10.0.10.35

@@ -1,4 +1,4 @@
-- hosts: nautiloid
+- hosts: syrinx
   become: yes
   become_user: root
   roles:
