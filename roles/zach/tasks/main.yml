@@ -41,7 +41,6 @@
   shell: "{{ item }} -y"
   loop:
     - 'dnf groupupdate core'
-    - 'dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin'
     - 'dnf groupupdate sound-and-video'
 
 - name: install a few normal things

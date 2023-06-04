@@ -56,7 +56,6 @@
   shell: "dnf groupupdate {{ item }} -y"
   loop:
     - 'core'
-    - 'multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin --exclude=gstreamer1-plugins-ugly'
     - 'sound-and-video'
   when: ansible_distribution_major_version in ['37', '38']
 

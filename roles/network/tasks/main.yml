@@ -19,7 +19,7 @@
 
 - name: set nameservers on active connections
   community.general.nmcli:
-    conn_name: "{{ ansible_default_ipv4['interface'] }}"
+    conn_name: "{{ ansible_default_ipv4['alias'] }}"
     type: "{{ host_conn_type | default('ethernet') }}"
     method6: disabled
     dns4: "{{ dns_ips }}"
@@ -31,12 +31,13 @@
 
 - name: set nameservers on active connections samarkand
   community.general.nmcli:
-    conn_name: "wlp3s0"
-    type: "{{ host_conn_type | default('ethernet') }}"
+    conn_name: "{{ ansible_default_ipv4.alias }}"
+    type: "{{ host_conn_type | default('wifi') }}"
     method6: disabled
     dns4: "{{ dns_ips }}"
     dns4_search: "{{ cluster_domain }}"
     state: present
+  when: ansible_hostname == 'samarkand'
   vars:
     dns_ips: "{{ lan_dns | intersect(external_dns) }}"
 

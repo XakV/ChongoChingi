@@ -91,9 +91,11 @@ flatpaks:
   - dev.k8slens.OpenLens
   - org.gnome.dspy
   - io.github.nate_xyz.Resonance
+  - io.github.ripose_jp.Memento
 
 gaming_flpks:
   - com.valvesoftware.Steam
   - io.gdevs.GDLauncher
   - com.mojang.Minecraft
   - org.freedesktop.Platform.openh264/x86_64/2.0
+  - io.itch.itch
