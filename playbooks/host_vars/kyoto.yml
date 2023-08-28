@@ -7,3 +7,23 @@ ansible_become_password: !vault |
           6331663561366335360a363537363734333233623334326361353738353266643865386261386633
           6631
 
+managed_ifaces:
+  - name: 'tailscale0'
+    method4: 'auto'
+    method6: 'auto'
+    dns4: '100.100.100.100'
+    dns4_search: 'pangolin-vibes.ts.net'
+    fw_zone: 'Tailscale'
+    fw_services:
+      - 'ssh'
+      - 'https'
+      - 'mdns'
+  - name: 'enabcm6e4ei0'
+    method4: 'auto'
+    method6: 'auto'
+    dns4: '23.160.192.216'
+    dns4_search: 'fsck-it.org'
+    fw_zone: 'FedoraServer'
+    fw_services:
+      - 'ssh'
+      - 'cockpit'

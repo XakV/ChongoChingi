@@ -6,4 +6,23 @@ ansible_become_password: !vault |
           3863656634383838370a363731303631343163363564366631343437343831663539623863326432
           31663566613834323366353233346664306364626264623364616237363966383334
 
-host_conn_type: 'ethernet'
+managed_ifaces:
+  - 'name': 'tailscale0'
+    'method4': 'auto'
+    'method6': 'auto'
+    'dns4': '100.100.100.100'
+    'dns4_search': 'pangolin-vibes.ts.net'
+    'fw_zone': 'Tailscale'
+    'fw_services':
+       - 'ssh'
+       - 'https'
+       - 'mdns'
+  - 'name': 'DrachenFutter'
+    'method4': 'auto'
+    'method6': 'auto'
+    'dns4': '23.160.192.216'
+    'dns4_search': 'fsck-it.org'
+    'fw_zone': 'FedoraWorkstation'
+    'fw_services':
+       - 'ssh'
+       - 'cockpit'

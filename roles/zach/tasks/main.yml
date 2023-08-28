@@ -1,52 +1,9 @@
 ---
-- name: get installed pagackes
-  package_facts:
-
-- name: set up vscode ms keys
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://packages.microsoft.com/keys/microsoft.asc
-
-- name: set up vscode repo
-  ansible.builtin.yum_repository:
-    name: vscode
-    description: ms vscode
-    file: vscode.repo
-    baseurl: https://packages.microsoft.com/yumrepos/vscode
-    enabled: yes
-    gpgcheck: yes
-    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
-
-- name: set up the copr repos
-  command: "dnf copr enable {{ item }} -y"
-  loop: "{{ copr_repos }}"
-
-- name: install copr rpms
-  dnf:
-    name: "{{ item | split('/') | last }}"
-    state: installed
-  loop: "{{ copr_repos }}"
-
-- name: add rpmfusion repos
-  dnf:
-    name: "{{ rpmfusion_urls }}"
-    state: installed
-    
-- name: remove the nano default
-  ansible.builtin.dnf:
-    name: nano-default-editor
-    state: absent
-
-- name: run the additional rpmfusion dnf commands
-  shell: "{{ item }} -y"
-  loop:
-    - 'dnf groupupdate core'
-    - 'dnf groupupdate sound-and-video'
-
-- name: install a few normal things
-  ansible.builtin.dnf:
-    name: "{{ zachs_rpms }}"
-    state: present
+- name: Include tasks for system type
+  ansible.builtin.include_tasks: "{{ role_path }}/tasks/{{ system_type }}.yml"
+  vars:
+    system_type: |-
+      {{ lookup('ansible.builtin.file', '/proc/cmdline') is search('ostree') | ternary('ostree', 'rpm_only') }}
 
 - name: make vim right
   ansible.builtin.shell: |
@@ -78,40 +35,6 @@
     - podman.socket
     - podman-auto-update.timer
 
-- name: Add the flathub flatpak repository remote to the user installation
-  flatpak_remote:
-    name: flathub
-    state: present
-    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-    method: user
-  become_user: zach
-
-- name: install the flattened paks
-  flatpak:
-    name: "{{ item }}"
-    state: present
-    method: user
-  become_user: zach
-  loop: "{{ flatpaks }}"
-
-- name: install the gamery flattened paks
-  flatpak:
-    name: "{{ item }}"
-    state: present
-    method: user
-  become_user: zach
-  loop: "{{ gaming_flpks }}"
-  when: ansible_nodename is search('megalonyx')
-
-- name: swap mesa packages to freeworld 
-  command: "dnf swap {{ item.from }} {{ item.to }} -y"
-  register: swapped
-  changed_when: swapped.rc == 0
-  loop: "{{ rpm_swaps }}"
-  when: 
-    - ansible_package.facts['mesa-va-drivers'] is defined
-    - ansible_package.facts['mesa-vdpau-drivers'] is defined
-
 - name: aliases set up in bash_profile
   blockinfile:
     path: /home/zach/.bash_profile
@@ -121,31 +44,31 @@
     block: |
       {{ alias_block }}
 
-- name: copy dotfiles
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "/home/zach/.{{ item }}"
-    owner: zach
-    group: zach
-    mode: 0640
-  loop: "{{ home_dotfiles }}"
-
-- name: copy ssh dir
-  ansible.builtin.copy:
-    src: ssh
-    dest: /home/zach/.ssh
-    owner: zach
-    group: zach
-    mode: 0640
-
-- name: copy home dot_dirs
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "/home/zach/.{{ item }}"
-    owner: zach
-    group: zach
-    mode: 0640
-  loop: "{{ home_dotdirs }}"
+      # name: copy dotfiles
+      # ansible.builtin.copy:
+      #   src: "{{ item }}"
+      #   dest: "/home/zach/.{{ item }}"
+      #   owner: zach
+      #   group: zach
+      #   mode: 0640
+      # loop: "{{ home_dotfiles }}"
+      #
+      # name: copy ssh dir
+      # ansible.builtin.copy:
+      #   src: ssh
+      #   dest: /home/zach/.ssh
+      #   owner: zach
+      #   group: zach
+      #   mode: 0640
+      #
+      # name: copy home dot_dirs
+      # ansible.builtin.copy:
+      #   src: "{{ item }}"
+      #   dest: "/home/zach/.{{ item }}"
+      #   owner: zach
+      #   group: zach
+      #   mode: 0640
+      # loop: "{{ home_dotdirs }}"
 
 - name: install pipx
   ansible.builtin.pip:

@@ -19,27 +19,15 @@
 
 - name: set nameservers on active connections
   community.general.nmcli:
-    conn_name: "{{ ansible_default_ipv4['alias'] }}"
-    type: "{{ host_conn_type | default('ethernet') }}"
-    method6: disabled
-    dns4: "{{ dns_ips }}"
-    dns4_search: "{{ cluster_domain }}"
+    conn_name: "{{ iface.name }}"
+    type: "{{ iface.type | default('ethernet') }}"
+    method6: "{{ iface.method6 | default('auto') }}"
+    dns4: "{{ iface.dns4 | intersect(external_dns) }}"
+    dns4_search: "{{ iface.dns4_search }}"
     state: present
-  when: ansible_hostname != 'samarkand'
-  vars:
-    dns_ips: "{{ lan_dns | intersect(external_dns) }}"
-
-- name: set nameservers on active connections samarkand
-  community.general.nmcli:
-    conn_name: "{{ ansible_default_ipv4.alias }}"
-    type: "{{ host_conn_type | default('wifi') }}"
-    method6: disabled
-    dns4: "{{ dns_ips }}"
-    dns4_search: "{{ cluster_domain }}"
-    state: present
-  when: ansible_hostname == 'samarkand'
-  vars:
-    dns_ips: "{{ lan_dns | intersect(external_dns) }}"
+  loop: "{{ managed_ifaces }}"
+  loop_control:
+    loop_var: 'iface'
 
 - name: send the resolved config
   template:

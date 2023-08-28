@@ -2,13 +2,13 @@
   become: yes
   become_user: root
   roles:
-    - common
-    - tailscale
-    - podman
-    - network
-    - devel
-    - ssl
+#   - common
+#   - tailscale
+#   - podman
+#   - network
+#   - devel
+#   - ssl
     - zach
-    - bitwarden
-    - restic_b2
-    - packaging
+#   - bitwarden
+#   - restic_b2
+#   - packaging

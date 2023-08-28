@@ -1,0 +1,25 @@
+---
+- name: Add the flathub flatpak repository remote to the user installation
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
+  become_user: zach
+
+- name: install the flattened paks
+  flatpak:
+    name: "{{ item }}"
+    state: present
+    method: user
+  become_user: zach
+  loop: "{{ flatpaks }}"
+
+- name: install the gamery flattened paks
+  flatpak:
+    name: "{{ item }}"
+    state: present
+    method: user
+  become_user: zach
+  loop: "{{ gaming_flpks }}"
+  when: ansible_nodename is search('runcible')
