@@ -1,9 +1,9 @@
 ---
 - name: Include tasks for system type
-  ansible.builtin.include_tasks: "{{ role_path }}/tasks/{{ system_type }}.yml"
-  vars:
-    system_type: |-
-      {{ lookup('ansible.builtin.file', '/proc/cmdline') is search('ostree') | ternary('ostree', 'rpm_only') }}
+  ansible.builtin.include_tasks: "{{ role_path }}/tasks/{{ item }}.yml"
+  loop:
+    - 'rpm_only'
+    - 'ostree'
 
 - name: make vim right
   ansible.builtin.shell: |
@@ -35,40 +35,31 @@
     - podman.socket
     - podman-auto-update.timer
 
-- name: aliases set up in bash_profile
-  blockinfile:
-    path: /home/zach/.bash_profile
-    owner: zach
-    group: zach 
-    mode: 0640
-    block: |
-      {{ alias_block }}
-
-      # name: copy dotfiles
-      # ansible.builtin.copy:
-      #   src: "{{ item }}"
-      #   dest: "/home/zach/.{{ item }}"
-      #   owner: zach
-      #   group: zach
-      #   mode: 0640
-      # loop: "{{ home_dotfiles }}"
-      #
-      # name: copy ssh dir
-      # ansible.builtin.copy:
-      #   src: ssh
-      #   dest: /home/zach/.ssh
-      #   owner: zach
-      #   group: zach
-      #   mode: 0640
-      #
-      # name: copy home dot_dirs
-      # ansible.builtin.copy:
-      #   src: "{{ item }}"
-      #   dest: "/home/zach/.{{ item }}"
-      #   owner: zach
-      #   group: zach
-      #   mode: 0640
-      # loop: "{{ home_dotdirs }}"
+# name: copy dotfiles
+# ansible.builtin.copy:
+#   src: "{{ item }}"
+#   dest: "/home/zach/.{{ item }}"
+#   owner: zach
+#   group: zach
+#   mode: 0640
+# loop: "{{ home_dotfiles }}"
+#
+# name: copy ssh dir
+# ansible.builtin.copy:
+#   src: ssh
+#   dest: /home/zach/.ssh
+#   owner: zach
+#   group: zach
+#   mode: 0640
+#
+# name: copy home dot_dirs
+# ansible.builtin.copy:
+#   src: "{{ item }}"
+#   dest: "/home/zach/.{{ item }}"
+#   owner: zach
+#   group: zach
+#   mode: 0640
+# loop: "{{ home_dotdirs }}"
 
 - name: install pipx
   ansible.builtin.pip:

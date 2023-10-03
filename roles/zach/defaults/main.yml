@@ -30,6 +30,7 @@ zachs_rpms:
   - 'cronie'
   - 'sbc'
   - 'pipewire-codec-aptx'
+  - 'bluez'
   - 'hidapi'
   - 'bluez-tools'
   - 'gnome-bluetooth'

@@ -1,0 +1,37 @@
+ansible_become_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          64666263316631656230626635333963323535646161663166316630333561343065386536636338
+          3335613633623138306461616231643132616164363762650a393138366133316564373030313763
+          34646530666636313838326536616662303965653364626566636230643466343938303362333234
+          3066346636323663610a666466663333343937393863646539636631666362343134633834303534
+          3461
+
+managed_ifaces:
+  - 'name': 'tailscale0'
+    'method4': 'auto'
+    'method6': 'auto'
+    'dns4': '100.100.100.100'
+    'dns4_search': 'pangolin-vibes.ts.net'
+    'fw_zone': 'Tailscale'
+    'fw_services':
+      - 'ssh'
+      - 'https'
+      - 'mdns'
+  - 'name': 'enp3s0'
+    'method4': 'auto'
+    'method6': 'auto'
+    'dns4': '23.160.192.216'
+    'dns4_search': 'fsck-it.org'
+    'fw_zone': 'Ubi'
+    'fw_services':
+      - 'ssh'
+      - 'cockpit'
+  - 'name': 'eno1'
+    'method4': 'auto'
+    'method6': 'auto'
+    'dns4': '23.160.192.216'
+    'dns4_search': 'fsck-it.org'
+    'fw_zone': 'FedoraServer'
+    'fw_services':
+      - 'ssh'
+      - 'cockpit'

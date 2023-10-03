@@ -18,9 +18,10 @@
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
 
 - name: add rpmfusion repos
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ rpmfusion_urls }}"
     state: installed
+    disable_gpg_check: yes
     
 - name: remove the nano default
   ansible.builtin.dnf:

@@ -17,6 +17,9 @@
     state: link
     force: yes
 
+- debug:
+    msg: "{{ hostvars[inventory_hostname] }}"
+
 - name: set nameservers on active connections
   community.general.nmcli:
     conn_name: "{{ iface.name }}"
