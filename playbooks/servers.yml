@@ -8,13 +8,13 @@
     - podman
     - devel
     - server_no_sleep
-    - ssl
+#   - ssl
 
 - hosts: nameservers
   become: yes
   become_user: root
   roles:
     - coredns
-    - ssl
+#   - ssl
 
 

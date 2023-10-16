@@ -14,19 +14,18 @@
 
 - name: copy zone file
   ansible.builtin.template:
-    src: "{{ item }}.j2"
-    dest: "{{ vol_path.volume['Mountpoint'] }}/{{ item }}"
+    src: "db.{{ dns_file }}.j2"
+    dest: "{{ vol_path.volume['Mountpoint'] }}/db.{{ dns_file }}"
     force: yes
     owner: root
     group: root
     mode: 0644 
-  loop:
-    - "db.fsck-it.org"
-    - "Corefile"
+  vars:
+    dns_file: "{{ nameservers[inventory_hostname]['domain'] }}"
 
 - name: create the coredns container
   containers.podman.podman_container:
-    name: verboxen_coredns
+    name: coredns
     image: docker.io/coredns/coredns
     state: started
     volume:

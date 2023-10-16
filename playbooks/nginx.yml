@@ -1,6 +1,13 @@
-- hosts: drachen
-  become: yes
+- name: 'Run coredns role'
+  hosts: nameservers
+  become: True
   become_user: root
   roles:
-    - ssl
+    - coredns
+
+- name: 'Run nginx role'
+  hosts: kanazawa
+  become: True
+  become_user: root
+  roles:
     - rproxy_nginx

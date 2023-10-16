@@ -1,70 +1,60 @@
 ---
-- name: Install nginx module
-  dnf:
-    name: '@nginx:1.20'
-    state: latest
-
-- name: Create the nginx default content directory
-  file:
-    path: "/var/www/fsck-it.org/public"
-    state: absent
-    owner: root
-    group: root
-    mode: 0750
+- name: Create a config volume
+  containers.podman.podman_volume:
+    name: nginx_config
+  register: config_vol
 
 - name: Copy the configuration files
-  copy:
-    src: nginx.conf
-    dest: /etc/nginx/nginx.conf
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/nginx"
+    dest: "{{ config_vol.volume.Mountpoint }}/"
     owner: root
     group: root
     mode: 0644
 
-- name: Template the site config file
-  template:
-    src: "{{ server_name }}.conf.j2"
-    dest: "/etc/nginx/conf.d/{{ server_name }}.conf"
-    owner: root
-    group: root
-    mode: 0644
-
-- name: Start and enable nginx service
-  systemd: 
-    name: nginx.service
-    state: restarted
-    enabled: yes
-    daemon_reload: yes
-
-- name: Configure Public zone rich rules
-  firewalld:
-    zone: public 
-    permanent: yes
-    immediate: yes
-    rich_rule: "{{ item }}"
-    state: enabled
-  loop:
-    - "rule family='ipv4' source address='83.165.192.43' drop"
-    - "rule family='ipv4' source address='65.60.165.95' port port='22' protocol='tcp' accept"
-    - "rule family='ipv4' source address='65.60.165.95' port port='443' protocol='tcp' accept"
-    - "rule family='ipv4' source address='65.60.165.95' port port='80' protocol='tcp' accept"
-
+- name: Create the nginx container
+  containers.podman.podman_container:
+    name: nginx_rproxy
+    image: docker.io/library/nginx
+    state: started
+    recreate: true
+    command: /usr/sbin/nginx
+    tty: yes
+    cap_add:
+      - 'NET_ADMIN'
+      - 'NET_RAW'
+    expose: "{{ expose_ports }}"
+    publish: "{{ publish_ports }}"
+    volume:
+      - "{{ config_vol.volume.Mountpoint }}:/etc/nginx"
+    env:
+      'TZ': 'America/NewYork'
+      'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    generate_systemd:
+      restart_policy: always
+      time: 120
+      names: true
+      container_prefix: pdmn
+      separator: "_"
+  register: server_container
+  
 - name: Create zone internal
   firewalld:
-    zone: internal
+    zone: tailscale
     permanent: yes
     state: present
 
 - name: Enable zone internal for tailscale0
   firewalld:
-    zone: internal
+    zone: tailscale
     permanent: yes
     immediate: yes
     interface: tailscale0
     state: enabled
 
-- name: Allow services internal zone
+- name: Allow services tailscale zone
   firewalld:
-    zone: internal 
+    zone: tailscale 
     permanent: yes
     immediate: yes
     state: enabled
@@ -76,57 +66,11 @@
     - 'dns'
     - 'dns-over-tls'
 
-- name: Configure Public zone source
+- name: Configure tailscale zone ports
   firewalld:
-    zone: public 
-    permanent: yes
-    immediate: yes
-    source: '0.0.0.0/24'
-    state: enabled
-
-- name: Configure Public zone ports
-  firewalld:
-    zone: public 
+    zone: tailscale 
     permanent: yes
     immediate: yes
     port: "{{ item }}"
     state: enabled
-  loop:
-    - '25560-25599/tcp' 
-    - '25919/tcp'
-    - '4242/udp'
-
-- name: Configure Public zone services
-  firewalld:
-    zone: public 
-    permanent: yes
-    immediate: yes
-    service: ssh
-    state: disabled
-
-# name: Create the nginx container
-# containers.podman.podman_container:
-#   name: nginx_rproxy
-#   image: localhost/nginx_f37
-#   state: started
-#   recreate: true
-#   command: /usr/sbin/nginx
-#   tty: yes
-#   cap_add:
-#     - 'NET_ADMIN'
-#     - 'NET_RAW'
-#   expose: "{{ expose_ports }}"
-#   publish: "{{ publish_ports }}"
-#   volume:
-#     - "/srv/nginx/{{ server_name }}:/etc/nginx"
-#     - "/etc/pki/tls:/etc/pki/tls"
-#   env:
-#     'TZ': 'America/NewYork'
-#     'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
-#   generate_systemd:
-#     restart_policy: always
-#     time: 120
-#     names: true
-#     container_prefix: pdmn
-#     separator: "_"
-# register: server_container
+  loop: "{{ publish_ports }}"

@@ -57,7 +57,7 @@
   loop:
     - 'core'
     - 'sound-and-video'
-  when: ansible_distribution_major_version in ['37', '38']
+  when: ansible_distribution_major_version in ['38', '39']
 
 - name: Common | update it all
   dnf:

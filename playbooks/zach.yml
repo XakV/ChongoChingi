@@ -1,14 +1,14 @@
-- hosts: zach
-  become: yes
+- name: "Zach's Infra"
+  hosts: zach
+  become: true
   become_user: root
   roles:
     - common
     - tailscale
     - podman
-#   - network
+    - network
     - devel
-    - ssl
     - zach
-    - bitwarden
-    - restic_b2
-    - packaging
+      #   - bitwarden
+      #   - restic_b2
+      #   - packaging

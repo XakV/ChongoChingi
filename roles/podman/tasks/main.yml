@@ -5,12 +5,12 @@
 
 - name: reset modules
   command: "dnf module reset {{ item | split(':') | first }} -y"
-  when: ansible_distribution_major_version != '9'
+  when: ansible_distribution_major_version not in ['9', '39']
   loop: "{{ container_modules }}"
 
 - name: enable module
   command: "dnf module enable {{ item }} -y"
-  when: ansible_distribution_major_version != '9'
+  when: ansible_distribution_major_version not in ['9', '39']
   loop: "{{ container_modules }}"
 
 - name: install packages

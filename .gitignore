@@ -7,3 +7,4 @@ roles/archive/**
 .venv/**
 .vscode/**
 .Trash-1000
+.ansible_vp

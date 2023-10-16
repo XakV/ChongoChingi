@@ -1,2 +1,5 @@
 ---
 metallb_seq: ['1', '2']
+domains:
+  - 'fsck-it.org'
+  - 'lab.fsck-it.org'
