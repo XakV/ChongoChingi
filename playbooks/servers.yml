@@ -2,19 +2,9 @@
   become: yes
   become_user: root
   roles:
-    - network
+    - fedora.linux_system_roles.network
     - common
     - tailscale
-    - podman
+    # podman
     - devel
     - server_no_sleep
-#   - ssl
-
-- hosts: nameservers
-  become: yes
-  become_user: root
-  roles:
-    - coredns
-#   - ssl
-
-

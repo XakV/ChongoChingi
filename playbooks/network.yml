@@ -1,5 +1,6 @@
-- hosts: all
-  become: yes
+- name: "Network Config"
+  hosts: all
+  become: true
   become_user: root
   roles:
-    - network
+    - fedora.linux_system_roles.network

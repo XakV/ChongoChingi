@@ -1,13 +1,13 @@
 - name: 'Run coredns role'
   hosts: nameservers
-  become: True
+  become: true
   become_user: root
   roles:
     - coredns
 
 - name: 'Run nginx role'
   hosts: kanazawa
-  become: True
+  become: true
   become_user: root
   roles:
     - rproxy_nginx

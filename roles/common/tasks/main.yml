@@ -32,7 +32,7 @@
     enabled: true
 
 - name: Common | set the fqdn
-  ansible.builtin.command: "hostnamectl set-hostname {{ inventory_hostname }}.{{ cluster_domain }}"
+  ansible.builtin.command: "hostnamectl set-hostname {{ inventory_hostname }}.{{ search_domain[0] }}"
 
 - name: Common | template the hosts file
   ansible.builtin.template:

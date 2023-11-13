@@ -6,16 +6,17 @@ ansible_become_password: !vault |
           6331663561366335360a363537363734333233623334326361353738353266643865386261386633
           6631
 
-# hostname of first cp node
-initial_cp: butcher-bend
-# domain name to use
-cluster_domain: "fsck-it.org"
-# ip of primary cp node
-cluster_ip: "10.0.10.33"
-# stable, latest, or testing
-k3s_channel: "latest"
-# user id that will use kubectl
-k3s_user: "zach"
-# nautiloid ip for dns
-lan_dns: ["10.0.10.23", "23.160.192.216"]
-external_dns: ["9.9.9.9", "1.1.1.1"]
+# domain configs
+search_domain: 
+  - "fsck-it.org"
+dns_nameserver: 
+  - '23.160.192.216'
+  - '9.9.9.9'
+  - '1.1.1.1'
+# firewalld configs
+fwalld_ports: ["4445/udp", "25560-25569/tcp", "8384/tcp", "5222/tcp", "5432/tcp", "8953/udp", "2360/tcp"]
+fwalld_sources: "10.0.10.0/23" 
+fwalld_services: ["ssh", "cockpit", "mdns"]
+fwalld_zone: "public"
+
+

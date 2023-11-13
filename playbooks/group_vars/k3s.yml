@@ -1,4 +1,3 @@
----
 ansible_become_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           61306466303534313538336663393134303039643734653566323066353432313032666630326532
@@ -7,23 +6,13 @@ ansible_become_password: !vault |
           6331663561366335360a363537363734333233623334326361353738353266643865386261386633
           6631
 
-managed_ifaces:
-  - name: 'tailscale0'
-    method4: 'auto'
-    method6: 'auto'
-    dns4: '100.100.100.100'
-    dns4_search: 'pangolin-vibes.ts.net'
-    fw_zone: 'Tailscale'
-    fw_services:
-      - 'ssh'
-      - 'https'
-      - 'mdns'
-  - name: 'enabcm6e4ei0'
-    method4: 'auto'
-    method6: 'auto'
-    dns4: '23.160.192.216'
-    dns4_search: 'fsck-it.org'
-    fw_zone: 'FedoraServer'
-    fw_services:
-      - 'ssh'
-      - 'cockpit'
+# hostname of first cp node
+initial_cp: kanazawa
+# domain name to use
+cluster_domain: "lab.fsck-it.org"
+# ip of primary cp node
+cluster_ip: "10.10.10.196"
+# stable, latest, or testing
+k3s_channel: "latest"
+# user id that will use kubectl
+k3s_user: "zach"

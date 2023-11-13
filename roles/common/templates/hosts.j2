@@ -1,5 +1,5 @@
-127.0.0.1      {{ inventory_hostname }}   {{ inventory_hostname }}.{{ cluster_domain }}
-23.160.192.216 drachen      drachen.{{ cluster_domain }}
+127.0.0.1      {{ inventory_hostname }}   {{ inventory_hostname }}.{{ search_domain[0] }}
+23.160.192.216 drachen      drachen.{{ search_domain[0] }}
 {% for hostn in ansible_play_hosts %}
 {{ hostvars[hostn]['ansible_default_ipv4']['address'] }}    {{ hostvars[hostn]['ansible_fqdn']}}    {{ hostvars[hostn]['ansible_hostname']}}
 {% endfor %}
