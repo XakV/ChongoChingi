@@ -1,0 +1,7 @@
+- name: "B2 Backups"
+  hosts: all
+  become: true
+  become_user: root
+  roles:
+    - bitwarden
+    - backups_b2

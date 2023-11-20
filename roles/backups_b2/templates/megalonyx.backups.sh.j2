@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+
+export B2_APPLICATION_KEY_ID={{ bucket_auth[ansible_hostname]['b2_account'] }}
+export B2_APPLICATION_KEY={{ bucket_auth[ansible_hostname]['b2_key'] }}
+ 
+B2_DOCS="$HOME/Documents b2://megalonyx-fsck-it-org/$HOME/Documents"
+B2_GAMZ="$HOME/Games  b2://megalonyx-fsck-it-org/$HOME/Games"
+B2_BOOK="$HOME/Library b2://megalonyx-fsck-it-org/$HOME/Library"
+B2_SONG="$HOME/Music b2://megalonyx-fsck-it-org/$HOME/Music"
+B2_PICS="$HOME/Pictures b2://megalonyx-fsck-it-org/$HOME/Pictures"
+B2_VIDS="$HOME/Videos b2://megalonyx-fsck-it-org/$HOME/Videos"
+B2_SYNC_CMD='b2 sync --keepDays 7 --replaceNewer --excludeRegex'
+B2_EXCLUDES='(.st\w+)|(.Trash\S+)'
+
+b2 authorize-account
+b2 $B2_SYNC_CMD $B2_EXCLUDES $B2_DOCS
+b2 $B2_SYNC_CMD $B2_EXCLUDES $B2_GAMZ
+b2 $B2_SYNC_CMD $B2_EXCLUDES $B2_BOOK
+b2 $B2_SYNC_CMD $B2_EXCLUDES $B2_SONG
+b2 $B2_SYNC_CMD $B2_EXCLUDES $B2_PICS
+b2 $B2_SYNC_CMD $B2_EXCLUDES $B2_VIDS
+
