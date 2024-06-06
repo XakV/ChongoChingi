@@ -1,4 +1,4 @@
-@       IN      SOA     ns1.gandi.net.      fsck-it.org. (
+@       IN      SOA     curitiba.ns.porkbun.com.      fsck-it.org. (
                         2022012101	; serial number YYMMDDNN
                         28800           ; Refresh
                         7200            ; Retry
@@ -6,24 +6,21 @@
                         86400           ; Min TTL
 			)
 
-                NS      ns1.gandi.net. 
-                NS      hostmaster.gandi.net. 
+                NS      curitiba.ns.porkbun.com.
+                NS      fortaleza.ns.porkbun.com.
+                NS      maceio.ns.porkbun.com.
+                NS      salvador.ns.porkbun.com.
 
-                MX      10 mail.fsck-it.org.
 
-
-$ORIGIN verboxen.org.
+$ORIGIN fsck-it.org.
 
 @ 		        IN	A 	23.160.192.216
 drachen         	IN	A 	23.160.192.216
-{% for i in metallb_seq %}
-metal{{ i }}.fsck-it.org IN      A      10.0.11.24{{ i }}
-{% endfor %}
-megalonyx               IN      A       10.0.11.101
-turkey-foot                             10.0.10.34
-stephens-fork           IN      A       10.0.10.32
-butcher-bend            IN      A       10.0.10.33
-scarce-fat              IN      A       10.0.10.36
-syrinx                  IN      A       10.0.11.135
+megalonyx               IN      A       10.0.11.180
 samarkand               IN      A       10.0.11.15
-sams-creek              IN      A       10.0.10.35
+lab                     IN      A       100.104.105.74
+kanazawa                IN      A       100.120.16.131
+kyoto                   IN      A       100.83.16.133
+nagano                  IN      A       100.86.1.92
+osaka                   IN      A       100.82.184.58
+tokyo                   IN      A       100.118.124.54

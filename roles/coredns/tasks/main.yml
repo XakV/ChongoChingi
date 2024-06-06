@@ -6,32 +6,31 @@
 # containers.podman.podman_image:
 #   name: docker.io/coredns/coredns
 
-- name: make a coredns volume
+- name: Make a coredns volume
   containers.podman.podman_volume:
     state: present
     name: coredns_vol
   register: vol_path
 
-- name: copy zone file
+- name: Copy zone file
   ansible.builtin.template:
-    src: "{{ item }}.j2"
-    dest: "{{ vol_path.volume['Mountpoint'] }}/{{ item }}"
-    force: yes
+    src: "db.{{ dns_file }}.j2"
+    dest: "{{ vol_path.volume['Mountpoint'] }}/db.{{ dns_file }}"
+    force: true
     owner: root
     group: root
-    mode: 0644 
-  loop:
-    - "db.fsck-it.org"
-    - "Corefile"
+    mode: '0644'
+  vars:
+    dns_file: "{{ nameservers[inventory_hostname]['domain'] }}"
 
-- name: create the coredns container
+- name: Create the coredns container
   containers.podman.podman_container:
-    name: verboxen_coredns
+    name: coredns
     image: docker.io/coredns/coredns
     state: started
     volume:
       - coredns_vol:/srv/CoreDNS
-    recreate: yes
+    recreate: true
     network: bridge
     expose: 53/udp
     ports: "{{ ansible_default_ipv4.address }}:53:53/udp"
@@ -42,15 +41,15 @@
     workdir: /srv/CoreDNS
   register: dns_container
 
-- name: enable and start the dns service
+- name: Enable and start the dns service
   ansible.builtin.systemd:
     name: "{{ dns_container.podman_systemd.keys() | first }}"
     state: started
     daemon_reload: true
     enabled: true
 
-- name: open ports for dns
+- name: Open ports for dns
   ansible.posix.firewalld:
     port: 53/udp
-    permanent: yes
+    permanent: true
     state: enabled

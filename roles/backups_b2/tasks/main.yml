@@ -1,0 +1,40 @@
+---
+- name: Install pipx via pip
+  ansible.builtin.pip:
+    name: pipx
+
+- name: Install b2 cli tool
+  ansible.builtin.pip:
+    name: b2
+    executable: pipx
+
+- name: Copy cron.allow is important
+  ansible.builtin.copy:
+    src: cron.allow
+    dest: /etc/cron.allow
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Template back script
+  ansible.builtin.template:
+    src: "{{ inventory_hostname }}.backups.sh.j2"
+    dest: /home/zach/.backups.sh
+    owner: zach
+    group: zach
+    mode: '0750'
+
+- name: Schedule backups
+  ansible.builtin.cron:
+    name: "backup_{{ ansible_hostname }}"
+    hour: 1
+    minute: 15
+    weekday: 1
+    job: /usr/bin/bash /home/zach/.backups.sh
+
+- name: Enable start cron
+  ansible.builtin.systemd:
+    name: crond
+    state: restarted
+    enabled: true
+    daemon-reload: true

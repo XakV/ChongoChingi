@@ -1,0 +1,6 @@
+---
+nameservers:
+  drachen:
+    domain: 'fsck-it.org'
+  kanazawa:
+    domain: 'lab.fsck-it.org'

@@ -1,25 +1,25 @@
-- hosts: all
+- name: update_all
+  hosts: all
   become: yes
   become_user: root
   tasks:
-
     - name: First install dnf plugin
-      dnf:
+      ansible.builtin.dnf:
         name: 'python3-dnf-plugins-core'
         state: installed
 
     - name: Now update it all
-      dnf:
+      ansible.builtin.dnf:
         name: '*'
         state: latest
       register: dnfupdate
 
     - name: Reboot
-      reboot:
+      ansible.builtin.reboot:
       when: dnfupdate.changed
 
     - name: DNF system update
-      command: 'dnf system-upgrade download --releasever=38 -y'
+      ansible.builtin.command: 'dnf system-upgrade download --releasever=38 -y'
 
     - name: DNF sys-up reboot
-      command: 'dnf system-upgrade reboot -y'
+      ansible.builtin.command: 'dnf system-upgrade reboot -y'

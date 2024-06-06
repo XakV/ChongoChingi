@@ -1,0 +1,13 @@
+---
+tailscale_iface:
+  - name: 'tailscale0'
+    method4: 'auto'
+    method6: 'auto'
+    dns4: '100.100.100.100'
+    dns4_search: 'pangolin-vibes.ts.net'
+    fw_zone: 'Tailscale'
+    fw_services:
+      - 'ssh'
+      - 'https'
+      - 'mdns'
+

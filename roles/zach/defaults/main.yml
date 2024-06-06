@@ -30,6 +30,7 @@ zachs_rpms:
   - 'cronie'
   - 'sbc'
   - 'pipewire-codec-aptx'
+  - 'bluez'
   - 'hidapi'
   - 'bluez-tools'
   - 'gnome-bluetooth'
@@ -54,10 +55,8 @@ rpmfusion_urls:
   - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm"
 
 copr_repos:
-  - 'varlad/helix'
 
 flatpaks:
-  - com.github.babluboy.bookworm
   - im.riot.Riot
   - info.mumble.Mumble
   - org.gnome.NetworkDisplays
@@ -65,20 +64,14 @@ flatpaks:
   - com.discordapp.Discord
   - com.bitwarden.desktop
   - org.gnome.Firmware
-  - org.gnome.seahorse.Application
-  - com.github.wwmm.easyeffects
   - org.gnome.Connections
-  - com.github.fabiocolacio.marker
   - com.mattjakeman.ExtensionManager
   - de.haeckerfelix.AudioSharing
   - io.github.realmazharhussain.GdmSettings
-  - io.posidon.Paper
   - dev.lapce.lapce
   - org.gnome.Chess
   - com.valvesoftware.SteamLink
-  - com.github.neithern.g4music
   - io.posidon.Paper
-  - io.github.davidoc26.wallpaper_selector
   - com.raggesilver.BlackBox
   - com.github.neithern.g4music
   - dev.boxi.Boxi
@@ -89,13 +82,10 @@ flatpaks:
   - com.jetpackduba.Gitnuro
   - io.podman_desktop.PodmanDesktop
   - dev.k8slens.OpenLens
-  - org.gnome.dspy
   - io.github.nate_xyz.Resonance
-  - io.github.ripose_jp.Memento
 
 gaming_flpks:
   - com.valvesoftware.Steam
-  - io.gdevs.GDLauncher
   - com.mojang.Minecraft
-  - org.freedesktop.Platform.openh264/x86_64/2.0
+  - org.freedesktop.Platform.openh264
   - io.itch.itch

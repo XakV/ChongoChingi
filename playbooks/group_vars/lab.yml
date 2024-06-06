@@ -1,0 +1,15 @@
+# domain configs
+search_domain: 
+  - "lab.fsck-it.org"
+  - "fsck-it.org"
+dns_nameserver:
+  - "10.10.10.196"
+  - "9.9.9.9"
+  - "1.1.1.1"
+# firewalld configs
+fwalld_ports: ["4445/udp", "25560-25569/tcp", "8384/tcp", "5222/tcp", "5432/tcp", "8953/udp", "2360/tcp"]
+fwalld_sources: "10.10.10.0/24" 
+fwalld_services: ["ssh", "cockpit", "mdns"]
+fwalld_zone: "FedoraServer"
+
+

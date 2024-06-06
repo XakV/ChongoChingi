@@ -5,8 +5,7 @@
     - common
     - tailscale
     - podman
-    # coredns
-    # network
+    - coredns
+    - network
     - devel
     - ssl
-    - zach

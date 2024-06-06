@@ -1,6 +1,0 @@
-- hosts: zach
-  become: yes
-  become_user: root
-  roles:
-    - bitwarden
-    - restic_b2

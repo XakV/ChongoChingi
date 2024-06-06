@@ -32,7 +32,7 @@
     enabled: true
 
 - name: Common | set the fqdn
-  ansible.builtin.command: "hostnamectl set-hostname {{ inventory_hostname }}.{{ cluster_domain }}"
+  ansible.builtin.command: "hostnamectl set-hostname {{ inventory_hostname }}.{{ search_domain[0] }}"
 
 - name: Common | template the hosts file
   ansible.builtin.template:
@@ -57,7 +57,7 @@
   loop:
     - 'core'
     - 'sound-and-video'
-  when: ansible_distribution_major_version in ['37', '38']
+  when: ansible_distribution_major_version in ['38', '39']
 
 - name: Common | update it all
   dnf:

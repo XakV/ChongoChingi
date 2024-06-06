@@ -1,0 +1,22 @@
+---
+- name: start systemd-resolved
+  systemd:
+    name: systemd-resolved
+    state: started
+
+- name: link stub resolver
+  file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+    force: yes
+
+- name: start systemd-resolved and others
+  systemd:
+    name: "{{ net_daemon }}"
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+  loop: ['systemd-resolved', 'NetworkManager', 'tailscaled']
+  loop_control:
+    loop_var: 'net_daemon'

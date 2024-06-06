@@ -4,10 +4,12 @@ server_name: 'fsck-it.org'
 expose_ports:
   - '80/tcp'
   - '443/tcp'
+  - '3000/tcp'
 
 publish_ports:
   - '80:80'
   - '443:443'
+  - '3000:3000'
 
 proxy_blocks:
   'cockpit': |
