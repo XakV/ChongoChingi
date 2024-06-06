@@ -1,10 +1,12 @@
-- hosts: servers
-  become: yes
+- name: "Configure Servers"
+  hosts: servers
+  become: true
   become_user: root
   roles:
     - fedora.linux_system_roles.network
     - common
     - tailscale
-    # podman
+    - systemd_resolved
+    - podman
     - devel
     - server_no_sleep

@@ -8,26 +8,6 @@
     name: b2
     executable: pipx
 
-# name: Unlock the vault
-# ansible.builtin.expect:
-#   command: /usr/local/bin/bw unlock --raw
-#   responses:
-#     password: "{{ bw_passwd }}"
-# become: true
-# become_user: zach
-# register: bitwarden_vault
-
-# name: Record the bw session response
-# ansible.builtin.set_fact:
-#   bw_session: "{{ bitwarden_vault.stdout_lines[1] }}"
-# 
-# name: Create fact for restic passwd cmd shell var
-# ansible.builtin.shell: |
-#     /usr/local/bin/bw list items --session {{ bw_session }} --search restic_b2 | /usr/bin/jq .[0].login.password
-# become: true
-# become_user: zach
-# register: restic_sekret
-
 - name: Copy cron.allow is important
   ansible.builtin.copy:
     src: cron.allow
@@ -44,7 +24,7 @@
     group: zach
     mode: '0750'
 
-- name: schedule backups
+- name: Schedule backups
   ansible.builtin.cron:
     name: "backup_{{ ansible_hostname }}"
     hour: 1

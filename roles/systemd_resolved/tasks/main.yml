@@ -1,10 +1,4 @@
 ---
-- name: Set the hostname with domain
-  ansible.builtin.command: "hostnamectl set-hostname {{ ansible_hostname }}.{{ cluster_domain }}"
-
-- name: Echo the hostname to the kernel
-  ansible.builtin.command: "echo {{ ansible_hostname }}.{{ cluster_domain }}"
-
 - name: start systemd-resolved
   systemd:
     name: systemd-resolved
@@ -17,35 +11,12 @@
     state: link
     force: yes
 
-- debug:
-    msg: "{{ hostvars[inventory_hostname] }}"
-
-- name: set nameservers on active connections
-  community.general.nmcli:
-    conn_name: "{{ iface.name }}"
-    type: "{{ iface.type | default('ethernet') }}"
-    method6: "{{ iface.method6 | default('auto') }}"
-    dns4: "{{ iface.dns4 | intersect(external_dns) }}"
-    dns4_search: "{{ iface.dns4_search }}"
-    state: present
-  loop: "{{ managed_ifaces }}"
-  loop_control:
-    loop_var: 'iface'
-
-- name: send the resolved config
-  template:
-    src: resolved.conf.j2
-    dest: /etc/systemd/resolved.conf
-    owner: root
-    group: root
-    mode: 0644
-
-- name: reload nm conxns
-  shell: "nmcli c reload ansible_default_ipv4['interface'] }}"
-
-- name: start systemd-resolved
+- name: start systemd-resolved and others
   systemd:
-    name: systemd-resolved
+    name: "{{ net_daemon }}"
     state: restarted
     daemon_reload: yes
     enabled: yes
+  loop: ['systemd-resolved', 'NetworkManager', 'tailscaled']
+  loop_control:
+    loop_var: 'net_daemon'
